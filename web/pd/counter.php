@@ -1,10 +1,10 @@
 <?php
 
-include '..lib/lib.php';
+include '../lib/lib.php';
 opendb();
 
 if(isset($_POST['try'])) {
-  $try_id = $_POST'try'] ; 
+  $try_id = $_POST['try']; 
   $query = "SELECT `trycnt` FROM `radios` WHERE `id` = $try_id limit 1";
   $result = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
   while(list($trycnt) = mysql_fetch_array($result)) {
@@ -16,7 +16,7 @@ if(isset($_POST['try'])) {
 }
 
 if(isset($_POST['play'])) {
-  $play_id = $_POST'play'] ; 
+  $play_id = $_POST['play'] ; 
   $query = "SELECT `playcnt` FROM `radios` WHERE `id` = $play_id limit 1";
   $result = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
   while(list($playcnt) = mysql_fetch_array($result)) {
