@@ -1,0 +1,122 @@
+body {
+  font: 13px monospace,sans-serif;
+}
+
+select[name^=cities]{
+    display: none;
+}
+select[name^=cities].visible {
+    display: inline;
+}
+
+input[name=radio] {
+  width:150px;
+}
+
+input[name=homepage],input[name=url] {
+  width:300px;
+}
+
+input[name=new_city] {
+    display: none;
+}
+input[name=new_city].visible {
+    display: inline;
+}
+
+input[name=lon] {
+  display: none;
+  width:80px;
+}
+input[name=lon].visible {
+    display: inline;
+}
+
+input[name=lat] {
+  display: none;
+  width:80px;
+}
+input[name=lat].visible {
+    display: inline;
+}
+
+input.button {
+  margin-top:20px;
+  margin-left:5px;
+}
+
+td.active {
+  background-color:#0f0;
+}
+
+td.inactive {
+  background-color:#f00;
+}
+
+.highlight {
+  color:green;
+}
+
+.error {
+  color:red;
+}
+
+div.menu {
+  float:left;
+  padding:5px 30px;
+  background-color:#eee;
+}
+
+a.menu {
+  text-decoration:none;
+}
+
+a.menu:visited {
+}
+
+#current {
+  background-color:#ddf;
+}
+
+h4 {
+  clear:both;
+  font-size:large;
+  padding-top:30px;
+  padding-left:5px;
+}
+
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  padding:2px 20px 2px 3px;
+}
+
+td.numeric {
+  text-align:right;
+  color:#050;
+}
+
+tr.form {
+  height:30px;
+  width:1000px;
+  background-color:#ddf;
+}
+
+tr.bg0 {
+  background-color:#ccf;
+}
+
+tr.bg1 {
+  background-color:#ddf;
+}
+
+th {
+  background-color:#eee;
+}
+
+#hide {
+  background-color:#fff;
+}
