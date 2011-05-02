@@ -4,7 +4,8 @@ function extract_stream_data {
   smid=$1
   echo "Counter: $smid"
   readyforradiosolarkompass="false"
-  wget --quiet -O /tmp/radio.html http://www.surfmusic.de/radio-station/xxx,${smid}.html
+  ugent="Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.17) Gecko/20110422 Ubuntu/10.04 (lucid) Firefox/3.6.17"
+  wget --quiet -O /tmp/radio.html --user-agent="$uagent" http://www.surfmusic.de/radio-station/xxx,${smid}.html
   if [ $(wc -l /tmp/radio.html | cut -f1 -d" ") -gt 1 ]
   then
     html2xhtml /tmp/radio.html -o /tmp/radio.xhtml
