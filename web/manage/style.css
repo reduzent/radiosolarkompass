@@ -53,6 +53,10 @@ td.inactive {
   background-color:#f00;
 }
 
+.hidden {
+  display:none
+}
+
 .highlight {
   color:green;
 }
