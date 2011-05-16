@@ -393,8 +393,9 @@ function displayStreamList() {
     left join `cities` on 
       `cities`.`id` = `radios`.`city_id` 
     left join `countries` on 
-       `countries`.`iso` = `cities`.`country_code` 
-    order by `radios`.`id` 
+      `countries`.`iso` = `cities`.`country_code` 
+    order by `countries`.`name`,
+      `cities`.`name`
     ';
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
 ?>
