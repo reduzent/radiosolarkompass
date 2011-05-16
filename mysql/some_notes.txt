@@ -55,3 +55,29 @@ load data
     coord = geomfromtext(concat("point(", @coordx, " ", @coordy, ")"));
 
 
+HOW TO CREATE GEONAMES_COUNTRIES TABLE
+======================================
+
+Create Table: CREATE TABLE `geonames_countries` (
+  `iso` char(2) NOT NULL,
+  `iso3` char(3) NOT NULL,
+  `isonum` char(3) NOT NULL,
+  `fips` char(2) DEFAULT NULL,
+  `name` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `capital` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `area` bigint(20) DEFAULT '0',
+  `population` bigint(20) DEFAULT '0',
+  `continent` char(2) NOT NULL,
+  `tld` char(5) DEFAULT NULL,
+  `currency_code` char(3) DEFAULT NULL,
+  `currency_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `phone` char(5) DEFAULT NULL,
+  `postal_code_format` varchar(12) DEFAULT NULL,
+  `postal_code_regex` varchar(30) DEFAULT NULL,
+  `languages` varchar(40) DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `neighbours` varchar(60) DEFAULT NULL,
+  `equivfipscode` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
