@@ -7,7 +7,7 @@ function opendb() {
   global $dbpass;
   global $dbname;
   global $conn;
-  $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die ('verbindung mit datenbank fehlgeschlagen');
+  $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die ('Verbindung mit Datenbank fehlgeschlagen');
   mysql_select_db($dbname);
 }
 
@@ -20,7 +20,7 @@ function switcher() {
   $links = array(
     'index'       => 'Add new entries',
     'radios'      => 'Manage radio stations',
-    'locations'   => 'Manage locations',
+    //'locations'   => 'Manage locations',
     'schedule'    => 'Schedule'
   );
   foreach($links as $page => $text) {
@@ -150,6 +150,8 @@ function generateSunriseSchedule () {
 
 //###### index.php functions ##########################
 // Validate POST data
+
+/*
 function validate_lat ($lat) {
   global $location_id;
   global $lon_global;
@@ -179,33 +181,53 @@ function validate_lon ($lon) {
     return false;
   }
 }
+*/
 
 function validate_city ($city) {
-  if ( $city != "" ) {
+  global $warnings;
+  global $country;
+  $warnings['city'] = '';
+  if ( $city != "empty" ) {
     return true;
   } else {
+    if ( $country != 'empty' ) {
+      $warnings['city'] = '<-- Please select a city';
+    }
     return false;
   }
 }
 
 function validate_country ($country) {
+  global $warnings;
+  $warnings['country'] = '';
   if ( $country != "empty" ) {
     return true;
   } else {
+    $warnings['country'] = '<-- Please select a country';
     return false;
   }
 }
 
 function validate_radio ($radio) {
+  global $warnings;
   if ( $radio != "" ) {
+    $warnings['radio'] = '';
     return true;
   } else {
+    $warnings['radio'] = '<-- Please enter something';
     return false;
   }
 }
 
 function validate_url ($url) {
-  return true;
+  global $warnings;
+  if ($url == "http://") {
+    $warnings['url'] = '<-- Please enter something';
+    return false;
+  } else {
+    $warnings['url'] = '';
+    return true;
+  }
  /* if (filter_var($url, FILTER_VALIDATE_URL)) {
     return true;
   } else {
@@ -215,74 +237,88 @@ function validate_url ($url) {
 }
 
 function validate_homepage ($url) {
+  global $warnings;
+  $warnings['homepage'] = '';
   if (filter_var($url, FILTER_VALIDATE_URL) or $url == '') {
     return true;
+  } elseif ($url == "http://") {
+    $warnings['homepage'] = '<-- Please enter a URL';
+    return false;
   } else {
+    $warnings['homepage'] = '<-- Please enter a valid URL';
     return false;
   }
 }
 
 // other functions
-function generateCountrySelector ($selected) {
-  $start = <<<EOH
-  <select id="country" name="country">
-  <option value="empty">Select a country:</option>
+function warn($type) {
+  global $warnings;
+  global $complete;
+  if ( $complete ) {
+    echo $warnings[$type];
+  }
+}
 
-EOH;
-  echo($start);
-  global $countries;
-  foreach ($countries as $countrydata) {
-    $country = $countrydata[0];
-    $country_id = $countrydata[1];
-    if ($country == $selected) {
-      echo "<option value=\"$country_id\" selected>$country</option>\n";
+function generateCountrySelector() {
+  global $country;
+  $query = "SELECT `iso`, `name` FROM `countries` ORDER by `name`";
+  $countriessql = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
+  echo "<select name=\"country\" onChange=\"this.form.submit()\" id=\"country\">\n";
+  echo "  <option value=\"empty\">Select Country...</option>\n";
+  while(list($iso, $countrylocal) = mysql_fetch_array($countriessql)) {
+    if ( $country == $iso ) {
+      echo "  <option selected value=\"$iso\">$countrylocal</option>\n";
     } else {
-      $country_text = htmlspecialchars($country);
-      echo "<option value=\"$country_id\">$country_text</option>\n";
+      echo "  <option value=\"$iso\">$countrylocal</option>\n";
     }
   }
   echo "</select>\n";
 }
 
-function generateCitySelectors($sel_country_id) {
-  global $countries;
-  global $emptyness;
-  global $allok;
-  $emptyness = "empty";
-  foreach ($countries as $countrydata) {
-    $country = $countrydata[0];
-    $country_id = $countrydata[1];
-    $query = "SELECT `id`, `city` FROM `locations` where `country` = '$country' order by `city`";
-    $cities = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
-    if ($sel_country_id == $country_id and mysql_num_rows($cities) > 0 and $allok == false) {
-      echo "<select class=\"visible\" name=\"cities-$country_id\">\n";
-      $emptyness = "populated";
-    } else {
-      echo "<select name=\"cities-$country_id\">\n";
-    }
-    $something = false;
-    $poststring = "cities-" . $country_id;
-    while(list($city_id, $city) = mysql_fetch_array($cities)) {
-      if (isset($_POST[$poststring]) and $_POST[$poststring] == $city_id) {
-        echo "  <option selected value=\"$city_id\">$city</option>\n";
+function generateCitySelector() {
+  global $latitude;
+  global $longitude;
+  global $country;
+  global $city;
+  $latitude = "";
+  $longitude = "";
+  if ( $country != "empty" ) {
+    $cc = $country;
+    $query = "SELECT `id`, `name`, `admin1_code`, X(coord), Y(coord) FROM `cities` where `country_code` = '$cc' ORDER by `name`";
+    $citiessql = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
+    echo "<select name=\"city\" onChange=\"this.form.submit()\" id=\"city\">\n";
+    echo "  <option value=\"empty\">Select a City...</option>\n";
+    while(list($id, $citylocal, $division, $lat, $long) = mysql_fetch_array($citiessql)) {
+      if ( $city == $id ) {
+        echo "  <option selected value=\"$id\">$citylocal ($division)</option>\n";
+        $latitude = $lat;
+        $longitude = $long;
       } else {
-        echo "  <option value=\"$city_id\">$city</option>\n";
+        echo "  <option value=\"$id\">$citylocal ($division)</option>\n";
       }
-      $something = true;
     }
-  //  if ($something) { 
-      if (isset($_POST[$poststring]) and $_POST[$poststring] == "new" and $allok == false ) {
-       echo "  <option selected value=\"new\">Other...</option>\n";
-      } else {
-       echo "  <option value=\"new\">Other...</option>\n";
-      }
-   // }
     echo "</select>\n";
   }
 }
 
+function addShowNewEntry() {
+  global $todb;
+  global $allok;
+  if ( $allok ) {
+    echo "<h4>Added the following data to the database</h4>\n";
+    echo "<table> \n";
+    foreach ($todb as $type => $value) {
+      echo "<tr>\n";
+      echo "<td>$type:</td>\n";
+      echo "<td class=\"highlight\">$value</td>\n";
+      echo "</tr>\n";
+    }
+    echo "</table>\n";
+  }
+}
+
 //######## location.php functions #######################################
-function displayCityList() {
+/*function displayCityList() {
   $query = 'select `id`, `city`, `country`, X(coord), Y(coord) from `locations` order by `country`, `city`';
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
 ?>
@@ -310,6 +346,7 @@ function displayCityList() {
   echo "</table>\n";
   echo "<input class=\"button\" type=\"submit\" value=\"Delete\" />";
 }
+*/
 
 //########## radios.php functions ###########################################
 function truncateUrl($url) {
