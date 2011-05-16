@@ -358,7 +358,22 @@ function truncateUrl($url) {
 }
 
 function displayStreamList() {
-  $query = 'select `radios`.`active`, `radios`.`id`, `radios`.`name`, `radios`.`homepage`, `radios`.`url`, `locations`.`city`, `locations`.`country` from `radios`, `locations` where (`radios`.`location_id` = `locations`.`id`) order by `locations`.`country`, `locations`.`city`';
+  $query = '
+     select 
+       `radios`.`active`, 
+       `radios`.`id`, 
+       `radios`.`name`, 
+       `radios`.`homepage`, 
+       `radios`.`url`, 
+       `cities`.`name`, 
+       `countries`.`name` 
+    from `radios` 
+    left join `cities` on 
+      `cities`.`id` = `radios`.`city_id` 
+    left join `countries` on 
+       `countries`.`iso` = `cities`.`country_code` 
+    order by `radios`.`id` 
+    limit 30';
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
 ?>
 <table id="streamlist">
