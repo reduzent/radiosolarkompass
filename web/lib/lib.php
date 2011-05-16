@@ -314,6 +314,12 @@ function addShowNewEntry() {
       echo "</tr>\n";
     }
     echo "</table>\n";
+    $query = "
+      insert into `radios` 
+      (`name`, `homepage`, `url`, `city_id`)
+      values
+      ('${todb['radio']}', '${todb['homepage']}', '${todb['url']}', '${todb['city']}');";
+    mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
   }
 }
 
@@ -373,7 +379,7 @@ function displayStreamList() {
     left join `countries` on 
        `countries`.`iso` = `cities`.`country_code` 
     order by `radios`.`id` 
-    limit 30';
+    ';
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
 ?>
 <table id="streamlist">
