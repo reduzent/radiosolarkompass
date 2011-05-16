@@ -115,12 +115,26 @@ function generatePdPlaylist() {
 }
 
 function generateSunriseSchedule () {
-  $query = 'select `id`, `city`, `country`, X(coord), Y(coord) from `locations`';
+  $query = "
+    select 
+    count(*),
+    `cities`.`id`, 
+    `cities`.`name`, 
+    `countries`.`name`, 
+    X(`cities`.`coord`), 
+    Y(`cities`.`coord`) 
+    from `cities`
+    left join `countries`
+    on `cities`.`country_code` = `countries`.`iso`
+    right join `radios`
+    on `radios`.`city_id` = `cities`.`id`
+    group by `radios`.`city_id`
+    ";
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
   $timetable = array();
-  while(list($id, $city, $country, $lat, $lon) = mysql_fetch_array($result)) {
+  while(list($count, $id, $city, $country, $lat, $lon) = mysql_fetch_array($result)) {
     $sunrise_dec = calcSunriseTime($lat, $lon, 0);
-    $timetable[] = array($sunrise_dec, $city, $country);
+    $timetable[] = array($sunrise_dec, $count, $city, $country);
     sort($timetable);
   }
 ?>
@@ -129,11 +143,12 @@ function generateSunriseSchedule () {
   <th>SUNRISE</th>
   <th>CITY</th>
   <th>COUNTRY</th>
+  <th>RADIO COUNT</th>
 </tr>
 <?php
   $bgclr = 0;
   foreach($timetable as $row)  {
-    list($sunrise_dec, $city, $country) = $row;
+    list($sunrise_dec, $count, $city, $country) = $row;
     echo "<tr class=\"bg$bgclr\">\n";
     $bgclr += 1;
     $bgclr = fmod($bgclr, 2);
@@ -141,6 +156,7 @@ function generateSunriseSchedule () {
     echo "  <td class=\"numeric\">$sunrise</td>\n";
     echo "  <td>$city</td>\n";
     echo "  <td>$country</td>\n";
+    echo "  <td class=\"numeric\">$count</td>\n";
     echo "</tr>";
   }
   echo "</table>\n";
