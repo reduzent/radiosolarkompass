@@ -58,7 +58,7 @@ if ( $radio_valid
 </head>
 <body>
 <?php switcher(); ?>
-<h4>!!!TEMPORARILY OUT OF SERVICE!!!!!!!! Enter a new Radiostation</h4>
+<h4>Enter a new Radiostation</h4>
 <form name="add_radio" action="." method="post">
 <table>
   <tr class="form">
