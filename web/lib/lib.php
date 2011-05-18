@@ -134,7 +134,9 @@ function generateSunriseSchedule () {
   $timetable = array();
   while(list($count, $id, $city, $country, $lat, $lon) = mysql_fetch_array($result)) {
     $sunrise_dec = calcSunriseTime($lat, $lon, 0);
-    $timetable[] = array($sunrise_dec, $count, $city, $country);
+    if (is_nan($sunrise_dec) == false) {
+      $timetable[] = array($sunrise_dec, $count, $city, $country);
+    }
     sort($timetable);
   }
 ?>
