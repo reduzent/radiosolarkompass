@@ -120,22 +120,25 @@ function generateSunriseSchedule () {
     count(*),
     `cities`.`id`, 
     `cities`.`name`, 
+    `admin_codes`.`name`,
     `countries`.`name`, 
     X(`cities`.`coord`), 
     Y(`cities`.`coord`) 
     from `cities`
     left join `countries`
     on `cities`.`country_code` = `countries`.`iso`
+    left join `admin_codes`
+    on `admin_codes`.`code` = concat(`cities`.`country_code`, '.', `cities`.`admin1_code`)
     right join `radios`
     on `radios`.`city_id` = `cities`.`id`
     group by `radios`.`city_id`
     ";
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
   $timetable = array();
-  while(list($count, $id, $city, $country, $lat, $lon) = mysql_fetch_array($result)) {
+  while(list($count, $id, $city, $region, $country, $lat, $lon) = mysql_fetch_array($result)) {
     $sunrise_dec = calcSunriseTime($lat, $lon, 0);
     if (is_nan($sunrise_dec) == false) {
-      $timetable[] = array($sunrise_dec, $count, $city, $country);
+      $timetable[] = array($sunrise_dec, $count, $city, $region, $country);
     }
     sort($timetable);
   }
@@ -144,19 +147,21 @@ function generateSunriseSchedule () {
 <tr>
   <th>SUNRISE</th>
   <th>CITY</th>
+  <th>REGION</th>
   <th>COUNTRY</th>
   <th>RADIO COUNT</th>
 </tr>
 <?php
   $bgclr = 0;
   foreach($timetable as $row)  {
-    list($sunrise_dec, $count, $city, $country) = $row;
+    list($sunrise_dec, $count, $city, $region, $country) = $row;
     echo "<tr class=\"bg$bgclr\">\n";
     $bgclr += 1;
     $bgclr = fmod($bgclr, 2);
     $sunrise = convertTdecThms($sunrise_dec);
     echo "  <td class=\"numeric\">$sunrise</td>\n";
     echo "  <td>$city</td>\n";
+    echo "  <td>$region</td>\n";
     echo "  <td>$country</td>\n";
     echo "  <td class=\"numeric\">$count</td>\n";
     echo "</tr>";
@@ -397,7 +402,8 @@ function displayStreamList() {
     left join `countries` on 
       `countries`.`iso` = `cities`.`country_code` 
     order by `countries`.`name`,
-      `cities`.`name`
+      `cities`.`name`,
+      `radios`.`name`
     ';
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
 ?>
