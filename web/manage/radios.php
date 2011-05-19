@@ -25,6 +25,14 @@ if (isset($_POST['delete'])) {
   }
 }
 
+// generate title numbers
+$query = "select count(*) from radios";
+$result = mysql_query($query) or die('Datenbankabfrage fehlgeschlagen');
+list($total) = mysql_fetch_array($result);
+$query = "select count(*) from radios where active = true";
+$result = mysql_query($query) or die('Datenbankabfrage fehlgeschlagen');
+list($active) = mysql_fetch_array($result);
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -34,7 +42,7 @@ if (isset($_POST['delete'])) {
 </head>
 <body>
 <?php switcher(); ?>
-<h4>Manage Radio Stations</h4>
+<h4>Manage Radio Stations <?php echo "($active/$total)"; ?></h4>
 <form name="manage_radios" action="radios.php" method="post">
 <?php
 displayStreamList();
