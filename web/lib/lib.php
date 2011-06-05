@@ -97,12 +97,24 @@ function pdGetStreamsOfLocation($location_id) {
 }
 
 function generatePdPlaylist() {
-  $query = 'select `id`, `city`, `country`, X(coord), Y(coord) from `locations`';
+  $query = "
+    select 
+    `cities`.`id`,
+    X(`cities`.`coord`), 
+    Y(`cities`.`coord`) 
+    from `cities`
+    join `radios`
+    on `radios`.`city_id` = `cities`.`id`
+    where  `radios`.`active` = true
+    group by `cities`.`id`;
+    ";
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
   $timetable = array();
-  while(list($id, $city, $country, $lat, $lon) = mysql_fetch_array($result)) {
+  while(list($id, $lat, $lon) = mysql_fetch_array($result)) {
     $sunrise_dec = calcSunriseTime($lat, $lon, 0);
-    $timetable[] = array($sunrise_dec, $id);
+    if (is_nan($sunrise_dec) == false) {
+      $timetable[] = array($sunrise_dec, $id);
+    }
     sort($timetable);
   }
   foreach($timetable as $row)  {
@@ -444,5 +456,47 @@ function displayStreamList() {
   echo "<input class=\"button\" type=\"submit\" value=\"Update / Delete\" />";
 }
 
+// ############ import.php functions #################################################################
+
+
+function displayImportList() {
+  $query = '
+     select 
+       `id`,
+       `name`,
+       `homepage`,
+       `url`, 
+       `city`,
+       `country`  
+    from `radios_import` 
+    where `imported` = false and `url_valid` = true
+    order by `country`, `city`, `name`
+    ';
+  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+?>
+<table id="streamlist">
+<tr>
+  <th id="hide"></th>
+  <th>STATION</th>
+  <th>URL</th>
+  <th>CITY</th>
+  <th>COUNTRY</th>
+</tr>
+<?php
+  $bgclr = 0;
+  while(list($id, $name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
+    echo "<tr class=\"bg$bgclr\">\n";
+    $bgclr += 1;
+    $bgclr = fmod($bgclr, 2);
+    echo "  <td class=\"$class\"><input class=\"button\" type=\"button\" name=\"active[]\" value=\"$id\" /></td>\n";
+    echo "  <td><a href=\"$homepage\">$name</a></td>\n";
+    echo "  <td><a href=\"$url\">" . truncateUrl($url) . "</a></td>\n";
+    echo "  <td>$city</td>\n";
+    echo "  <td> $country</td>\n";
+    echo "</tr>\n";
+  }
+  echo "</table>\n";
+  echo "<input class=\"button\" type=\"submit\" value=\"Update / Delete\" />";
+}
 
 ?>
