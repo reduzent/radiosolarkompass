@@ -1,6 +1,8 @@
-#N canvas 236 44 695 408 10;
+#N canvas 217 73 695 408 10;
 #X declare -stdpath extra/ggee;
 #X declare -path include;
+#X declare -stdpath extra/ggee -stdpath extra/zexy -stdlib extra/zexy
+;
 #X obj 15 38 rsk_get_streamurl_from_locid;
 #X obj 180 62 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -8,7 +10,7 @@
 #X obj 297 10 declare -path include;
 #X obj 22 276 rsk_streamplayer;
 #X msg 102 61 set \$2;
-#X msg 102 84 mms://193.194.64.116/chaine1;
+#X msg 102 86 mms://bcr.media.hinet.net/RA000032;
 #X obj 22 329 dac~;
 #X obj 129 308 print;
 #X msg 397 317 http://www.netpd.org:8010/netpd.mp3;
@@ -22,6 +24,8 @@
 #X msg 390 228 http://66.197.173.15:8020/lofi.mp3;
 #X msg 354 201 http://hpr-ice.streamguys.org/khpr2;
 #X msg 15 12 _2506999;
+#X msg 89 11 _1668341;
+#X obj 364 97 rsk_daily_playlist;
 #X connect 0 0 2 0;
 #X connect 0 0 5 0;
 #X connect 0 1 1 0;
@@ -38,3 +42,4 @@
 #X connect 16 0 13 0;
 #X connect 17 0 13 0;
 #X connect 18 0 0 0;
+#X connect 19 0 0 0;
