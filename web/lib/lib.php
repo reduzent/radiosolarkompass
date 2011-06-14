@@ -88,8 +88,8 @@ function convertTdecThms($tdec) {
   return $thms;
 }
 
-function pdGetStreamsOfLocation($location_id) {
-  $query = "select `id`, `url` from `radios` where `location_id` = $location_id";
+function pdGetStreamsOfLocation($city_id) {
+  $query = "select `id`, `url` from `radios` where `city_id` = $city_id";
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
   while(list($id, $url) = mysql_fetch_array($result)) {
     echo "$id $url;\n";
