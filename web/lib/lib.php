@@ -122,7 +122,7 @@ function generatePdPlaylist() {
     $h = floor($sunrise_dec);
     $m = floor(fmod($sunrise_dec, 1) * 60);
     $s = fmod(floor(fmod($sunrise_dec, 1) * 3600), 60);
-    echo "$h $m $s $id;\n";
+    echo "$h $m $s _$id;\n";
   }
 }
 
