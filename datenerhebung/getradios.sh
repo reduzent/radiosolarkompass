@@ -19,13 +19,13 @@ function extract_stream_data {
     #echo "URL: $url"
     if [ "$url" != "http://www.surfmusik.org/enostream.mp3" ]
     then 
-      echo "Checking streamurl: $url ..."
-      $(pd -nomidi -noaudio -nrt -nogui -open getradios_checkstream.pd -send "streamurl $url" 2>&1 | grep readyforradiosolarkompass)
-      if [ $readyforradiosolarkompass = "true" ]
-      then
+      #echo "Checking streamurl: $url ..."
+      #$(pd -nomidi -noaudio -nrt -nogui -open getradios_checkstream.pd -send "streamurl $url" 2>&1 | grep readyforradiosolarkompass)
+      #if [ $readyforradiosolarkompass = "true" ]
+      #then
         echo -ne "${smid};${name};${homepage};${city};${country};${url}\n" >> /home/roman/surfmusic_streamdata.csv
-        echo "STREAM OK ($name, $city, $country)"
-      fi
+        echo "STREAM ADDED ($name, $city, $country)"
+      #fi
     fi
   fi
 }
