@@ -22,7 +22,7 @@
 #X obj 123 278 t b a;
 #X msg 234 256 symbol false;
 #X obj 234 212 loadbang;
-#X obj 234 234 delay 5000;
+#X obj 234 234 delay 10000;
 #X msg 181 305 export readyforradiosolarkompass=\$1;
 #X connect 0 0 4 0;
 #X connect 0 2 5 0;
