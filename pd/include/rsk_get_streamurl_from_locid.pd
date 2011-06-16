@@ -3,8 +3,8 @@
 #X obj 11 205 shell;
 #X obj 170 16 declare -stdpath extra/ggee;
 #X obj 38 232 route 0;
-#X obj 96 333 outlet;
-#X obj 11 326 outlet;
+#X obj 38 332 outlet;
+#X obj 110 329 outlet;
 #X obj 11 12 inlet;
 #X obj 11 80 spigot 1;
 #X obj 11 102 t a b;
