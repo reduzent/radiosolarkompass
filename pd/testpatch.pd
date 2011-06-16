@@ -1,8 +1,9 @@
-#N canvas 214 73 695 408 10;
+#N canvas 0 44 695 408 10;
 #X declare -stdpath extra/ggee;
 #X declare -path include;
 #X declare -stdpath extra/ggee -stdpath extra/zexy -stdlib extra/zexy
 ;
+#X declare -stdpath extra/ggee;
 #X obj 15 38 rsk_get_streamurl_from_locid;
 #X obj 180 62 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -12,35 +13,38 @@
 #X msg 102 61 set \$2;
 #X msg 102 86 mms://bcr.media.hinet.net/RA000032;
 #X obj 22 329 dac~;
-#X msg 397 317 http://www.netpd.org:8010/netpd.mp3;
-#X msg 305 254 mms://a688.l11289730687.c112897.a.lm.akamaistream.net/D/688/112897/v0001/reflector:30687
+#X msg 391 338 http://www.netpd.org:8010/netpd.mp3;
+#X msg 299 275 mms://a688.l11289730687.c112897.a.lm.akamaistream.net/D/688/112897/v0001/reflector:30687
 ;
-#X msg 403 337 http://radios.xalimasn.com:9020;
-#X msg 389 296 http://85.214.153.149:8100;
-#X obj 360 361 s \$0.play;
+#X msg 397 358 http://radios.xalimasn.com:9020;
+#X msg 383 317 http://85.214.153.149:8100;
+#X obj 354 382 s \$0.play;
 #X obj 22 251 r \$0.play;
 #X obj 102 121 s \$0.play;
-#X msg 390 228 http://66.197.173.15:8020/lofi.mp3;
-#X msg 354 201 http://hpr-ice.streamguys.org/khpr2;
+#X msg 384 249 http://66.197.173.15:8020/lofi.mp3;
+#X msg 348 222 http://hpr-ice.streamguys.org/khpr2;
 #X msg 15 12 _2506999;
 #X msg 89 11 _1668341;
-#X obj 364 97 rsk_daily_playlist;
-#X obj 364 136 print TIME_STREAMID;
-#X msg 364 61 0;
-#X text 392 61 find next after 0 seconds from now;
+#X obj 384 146 rsk_daily_playlist;
+#X msg 384 122 0;
+#X text 412 122 find next after 0 seconds from now;
 #X obj 622 20 loadbang;
 #X msg 622 42 dsp 1;
 #X obj 622 64 s pd;
 #X obj 115 335 print PLAYAERSTATUS;
-#X obj 144 302 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 144 302 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
+#X obj 384 170 print TIME_CITYID;
+#X obj 573 184 rsk_counter;
+#X msg 573 158 play 1;
+#X msg 621 158 try 1;
 #X connect 0 0 2 0;
 #X connect 0 0 5 0;
 #X connect 0 1 1 0;
 #X connect 4 0 7 0;
 #X connect 4 1 7 1;
-#X connect 4 2 27 0;
 #X connect 4 2 26 0;
+#X connect 4 2 25 0;
 #X connect 5 0 6 0;
 #X connect 6 0 14 0;
 #X connect 8 0 12 0;
@@ -52,7 +56,9 @@
 #X connect 16 0 12 0;
 #X connect 17 0 0 0;
 #X connect 18 0 0 0;
-#X connect 19 0 20 0;
-#X connect 21 0 19 0;
+#X connect 19 0 27 0;
+#X connect 20 0 19 0;
+#X connect 22 0 23 0;
 #X connect 23 0 24 0;
-#X connect 24 0 25 0;
+#X connect 29 0 28 0;
+#X connect 30 0 28 0;
