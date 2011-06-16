@@ -1,4 +1,4 @@
-#N canvas 206 180 232 334 10;
+#N canvas 206 208 232 334 10;
 #X obj 105 203 list prepend;
 #X obj 191 204 t a;
 #X obj 42 230 list append;
@@ -16,6 +16,7 @@
 #X obj 9 36 t b b b;
 #X obj 73 171 t b b;
 #X obj 70 306 outlet;
+#X msg 197 87 0;
 #X connect 0 0 1 0;
 #X connect 0 0 2 1;
 #X connect 1 0 0 1;
@@ -39,3 +40,5 @@
 #X connect 14 2 7 0;
 #X connect 15 0 2 1;
 #X connect 15 1 0 1;
+#X connect 15 1 17 0;
+#X connect 17 0 5 1;
