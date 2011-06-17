@@ -1,4 +1,4 @@
-#N canvas 0 44 543 404 10;
+#N canvas 0 44 763 515 10;
 #X declare -path include;
 #X declare -stdpath extra/ggee -stdpath extra/zexy -stdlib extra/zexy
 ;
@@ -23,16 +23,14 @@
 #X obj 18 243 list prepend 0;
 #X obj 99 194 r \$0.onair;
 #X obj 99 215 == 0;
-#X obj 340 81 r \$0.time.next;
+#X obj 486 55 r \$0.time.next;
 #X obj 339 190 route 0 1;
-#X obj 339 217 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 339 244 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
-#X obj 364 217 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
-1;
-#X msg 340 103 symbol PLAY_NEXT_AT_\$1:\$2:\$3;
-#X symbolatom 340 125 30 0 0 0 - - -;
-#X obj 408 272 s \$0.get.next;
-#X msg 408 249 0;
+#X msg 486 77 symbol PLAY_NEXT_AT_\$1:\$2:\$3;
+#X symbolatom 486 99 30 0 0 0 - - -;
+#X obj 408 312 s \$0.get.next;
+#X msg 408 289 0;
 #X obj 305 303 s \$0.onair;
 #X obj 305 278 hradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144
 -1 -1 0;
@@ -87,6 +85,12 @@
 #X connect 20 0 18 1;
 #X connect 21 0 18 0;
 #X restore 18 277 pd players;
+#X obj 339 220 unpack f f;
+#X floatatom 357 245 5 0 0 0 - - -;
+#X obj 408 245 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 408 221 unpack f f;
+#X floatatom 426 246 5 0 0 0 - - -;
 #X connect 1 0 4 0;
 #X connect 2 0 3 0;
 #X connect 2 1 3 1;
@@ -96,15 +100,19 @@
 #X connect 5 0 6 0;
 #X connect 7 0 1 0;
 #X connect 8 0 2 0;
-#X connect 10 0 24 0;
+#X connect 10 0 23 0;
 #X connect 11 0 12 0;
 #X connect 12 0 10 1;
-#X connect 13 0 17 0;
-#X connect 14 0 15 0;
-#X connect 14 1 16 0;
-#X connect 17 0 18 0;
-#X connect 20 0 19 0;
-#X connect 22 0 21 0;
-#X connect 23 0 14 0;
-#X connect 24 0 9 0;
-#X connect 24 1 9 1;
+#X connect 13 0 16 0;
+#X connect 14 0 24 0;
+#X connect 14 1 27 0;
+#X connect 16 0 17 0;
+#X connect 19 0 18 0;
+#X connect 21 0 20 0;
+#X connect 22 0 14 0;
+#X connect 23 0 9 0;
+#X connect 23 1 9 1;
+#X connect 24 0 15 0;
+#X connect 24 1 25 0;
+#X connect 27 0 26 0;
+#X connect 27 1 28 0;
