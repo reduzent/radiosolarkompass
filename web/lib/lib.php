@@ -456,6 +456,60 @@ function displayStreamList() {
   echo "<input class=\"button\" type=\"submit\" value=\"Update / Delete\" />";
 }
 
+// ############ whatsup.php functions ################################################################
+
+function displayWhatsupList() {
+  $query = '
+     select
+       `status`.`param`,
+       `status`.`mod_time`, 
+       `radios`.`name`, 
+       `radios`.`homepage`, 
+       `radios`.`url`, 
+       `cities`.`name`, 
+       `countries`.`name` 
+    from `status` 
+    left join `radios` on 
+      `radios`.`id` = `status`.`value` 
+    inner join `cities` on 
+      `cities`.`id` = `radios`.`city_id`
+    inner join `countries` on
+      `countries`.`iso` = `cities`.`country_code`
+    order by `status`.`mod_time`
+    ';
+  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+?>
+<table id="streamlist">
+<tr>
+  <th id="hide"></th>
+  <th>TIME</th>
+  <th>RADIO</th>
+  <th>URL</th>
+  <th>CITY</th>
+  <th>COUNTRY</th>
+</tr>
+<?php
+  $bgclr = 0;
+  while(list($role, $time, $name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
+    echo "<tr class=\"bg$bgclr\">\n";
+    $bgclr += 1;
+    $bgclr = fmod($bgclr, 2);
+    echo " <td>$role</td>\n";
+    echo " <td>$time</td>\n";
+    if ($homepage == '') {
+      echo "  <td>$name</td>\n";
+    } else {
+      echo "  <td><a href=\"$homepage\">$name</a></td>\n";
+    }
+    echo "  <td><a href=\"$url\">" . truncateUrl($url) . "</a></td>\n";
+    echo "  <td>$city</td>\n";
+    echo "  <td> $country</td>\n";
+    echo "</tr>\n";
+  }
+  echo "</table>\n";
+}
+
+
 // ############ import.php functions #################################################################
 
 
