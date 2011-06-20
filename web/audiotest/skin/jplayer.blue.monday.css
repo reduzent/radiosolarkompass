@@ -39,9 +39,6 @@ div.jp-interface {
 	height:48px;
 	border:1px solid #bbb;
 }
-div.jp-playlist-player div.jp-interface {
-}
-
 div.jp-interface ul.jp-controls {
 	list-style-type:none;
 	padding:0;
@@ -87,9 +84,6 @@ a.jp-stop {
 div.jp-single-player a.jp-stop {
 	left:90px;
 }
-div.jp-playlist-player a.jp-stop {
-	left:126px;
-}
 a.jp-stop:hover {
 	background: url("jplayer.blue.monday.jpg") -29px -83px no-repeat;
 }
@@ -123,9 +117,6 @@ div.jp-progress {
 }
 div.jp-single-player div.jp-progress {
 	left:130px;
-}
-div.jp-playlist-player div.jp-progress {
-	left:164px;
 }
 div.jp-load-bar {
 	background: url("jplayer.blue.monday.jpg") 0 -202px repeat-x;
@@ -175,9 +166,6 @@ div.jp-volume-bar {
 div.jp-single-player div.jp-volume-bar {
 	left:76px;
 }
-div.jp-playlist-player div.jp-volume-bar {
-	left:180px;
-}
 div.jp-volume-bar-value {
 	background: url("jplayer.blue.monday.jpg") 0 -256px repeat-x;
 	width:0px;
@@ -198,47 +186,10 @@ div.jp-single-player div.jp-play-time,
 div.jp-single-player div.jp-total-time {
 	left:130px;
 }
-div.jp-playlist-player div.jp-play-time,
-div.jp-playlist-player div.jp-total-time {
-	left:164px;
-}
 div.jp-playlist {
 	width:418px;
-}
-div.jp-playlist ul{
-	list-style-type:none;
-	margin:0;
-	padding:0 20px;
-	background-color:#ccc;
-	border:1px solid #009be3;
-	border-top:none;
-	width:378px;
-	font-size:.72em;
 }
 div.jp-single-player div.jp-playlist li {
 	padding:5px 0 5px 20px;
 	font-weight:bold;
-}
-div.jp-playlist-player div.jp-playlist li {
-	padding:5px 0 4px 20px;
-	border-bottom:1px solid #eee;
-}
-div.jp-playlist-player div.jp-playlist li.jplayer_playlist_item_last {
-	padding:5px 0 5px 20px;
-	border-bottom:none;
-}
-div.jp-playlist-player div.jp-playlist li.jplayer_playlist_current {
-	list-style-type:square;
-	list-style-position:inside;
-	padding-left:8px;
-}
-div.jp-playlist-player div.jp-playlist a {
-	color: #666;
-	text-decoration: none;
-}
-div.jp-playlist-player div.jp-playlist a:hover {
-	color:#0d88c1;
-}
-div.jp-playlist-player div.jp-playlist a.jplayer_playlist_current {
-	color:#0d88c1;
 }
