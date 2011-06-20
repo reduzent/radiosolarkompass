@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="skin/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+	<script type="text/javascript" src="js/demos.common.js"></script>
+	<script type="text/javascript">
+	//<![CDATA[
+	$(document).ready(function(){
+
+	// Local copy of jQuery selectors, for performance.
+	var jpPlayTime = $("#jplayer_play_time");
+	var jpTotalTime = $("#jplayer_total_time");
+	var jpStatus = $("#demo_status"); // For displaying information about jPlayer's status in the demo page
+
+	$("#jquery_jplayer").jPlayer({
+		ready: function () {
+			this.element.jPlayer("setFile", "http://195.176.254.176:8010/netpd.mp3").jPlayer("play");
+			demoInstanceInfo(this.element, $("#demo_info")); // This displays information about jPlayer's configuration in the demo page
+		},
+		swfPath: "js"
+	})
+	.jPlayer("onProgressChange", function(loadPercent, playedPercentRelative, playedPercentAbsolute, playedTime, totalTime) {
+		jpPlayTime.text($.jPlayer.convertTime(playedTime));
+		jpTotalTime.text($.jPlayer.convertTime(totalTime));
+
+		demoStatusInfo(this.element, jpStatus); // This displays information about jPlayer's status in the demo page
+	})
+	.jPlayer("onSoundComplete", function() {
+		this.element.jPlayer("play");
+	});
+	});
+	//]]>
+	</script>
+
+	<title>Streamplayer</title>
+</head>
+<body>
+<h2>jPlayer 1.2.0 for live audio</h2>
+<div id="jquery_jplayer"></div>
+<div class="jp-single-player">
+	<div class="jp-interface">
+		<ul class="jp-controls">
+			<li><a href="#" id="jplayer_play" class="jp-play" tabindex="1">play</a></li>
+			<li><a href="#" id="jplayer_pause" class="jp-pause" tabindex="1">pause</a></li>
+			<li><a href="#" id="jplayer_volume_min" class="jp-volume-min" tabindex="1">min volume</a></li>
+			<li><a href="#" id="jplayer_volume_max" class="jp-volume-max" tabindex="1">max volume</a></li>
+		</ul>
+		<div id="jplayer_volume_bar" class="jp-volume-bar">
+			<div id="jplayer_volume_bar_value" class="jp-volume-bar-value"></div>
+		</div>
+		<div id="jplayer_play_time" class="jp-play-time"></div>
+	</div>
+	<div id="jplayer_playlist" class="jp-playlist">
+		<ul>
+			<li>RadioSolarKompass <br />(spielt im Moment noch netpd-radio)</li>
+		</ul>
+	</div>
+</div>
+
+</body>
+</html>
