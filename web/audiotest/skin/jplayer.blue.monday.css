@@ -15,8 +15,8 @@
  */
 
 #jquery_jplayer {
-	width:80px;
-	height:20px;
+	width:40px;
+	height:40px;
 }
 
 div.jp-single-player,
@@ -35,12 +35,9 @@ div.jp-playlist-player {
 div.jp-interface {
 	position: relative;
 	background-color:#eee;
-	width:418px;
-	height:80px;
-	border:1px solid #009be3;
-}
-div.jp-single-player div.jp-interface {
-	border-bottom:none;
+	width:170px;
+	height:48px;
+	border:1px solid #bbb;
 }
 div.jp-playlist-player div.jp-interface {
 }
@@ -60,17 +57,13 @@ div.jp-interface ul.jp-controls a {
 }
 a.jp-play,
 a.jp-pause {
-	top:20px;
+	top:3px;
 	width:40px;
 	height:40px;
 }
 div.jp-single-player a.jp-play,
 div.jp-single-player a.jp-pause {
-	left:40px;
-}
-div.jp-playlist-player a.jp-play,
-div.jp-playlist-player a.jp-pause {
-	left:48px;
+	left:3px;
 }
 a.jp-play {
 	background: url("jplayer.blue.monday.jpg") 0 0 no-repeat;
@@ -146,31 +139,25 @@ div.jp-play-bar {
 	height:15px;
 }
 a.jp-volume-min {
-	top:32px;
+	top:16px;
 	background: url("jplayer.blue.monday.jpg") 0 -170px no-repeat;
 	width:18px;
 	height:15px;
 }
 div.jp-single-player a.jp-volume-min {
-	left:274px;
-}
-div.jp-playlist-player a.jp-volume-min {
-	left:296px;
+	left:55px;
 }
 a.jp-volume-min:hover {
 	background: url("jplayer.blue.monday.jpg") -19px -170px no-repeat;
 }
 a.jp-volume-max {
-	top:32px;
+	top:16px;
 	background: url("jplayer.blue.monday.jpg") 0 -186px no-repeat;
 	width:18px;
 	height:15px;
 }
 div.jp-single-player a.jp-volume-max {
-	left:346px;
-}
-div.jp-playlist-player a.jp-volume-max {
-	left:368px;
+	left:146px;
 }
 a.jp-volume-max:hover {
 	background: url("jplayer.blue.monday.jpg") -19px -186px no-repeat;
@@ -179,17 +166,17 @@ a.jp-volume-max:hover {
 div.jp-volume-bar {
 	position: absolute;
 	overflow:hidden;
-	top:37px;
+	top:21px;
 	background: url("jplayer.blue.monday.jpg") 0 -250px repeat-x;
-	width:46px;
+	width:61px;
 	height:5px;
 	cursor: pointer;
 }
 div.jp-single-player div.jp-volume-bar {
-	left:292px;
+	left:76px;
 }
 div.jp-playlist-player div.jp-volume-bar {
-	left:314px;
+	left:180px;
 }
 div.jp-volume-bar-value {
 	background: url("jplayer.blue.monday.jpg") 0 -256px repeat-x;
