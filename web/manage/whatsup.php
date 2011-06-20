@@ -10,9 +10,10 @@ opendb();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" media="all" type="text/css" href="style.css"/>
-<title>Currently up</title>
+<title>Manage RadioSolarKompass</title>
 </head>
 <body>
+<?php switcher(); ?>
 <h4>What's up?</h4>
 <?php
 displayWhatsupList();
