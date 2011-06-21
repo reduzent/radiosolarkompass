@@ -1,0 +1,13 @@
+#worldmap {
+	background: url("world_850_410.png") 0 0 no-repeat;
+	width:850px;
+	height:410px;
+}
+#location {
+	position:relative;
+}
+#point {
+	width:2px;
+	height:2px;
+	background-color:#f00;
+}
