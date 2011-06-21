@@ -5,6 +5,8 @@
 }
 #location {
 	position:relative;
+	width:30px;
+	height:30px;
 }
 #point {
 	width:2px;
