@@ -4,6 +4,7 @@
 #X declare -stdpath extra/ggee -stdpath extra/zexy -stdlib extra/zexy
 ;
 #X declare -stdpath extra/ggee;
+#X declare -path wav -stdpath extra/moocow;
 #X obj 15 38 rsk_get_streamurl_from_locid;
 #X obj 26 62 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -31,7 +32,7 @@
 #X obj 622 20 loadbang;
 #X msg 622 42 dsp 1;
 #X obj 622 64 s pd;
-#X obj 114 297 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 114 297 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 411 179 print TIME_CITYID;
 #X obj 600 193 rsk_counter;
@@ -46,6 +47,10 @@
 #X msg 138 240 http://radios.xalimasn.com:9020;
 #X obj 201 364 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
+#X obj 271 89 rsk_announce;
+#X msg 271 41 city Zurich \, country Switzerland \, radio net pd community
+radio;
+#X obj 271 111 dac~;
 #X connect 0 0 1 0;
 #X connect 0 0 31 0;
 #X connect 0 1 31 1;
@@ -79,3 +84,6 @@
 #X connect 33 2 34 0;
 #X connect 35 0 33 0;
 #X connect 36 0 32 4;
+#X connect 37 0 39 0;
+#X connect 37 1 39 1;
+#X connect 38 0 37 0;
