@@ -50,7 +50,9 @@
 #X obj 271 89 rsk_announce;
 #X msg 271 41 city Zurich \, country Switzerland \, radio net pd community
 radio;
-#X obj 271 111 dac~;
+#X obj 272 144 dac~;
+#X obj 338 123 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
 #X connect 0 0 1 0;
 #X connect 0 0 31 0;
 #X connect 0 1 31 1;
@@ -86,4 +88,5 @@ radio;
 #X connect 36 0 32 4;
 #X connect 37 0 39 0;
 #X connect 37 1 39 1;
+#X connect 37 2 40 0;
 #X connect 38 0 37 0;
