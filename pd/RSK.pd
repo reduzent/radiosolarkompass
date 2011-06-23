@@ -1,4 +1,4 @@
-#N canvas 0 44 768 465 10;
+#N canvas 0 53 768 465 10;
 #X declare -path include;
 #X declare -stdpath extra/ggee -stdpath extra/zexy -stdlib extra/zexy
 ;
@@ -8,6 +8,7 @@
 #X declare -stdpath extra/ggee;
 #X declare -stdpath extra/ggee;
 #X declare -stdpath extra/ggee;
+#X declare -path wav -stdpath extra/moocow;
 #N canvas 213 173 391 212 INIT 0;
 #X obj -153 10 declare -path include;
 #X obj -151 44 loadbang;
@@ -24,13 +25,13 @@
 #X obj 73 107 s \$0.time.next;
 #X obj 18 17 r \$0.get.next;
 #X msg 18 100 \$4;
-#X obj 17 337 dac~;
+#X obj 22 390 dac~;
 #X obj 18 263 list prepend 0;
 #X obj 99 220 r \$0.onair;
 #X obj 99 241 == 0;
 #X obj 562 44 r \$0.time.next;
 #X obj 562 141 route 0 1;
-#X obj 562 195 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 562 195 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X msg 562 66 symbol PLAY_NEXT_AT_\$1:\$2:\$3;
 #X symbolatom 562 88 30 0 0 0 - - -;
@@ -105,12 +106,12 @@
 #X restore 18 297 pd players;
 #X obj 562 171 unpack f f;
 #X floatatom 580 196 5 0 0 0 - - -;
-#X obj 631 196 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 631 196 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 631 172 unpack f f;
 #X floatatom 649 197 5 0 0 0 - - -;
 #X obj 563 258 hradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144
--1 -1 1;
+-1 -1 0;
 #X obj 563 236 r \$0.onair;
 #X obj 267 14 r \$0.time.next;
 #X obj 267 36 rsk_timebang;
@@ -151,7 +152,7 @@
 #X connect 8 0 9 0;
 #X connect 10 0 0 0;
 #X restore 400 47 pd DEBUG;
-#X obj 54 338 rsk_icecast;
+#X obj 59 391 rsk_icecast;
 #N canvas 189 119 388 375 offair.try.next.on.failure 0;
 #X obj 37 331 s \$0.get.next;
 #X obj 68 101 r \$0.state;
@@ -309,6 +310,12 @@ the server to be able to detect RSK outage.;
 #X restore 479 315 pd counter.update.play;
 #X obj 294 278 t a b;
 #X obj 321 301 s \$0.update.play;
+#X obj 131 318 rsk_announce;
+#X msg 131 281 city Zurich \, country Switzerland \, radio net pd community
+radio;
+#X obj 29 354 rsk_ducking;
+#X obj 155 367 env~;
+#X floatatom 164 404 5 0 0 0 - - -;
 #X connect 1 0 4 0;
 #X connect 2 0 3 0;
 #X connect 2 1 3 1;
@@ -326,10 +333,8 @@ the server to be able to detect RSK outage.;
 #X connect 14 1 23 0;
 #X connect 16 0 17 0;
 #X connect 18 0 14 0;
-#X connect 19 0 9 0;
-#X connect 19 0 45 0;
-#X connect 19 1 9 1;
-#X connect 19 1 45 1;
+#X connect 19 0 56 0;
+#X connect 19 1 56 1;
 #X connect 20 0 15 0;
 #X connect 20 1 21 0;
 #X connect 23 0 22 0;
@@ -355,3 +360,12 @@ the server to be able to detect RSK outage.;
 #X connect 42 0 43 0;
 #X connect 52 0 39 0;
 #X connect 52 1 53 0;
+#X connect 54 0 56 2;
+#X connect 54 0 57 0;
+#X connect 54 1 56 3;
+#X connect 55 0 54 0;
+#X connect 56 0 9 0;
+#X connect 56 0 45 0;
+#X connect 56 1 9 1;
+#X connect 56 1 45 1;
+#X connect 57 0 58 0;

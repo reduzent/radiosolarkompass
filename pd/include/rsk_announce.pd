@@ -1,4 +1,4 @@
-#N canvas 268 107 555 338 10;
+#N canvas 265 107 555 338 10;
 #X declare -path wav -stdpath extra/moocow;
 #N canvas 545 71 419 353 intro 0;
 #X obj 147 128 soundfiler;
@@ -106,7 +106,7 @@ list now playing;
 #X obj 498 200 outlet;
 #X obj 103 213 throw~ \$0.out.l;
 #X obj 165 193 throw~ \$0.out.r;
-#X obj 141 86 del 400;
+#X obj 141 86 del 3000;
 #X connect 0 0 23 0;
 #X connect 0 1 23 1;
 #X connect 1 0 21 0;
