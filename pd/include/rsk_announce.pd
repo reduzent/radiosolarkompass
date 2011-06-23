@@ -1,4 +1,4 @@
-#N canvas 265 107 515 378 10;
+#N canvas 265 107 509 395 10;
 #X declare -path wav -stdpath extra/moocow;
 #N canvas 545 71 419 353 intro 0;
 #X obj 147 128 soundfiler;
@@ -70,8 +70,8 @@
 #X connect 11 0 12 0;
 #X connect 11 0 13 0;
 #X restore 59 157 pd play_text;
-#X obj 8 283 \$0;
-#X obj 8 342 s \$0.render;
+#X obj 8 304 \$0;
+#X obj 8 362 s \$0.render;
 #X obj 8 258 loadbang;
 #X obj 77 260 r \$0.render;
 #N canvas 964 128 237 269 renderer 0;
@@ -94,7 +94,7 @@
 #X connect 7 0 2 0;
 #X connect 8 1 4 0;
 #X restore 74 55 pd renderer;
-#X msg 8 305 set \$1.sunrise \, list sunrise inn \, set \$1.now \,
+#X msg 8 325 set \$1.sunrise \, list sunrise inn \, set \$1.now \,
 list now playing;
 #X obj 17 10 inlet;
 #X obj 348 341 outlet~;
@@ -106,6 +106,7 @@ list now playing;
 #X obj 59 131 del 3000;
 #X obj 17 32 route play;
 #X obj 17 63 t b b;
+#X obj 8 280 delay 10;
 #X connect 0 0 20 0;
 #X connect 0 1 20 1;
 #X connect 1 0 18 0;
@@ -114,7 +115,7 @@ list now playing;
 #X connect 10 1 20 3;
 #X connect 10 2 21 0;
 #X connect 11 0 16 0;
-#X connect 13 0 11 0;
+#X connect 13 0 27 0;
 #X connect 14 0 4 0;
 #X connect 16 0 12 0;
 #X connect 17 0 25 0;
@@ -125,3 +126,4 @@ list now playing;
 #X connect 25 1 15 0;
 #X connect 26 0 0 0;
 #X connect 26 1 24 0;
+#X connect 27 0 11 0;
