@@ -56,6 +56,13 @@
 #X obj 39 367 rsk_ducking;
 #X obj 401 88 print ANNOUNCE;
 #X msg 278 88 play;
+#X msg 312 34 31;
+#X msg 343 34 770;
+#X msg 374 35 13;
+#X msg 411 32 957;
+#X msg 442 30 1224;
+#X msg 486 33 671;
+#X msg 523 30 535;
 #X connect 0 0 1 0;
 #X connect 0 0 31 0;
 #X connect 0 1 31 1;
@@ -99,3 +106,10 @@
 #X connect 41 0 7 0;
 #X connect 41 1 7 1;
 #X connect 43 0 37 0;
+#X connect 44 0 39 0;
+#X connect 45 0 39 0;
+#X connect 46 0 39 0;
+#X connect 47 0 39 0;
+#X connect 48 0 39 0;
+#X connect 49 0 39 0;
+#X connect 50 0 39 0;
