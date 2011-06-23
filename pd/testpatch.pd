@@ -5,6 +5,7 @@
 ;
 #X declare -stdpath extra/ggee;
 #X declare -path wav -stdpath extra/moocow;
+#X declare -stdpath extra/ggee;
 #X obj 15 38 rsk_get_streamurl_from_locid;
 #X obj 26 62 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -13,7 +14,7 @@
 #X obj 22 276 rsk_streamplayer;
 #X msg 35 106 set \$2;
 #X msg 35 131 mms://61.14.131.117/BLive/;
-#X obj 40 371 dac~;
+#X obj 39 394 dac~;
 #X msg 418 347 http://www.netpd.org:8010/netpd.mp3;
 #X msg 326 284 mms://a688.l11289730687.c112897.a.lm.akamaistream.net/D/688/112897/v0001/reflector:30687
 ;
@@ -32,7 +33,7 @@
 #X obj 622 20 loadbang;
 #X msg 622 42 dsp 1;
 #X obj 622 64 s pd;
-#X obj 114 297 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 114 297 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 411 179 print TIME_CITYID;
 #X obj 600 193 rsk_counter;
@@ -42,17 +43,19 @@
 #X obj 15 80 rsk_stream_chooser;
 #X obj 39 340 rsk_mixer;
 #X obj 138 277 rsk_streamplayer;
-#X obj 230 298 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 230 298 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X msg 138 240 http://radios.xalimasn.com:9020;
 #X obj 201 364 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 271 89 rsk_announce;
-#X msg 271 41 city Zurich \, country Switzerland \, radio net pd community
-radio;
-#X obj 272 144 dac~;
-#X obj 338 123 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 278 121 rsk_announce;
+#X obj 345 155 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
+#X obj 278 58 rsk_get_announce_data;
+#X msg 278 33 1;
+#X obj 39 367 rsk_ducking;
+#X obj 401 88 print ANNOUNCE;
+#X msg 278 88 play;
 #X connect 0 0 1 0;
 #X connect 0 0 31 0;
 #X connect 0 1 31 1;
@@ -79,14 +82,20 @@ radio;
 #X connect 29 0 27 0;
 #X connect 31 0 30 0;
 #X connect 31 0 5 0;
-#X connect 32 0 7 0;
-#X connect 32 1 7 1;
+#X connect 32 0 41 0;
+#X connect 32 1 41 1;
 #X connect 33 0 32 2;
 #X connect 33 1 32 3;
 #X connect 33 2 34 0;
 #X connect 35 0 33 0;
 #X connect 36 0 32 4;
-#X connect 37 0 39 0;
-#X connect 37 1 39 1;
-#X connect 37 2 40 0;
-#X connect 38 0 37 0;
+#X connect 37 0 41 2;
+#X connect 37 1 41 3;
+#X connect 37 2 38 0;
+#X connect 39 0 43 0;
+#X connect 39 1 42 0;
+#X connect 39 1 37 0;
+#X connect 40 0 39 0;
+#X connect 41 0 7 0;
+#X connect 41 1 7 1;
+#X connect 43 0 37 0;
