@@ -99,8 +99,8 @@ function pdGetStreamsOfLocation($city_id) {
 function pdGetAnnounceData($radio_id) {
   $query = "
     select 
-      `city`.`name`, 
-      `country`.`name`, 
+      `cities`.`name`, 
+      `countries`.`name`, 
       `radios`.`name`
     from `radios`
     join `cities` 
