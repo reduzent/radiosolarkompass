@@ -96,6 +96,26 @@ function pdGetStreamsOfLocation($city_id) {
   }
 }
 
+function pdGetAnnounceData($radio_id) {
+  $query = "
+    select 
+      `city`.`name`, 
+      `country`.`name`, 
+      `radios`.`name`
+    from `radios`
+    join `cities` 
+    on `radios`.`city_id` = `cities`.`id`
+    join `countries` 
+    on `cities`.`country_code` = `countries`.`iso` 
+    where `radios`.`id` = '$radio_id'";
+  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  while(list($city, $country, $radio) = mysql_fetch_array($result)) {
+    echo "city $city;\n";
+    echo "country $country;\n";
+    echo "radio $radio;\n";
+  }
+}
+
 function generatePdPlaylist() {
   $query = "
     select 
