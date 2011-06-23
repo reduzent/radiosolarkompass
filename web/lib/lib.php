@@ -90,7 +90,7 @@ function convertTdecThms($tdec) {
 
 function pdGetStreamsOfLocation($city_id) {
   $query = "select `id`, `url` from `radios` where `city_id` = $city_id";
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
   while(list($id, $url) = mysql_fetch_array($result)) {
     echo "$id $url;\n";
   }
@@ -99,8 +99,8 @@ function pdGetStreamsOfLocation($city_id) {
 function pdGetAnnounceData($radio_id) {
   $query = "
     select 
-      `city`.`name`, 
-      `country`.`name`, 
+      `cities`.`name`, 
+      `countries`.`name`, 
       `radios`.`name`
     from `radios`
     join `cities` 
@@ -108,7 +108,7 @@ function pdGetAnnounceData($radio_id) {
     join `countries` 
     on `cities`.`country_code` = `countries`.`iso` 
     where `radios`.`id` = '$radio_id'";
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
   while(list($city, $country, $radio) = mysql_fetch_array($result)) {
     echo "city $city;\n";
     echo "country $country;\n";
@@ -128,7 +128,7 @@ function generatePdPlaylist() {
     where  `radios`.`active` = true
     group by `cities`.`id`;
     ";
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  $result = mysql_query($query) or die header('HTTP/1.0 500 Internal Server Error');
   $timetable = array();
   while(list($id, $lat, $lon) = mysql_fetch_array($result)) {
     $sunrise_dec = calcSunriseTime($lat, $lon, 0);

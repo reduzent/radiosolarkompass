@@ -1,5 +1,5 @@
 #worldmap {
-	background: url("img/world_850_410.png") 0 0 no-repeat;
+	background: url("img/world_850_410_2.png") 0 0 no-repeat;
 	width:850px;
 	height:410px;
 }
@@ -7,9 +7,4 @@
 	position:relative;
 	width:30px;
 	height:30px;
-}
-#point {
-	width:2px;
-	height:2px;
-	background-color:#f00;
 }
