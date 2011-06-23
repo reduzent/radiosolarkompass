@@ -1,4 +1,25 @@
 <?php
+
+$query = "
+     select
+       `radios`.`name`, 
+       `radios`.`homepage`, 
+       `radios`.`url`, 
+       `cities`.`name`,
+       X(`cities`.`coord`),
+       Y(`cities`.`coord`),
+       `countries`.`name` 
+    from `status` 
+    left join `radios` on 
+      `radios`.`id` = `status`.`value` 
+    join `cities` on 
+      `cities`.`id` = `radios`.`city_id`
+    join `countries` on
+      `countries`.`iso` = `cities`.`country_code`
+    where `status`.`param` = 'onair'
+    ";
+
+
 if(isset($_GET['lat']) and is_numeric($_GET['lat'])) {
   $lat = $_GET['lat'];
 } else {
