@@ -1,4 +1,6 @@
 <?php
+include '../lib/lib.php';
+opendb();
 
 $query = "
      select
@@ -18,8 +20,12 @@ $query = "
       `countries`.`iso` = `cities`.`country_code`
     where `status`.`param` = 'onair'
     ";
+$result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+list($name, $homepage, $url, $city, $lat, $lon, $country) = mysql_fetch_array($result);
 
 
+
+/*
 if(isset($_GET['lat']) and is_numeric($_GET['lat'])) {
   $lat = $_GET['lat'];
 } else {
@@ -30,8 +36,12 @@ if(isset($_GET['lon']) and is_numeric($_GET['lon'])) {
 } else {
   $lon = 0;
 }
+*/
+
 $x = floor($lon * 2.29333 + 403.116 - 15 + 0.5);
 $y = floor($lat * -2.30868 + 222.567 - 15 + 0.5);
+
+closedb();
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -62,5 +72,12 @@ echo "<p>Latitude: $lat<br/>Longitude: $lon</p>\n";
      <img name="loeschi" src="img/aussenden_anim0.png"  alt="o" />
   </div>
 </div>
+<?php
+$url_short = truncateUrl($url);
+echo "<div class='fig'><a href='$homepage'>$name</a></div>\n";
+echo "<div class='fig'><a href='$url'>$url_short</a></div>\n";
+echo "<div class='fig'>$city</div>\n";
+echo "<div class='fig'>$country</div>\n";
+?>
 </body>
 </html>
