@@ -56,13 +56,12 @@ closedb();
     current = (current + 1) % num;
     loeschi.src = urlbase + current + '.png';
   }
-  timeMsg();
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="stylesheet" media="all" type="text/css" href="style.css" />
 <title>World Map Test</title>
 </head>
-<body>
+<body onload="timeMsg()">
 <h4>The world in 850 x 410 pixels</h4>
 <?php
 echo "<p>Latitude: $lat<br/>Longitude: $lon</p>\n";
