@@ -28,7 +28,7 @@ if(isset($_POST['onair'])) {
   $query = "insert into `onair_log` 
       (`radio_id`, `onair_time`) 
       values 
-      ($id, concat(utc_date(), ' ', sec_to_time($time))";
+      ($id, concat(utc_date(), ' ', sec_to_time($time)))";
   mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
 }
 if(isset($_POST['next'])) {
