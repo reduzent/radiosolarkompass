@@ -48,7 +48,7 @@ if ( $radio_valid
   $city     = 'empty';
   $complete = false; 
 }
-
+addNewEntry();
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -101,7 +101,7 @@ if ( $radio_valid
 <input class="button" type="submit" value="Submit" onclick="this.form.complete.value='true'"/>
 <br />
 <?php 
-addShowNewEntry();
+showNewEntry();
 ?>
 </form>
 </body>

@@ -359,7 +359,7 @@ function generateCitySelector() {
   }
 }
 
-function addShowNewEntry() {
+function showNewEntry() {
   global $todb;
   global $allok;
   if ( $allok ) {
@@ -372,12 +372,20 @@ function addShowNewEntry() {
       echo "</tr>\n";
     }
     echo "</table>\n";
+  }
+}
+
+
+function addNewEntry() {
+  global $todb;
+  global $allok;
+  if ( $allok ) {
     $query = "
       insert into `radios` 
       (`name`, `homepage`, `url`, `city_id`)
       values
       ('${todb['radio']}', '${todb['homepage']}', '${todb['url']}', '${todb['city']}');";
-    mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
+    mysql_query($query) or die (mysql_error());
   }
 }
 
