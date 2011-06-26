@@ -1,7 +1,6 @@
 div.worldmap > div > div > div.location {
 	position:relative;
 }
-
 #mark {
 	position:relative;
 	left:-15px;
@@ -11,7 +10,7 @@ div.worldmap > div > div > div.location {
 	clear:both;
 }
 div.worldmap {
-	border:solid 1px green;
+	border: solid 1px black;
 }
 
 div.worldmap > div {
