@@ -481,26 +481,66 @@ function displayStreamList() {
 
 // ############ whatsup.php functions ################################################################
 
-function displayWhatsupList() {
-  $query = '
+function getStatusInfo() {
+  $query = "
      select
        `status`.`param`,
-       `status`.`mod_time`, 
+       `status`.`value`,
+       `status`.`playtime`, 
        `radios`.`name`, 
        `radios`.`homepage`, 
        `radios`.`url`, 
-       `cities`.`name`, 
-       `countries`.`name` 
+       `cities`.`name` as `city`, 
+       `countries`.`name` as `country` 
     from `status` 
     left join `radios` on 
       `radios`.`id` = `status`.`value` 
-    inner join `cities` on 
+    left join `cities` on 
       `cities`.`id` = `radios`.`city_id`
-    inner join `countries` on
+    left join `countries` on
       `countries`.`iso` = `cities`.`country_code`
-    order by `status`.`mod_time`
-    ';
+    order by `status`.`playtime`
+    ";
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  while ($row = mysql_fetch_assoc($result)) {
+    $status[$row['param']] = $row;
+  }
+  $empty_values =  array(
+    'param' => 'n/a',
+    'value' => 'n/a',
+    'playtime' => 'n/a',
+    'name' => 'n/a',
+    'homepage' => 'n/a',
+    'url' => 'n/a',
+    'city' => 'n/a',
+    'country' => 'n/a'
+    );
+  $lastping = $status['online']['playtime'];
+  $tz = date_default_timezone_get();
+  date_default_timezone_set('UTC');
+  $lastping_epoch = strtotime($lastping);
+  date_default_timezone_set($tz);
+  $now = time();
+  $delta = $now - $lastping_epoch;
+  if ( $delta < 20 ) {
+    $status['online'] = true;
+  } else {
+    $status['online'] = false;
+    $status['onair'] = $empty_values;
+    $status['next'] = $empty_values;
+  }
+  if ($status['onair']['value'] == 0) {
+    $status['onair'] = $empty_values;
+  }
+  if ($status['next']['value'] == 0) {
+    $status['next'] = $empty_values;
+  }
+  return $status;
+}
+
+function displayWhatsupList() {
+
+/*
 ?>
 <table id="streamlist">
 <tr>
@@ -530,6 +570,7 @@ function displayWhatsupList() {
     echo "</tr>\n";
   }
   echo "</table>\n";
+*/
 }
 
 
