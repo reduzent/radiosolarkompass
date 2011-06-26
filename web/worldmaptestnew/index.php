@@ -18,9 +18,9 @@ $y_perc = rad2deg(0.5 * log((1 + sin(deg2rad($lat)))/(1 - sin(deg2rad($lat))))) 
 <head>
 <script type="text/javascript">
   var delay = 100;
-  var num = 5;
+  var num = 4;
   var current = 0;
-  var urlbase = 'img/aussenden_anim';
+  var urlbase = 'img/aussenden_';
   function timeMsg()
   {
     var t=setTimeout("timeMsg()",delay);
@@ -40,7 +40,7 @@ $y_perc = rad2deg(0.5 * log((1 + sin(deg2rad($lat)))/(1 - sin(deg2rad($lat))))) 
     <img src="img/worldmap_new_2942x2312.png" />
     <div>
       <div class="location" style=<?php echo "\"left:${x_perc}%;top:${y_perc}%;\""; ?>>
-        <img name="loeschi" id="mark" src="img/aussenden_anim0.png"  alt="o" />
+        <img name="loeschi" id="mark" src="img/aussenden0.png"  alt="o" />
       </div>
     </div>
   </div>
