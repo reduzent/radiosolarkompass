@@ -1,14 +1,18 @@
 <?php
-if(isset($_GET['x']) and is_numeric($_GET['x'])) {
-  $x = $_GET['x'];
+if(isset($_GET['lat']) and is_numeric($_GET['lat'])) {
+  $lat = $_GET['lat'];
 } else {
- $x = 0;
+  $lat = 0;
 }
-if(isset($_GET['y']) and is_numeric($_GET['y'])) {
-  $y = $_GET['y'];
+if(isset($_GET['lon']) and is_numeric($_GET['lon'])) {
+  $lon = $_GET['lon'];
 } else {
- $y = 0;
+  $lon = 0;
 }
+
+$x_perc = $lon / 3.58494 + 46.9449;
+$y_perc = rad2deg(0.5 * log((1 + sin(deg2rad($lat)))/(1 - sin(deg2rad($lat))))) / -2.81713 + 59.3701;
+
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -35,7 +39,7 @@ if(isset($_GET['y']) and is_numeric($_GET['y'])) {
   <div>
     <img src="img/worldmap_new_2942x2312.png" />
     <div>
-      <div class="location" style=<?php echo "\"left:${x}%;top:${y}%;\""; ?>>
+      <div class="location" style=<?php echo "\"left:${x_perc}%;top:${y_perc}%;\""; ?>>
         <img name="loeschi" id="mark" src="img/aussenden_anim0.png"  alt="o" />
       </div>
     </div>
