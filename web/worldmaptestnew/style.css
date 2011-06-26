@@ -1,0 +1,47 @@
+div.worldmap > div > div > div.location {
+	position:relative;
+}
+
+#mark {
+	position:relative;
+	left:-15px;
+	top:-15px;
+}
+.clearfix {
+	clear:both;
+}
+div.worldmap {
+	border:solid 1px green;
+}
+
+div.worldmap > div {
+	padding:0;
+	margin:0;
+	position:
+	relative;
+}
+div.worldmap > div > img {
+	border:0;
+	padding:0;
+	margin:0;
+	z-index:-1000;
+	position:relative;
+	top:0;
+	bottom:0;
+	left:0;
+	width:100%;
+	display:block;
+}
+div.worldmap > div > div { 
+	padding:0;
+	margin:0;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	width:100%;
+}
+body {
+	background-color:#ddd;
+	overflow-x:hidden;
+}

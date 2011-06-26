@@ -1,0 +1,30 @@
+#worldmap {
+	width:100%;
+	border:solid 1px green;
+}
+
+#image {
+	position:relative;
+	left:0px;
+	top:-30px;
+        width:100%;
+	z-index:0;
+}
+
+#location {
+	position:relative;
+	width:30px;
+	height:30px;
+	z-index:2;
+	left:25%;
+	top:100%;
+}
+
+.fig {
+	float:left;
+	margin-right:30px;
+	}
+
+body {
+	background-color:#eff;
+}
