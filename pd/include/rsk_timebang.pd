@@ -3,7 +3,7 @@
 #X obj 44 6 inlet;
 #X obj 101 91 t a b;
 #X obj 128 114 time GMT;
-#X obj 179 45 declare -stdlib zexy;
+#X obj 289 46 declare -stdlib zexy;
 #X obj 128 138 pack f f f;
 #X obj 196 138 * 0.001;
 #X obj 128 185 +;
@@ -12,14 +12,14 @@
 #X text 151 229 <- convert seconds to miliseconds;
 #X obj 101 265 delay;
 #X obj 101 287 outlet;
-#X obj 44 48 route stop;
+#X obj 44 28 route stop;
 #X msg 44 191 stop;
 #X obj 128 161 rsk_time2sec;
-#X obj 44 26 rsk_time2sec;
+#X obj 101 49 rsk_time2sec;
 #X msg 201 273 RSK NEXT SWITCH IN \$1 SECONDS;
 #X obj 201 295 s debug;
 #X obj 101 70 f;
-#X connect 0 0 15 0;
+#X connect 0 0 12 0;
 #X connect 1 0 7 0;
 #X connect 1 1 2 0;
 #X connect 2 0 4 0;
@@ -34,9 +34,9 @@
 #X connect 8 0 10 0;
 #X connect 10 0 11 0;
 #X connect 12 0 13 0;
-#X connect 12 1 18 0;
+#X connect 12 1 15 0;
 #X connect 13 0 10 0;
 #X connect 14 0 6 0;
-#X connect 15 0 12 0;
+#X connect 15 0 18 0;
 #X connect 16 0 17 0;
 #X connect 18 0 1 0;
