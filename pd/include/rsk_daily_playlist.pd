@@ -21,7 +21,7 @@
 #X msg 14 68 . include/pdaccess && wget -O /tmp/rsk_daily_playlist
 --quiet http://\$1@www.radiosolarkompass.org/pd/dailyplaylist.php &&
 echo done || echo failed;
-#X msg 41 252 read /tmp/rsk_daily_playlist.dummy \, rewind;
+#X msg 41 252 read /tmp/rsk_daily_playlist \, rewind;
 #X connect 0 0 10 0;
 #X connect 1 0 12 0;
 #X connect 2 0 3 0;
