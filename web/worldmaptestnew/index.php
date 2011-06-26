@@ -17,7 +17,7 @@ $y_perc = rad2deg(0.5 * log((1 + sin(deg2rad($lat)))/(1 - sin(deg2rad($lat))))) 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script type="text/javascript">
-  var delay = 100;
+  var delay = 80;
   var num = 4;
   var current = 0;
   var urlbase = 'img/aussenden_';
