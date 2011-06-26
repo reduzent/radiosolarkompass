@@ -539,7 +539,36 @@ function getStatusInfo() {
 }
 
 function displayWhatsupList() {
-
+  $status_raw = getStatusInfo();
+  $status = array(
+    'next' => $status_raw['next'],
+    'onair' => $status_raw['onair'],
+    'played' => $status_raw['played']
+  );
+  if ($status_raw['online'] == true) {
+    $online_status = 'online';
+  } else {
+    $online_status = 'offline';
+  }
+  echo "<p>The RadioSolarKompass is currently <b>$online_status</b>.</p>";
+  echo "<table id=\"streamlist\">\n";
+  $bgclr = 1;
+  foreach ( $status as $row) {
+    echo "<tr class=\"bg$bgclr\">\n";
+    $bgclr += 1;
+    $bgclr = fmod($bgclr, 2);
+    echo " <td>${row['param']}</td>\n";
+    echo " <td>${row['playtime']}</td>\n";
+    if ($row['homepage'] == 'n/a') {
+      echo "  <td>${row['name']}</td>\n";
+    } else {
+      echo "  <td><a href=\"${row['homepage']}\">${row['name']}</a></td>\n";
+    }
+    echo "  <td>${row['city']}</td>\n";
+    echo "  <td>${row['country']}</td>\n";
+    echo "</tr>\n";
+  }
+  echo "</table>\n";
 /*
 ?>
 <table id="streamlist">
