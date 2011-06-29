@@ -1,11 +1,11 @@
-#N canvas 288 144 640 412 10;
+#N canvas 239 245 640 412 10;
 #X declare -stdpath extra/ggee -stdpath extra/zexy -stdlib extra/zexy
 ;
 #X obj 498 108 textfile;
 #X obj 498 79 r \$0.tf.i;
 #X obj 498 149 s \$0.tf.o0;
 #X obj 543 130 s \$0.tf.o1;
-#N canvas 418 220 413 329 update_daily_playlist 0;
+#N canvas 445 554 413 329 update_daily_playlist 0;
 #X obj 14 137 shell;
 #X msg 14 42 symbol $user:$pass;
 #X obj 14 185 b;
@@ -14,14 +14,15 @@
 #X obj 14 14 inlet;
 #X obj 14 231 t b b;
 #X obj 14 298 outlet;
-#X obj 184 219 print -n;
-#X msg 184 193 RSK UPDATED DAILY PLAYLIST;
+#X obj 63 207 s error;
+#X msg 150 209 RSK UPDATED DAILY PLAYLIST;
 #X obj 14 163 route done failed;
-#X msg 157 161 RSK FAILED UPDATE DAILY PLAYLIST;
+#X msg 63 186 RSK FAILED UPDATE DAILY PLAYLIST;
 #X msg 14 68 . include/pdaccess && wget -O /tmp/rsk_daily_playlist
 --quiet http://\$1@www.radiosolarkompass.org/pd/dailyplaylist.php &&
 echo done || echo failed;
 #X msg 41 252 read /tmp/rsk_daily_playlist \, rewind;
+#X obj 150 232 s debug;
 #X connect 0 0 10 0;
 #X connect 1 0 12 0;
 #X connect 2 0 3 0;
@@ -30,7 +31,7 @@ echo done || echo failed;
 #X connect 6 0 7 0;
 #X connect 6 1 13 0;
 #X connect 6 1 9 0;
-#X connect 9 0 8 0;
+#X connect 9 0 14 0;
 #X connect 10 0 2 0;
 #X connect 10 1 11 0;
 #X connect 11 0 8 0;
