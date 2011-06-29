@@ -21,7 +21,7 @@ done || echo failed;
 #X obj 129 275 list append;
 #X obj 129 297 list prepend RSK;
 #X obj 129 319 list trim;
-#X obj 129 341 print -n;
+#X obj 129 341 s error;
 #X obj 21 340 s debug;
 #X obj 150 198 list;
 #X obj 204 197 list;

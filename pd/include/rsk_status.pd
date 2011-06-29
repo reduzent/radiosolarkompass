@@ -10,7 +10,7 @@
 #X obj 177 282 list append;
 #X obj 177 304 list prepend RSK;
 #X obj 177 326 list trim;
-#X obj 177 348 print -n;
+#X obj 177 348 s error;
 #X obj 25 385 s debug;
 #X msg 177 257 FAILED STATUS;
 #X msg 21 89 list $user:$pass \$1 \$2 \$3;

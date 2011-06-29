@@ -18,7 +18,7 @@
 #X obj 11 280 route done failed;
 #X obj 163 268 b;
 #X obj 163 290 symbol;
-#X obj 163 334 print -n;
+#X obj 163 334 s error;
 #X obj 11 56 t a a;
 #X msg 163 312 RSK FAILED GET STREAMURL \$1;
 #X msg 11 150 . include/pdaccess && wget -O - --quiet http://\$2@www.radiosolarkompass.org/pd/streams_of_location.php?id=\$1

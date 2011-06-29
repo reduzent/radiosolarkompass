@@ -6,6 +6,6 @@
 #X obj 329 241 outlet;
 #X obj 110 83 loadbang;
 #X msg 110 109 RSK FAILED TO LOAD CLASS time;
-#X obj 110 131 print -n;
+#X obj 110 131 s error;
 #X connect 5 0 6 0;
 #X connect 6 0 7 0;

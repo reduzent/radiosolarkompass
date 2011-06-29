@@ -132,7 +132,7 @@
 #X obj 267 389 s \$0.get.next;
 #N canvas 123 207 286 334 DEBUG 0;
 #X obj 14 285 spigot;
-#X obj 14 307 print -n;
+#X obj 14 307 s error;
 #X obj 60 284 r DEBUG;
 #X obj 19 7 r \$0.time.next;
 #X obj 40 60 r \$0.state;

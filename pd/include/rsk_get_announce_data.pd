@@ -17,7 +17,7 @@
 #X msg 11 124 list \$1 $user:$pass;
 #X obj 11 280 route done failed;
 #X obj 155 272 b;
-#X obj 155 338 print -n;
+#X obj 155 338 s error;
 #X obj 11 56 t a a;
 #X msg 11 150 . include/pdaccess && wget -O - --quiet http://\$2@www.radiosolarkompass.org/pd/announce_data.php?radio=\$1
 && echo done || echo failed;

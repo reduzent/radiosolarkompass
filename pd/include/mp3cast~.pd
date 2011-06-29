@@ -3,7 +3,7 @@
 #X obj 23 218 outlet;
 #X obj 77 60 loadbang;
 #X msg 76 84 RSK FAILED TO LOAD CLASS mp3cast~;
-#X obj 76 111 print -n;
+#X obj 76 111 s error;
 #X obj 16 21 inlet;
 #X connect 2 0 3 0;
 #X connect 3 0 4 0;
