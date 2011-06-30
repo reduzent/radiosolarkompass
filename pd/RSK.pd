@@ -1,4 +1,4 @@
-#N canvas 0 44 767 466 10;
+#N canvas 1 51 767 466 10;
 #X declare -path include;
 #X declare -stdpath extra/ggee -stdpath extra/zexy -stdlib extra/zexy
 ;
@@ -108,12 +108,12 @@
 #X restore 18 337 pd players;
 #X obj 562 171 unpack f f;
 #X floatatom 580 196 5 0 0 0 - - -;
-#X obj 631 196 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 631 196 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 631 172 unpack f f;
 #X floatatom 649 197 5 0 0 0 - - -;
 #X obj 563 258 hradio 15 1 0 2 empty empty empty 0 -8 0 10 -262144
--1 -1 1;
+-1 -1 0;
 #X obj 563 236 r \$0.onair;
 #X obj 267 14 r \$0.time.next;
 #X obj 267 36 rsk_timebang;
@@ -130,9 +130,8 @@
 #X obj 294 321 s \$0.onair;
 #X obj 267 342 sel 0 1;
 #X obj 267 389 s \$0.get.next;
-#N canvas 123 207 286 334 DEBUG 0;
+#N canvas 121 233 286 334 DEBUG 0;
 #X obj 14 285 spigot;
-#X obj 14 307 s error;
 #X obj 60 284 r DEBUG;
 #X obj 19 7 r \$0.time.next;
 #X obj 40 60 r \$0.state;
@@ -142,15 +141,18 @@
 #X msg 19 31 RSK NEXT SCHEDULE AT \$1:\$2:\$3;
 #X obj 19 204 s debug;
 #X obj 14 263 r debug;
-#X connect 0 0 1 0;
-#X connect 2 0 0 1;
-#X connect 3 0 8 0;
-#X connect 4 0 7 0;
-#X connect 5 0 6 0;
-#X connect 6 0 9 0;
-#X connect 7 0 9 0;
-#X connect 8 0 9 0;
-#X connect 10 0 0 0;
+#X obj 14 307 print -n;
+#X obj 169 263 r error;
+#X connect 0 0 10 0;
+#X connect 1 0 0 1;
+#X connect 2 0 7 0;
+#X connect 3 0 6 0;
+#X connect 4 0 5 0;
+#X connect 5 0 8 0;
+#X connect 6 0 8 0;
+#X connect 7 0 8 0;
+#X connect 9 0 0 0;
+#X connect 11 0 10 0;
 #X restore 400 47 pd DEBUG;
 #X obj 59 431 rsk_icecast;
 #N canvas 212 79 388 375 offair.try.next.on.failure 0;
@@ -293,7 +295,7 @@ the server to be able to detect RSK outage.;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X restore 479 315 pd counter.update.try;
-#N canvas 332 117 226 244 counter.update.play 0;
+#N canvas 345 185 226 244 counter.update.play 0;
 #X obj 12 11 r \$0.update.play;
 #X obj 111 75 r \$0.state;
 #X obj 111 96 route 0 1;
