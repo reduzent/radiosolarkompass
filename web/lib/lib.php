@@ -493,7 +493,7 @@ function displayStreamList() {
 
 // ############ log.php functions ####################################################################
 
-function displayLog() {
+function displayLog($date) {
   $query = "
      select
        `onair_log`.`onair_time`,
@@ -513,7 +513,32 @@ function displayLog() {
     and `onair_log`.`onair_time` <= '$date 23:59:59'
     order by `onair_log`.`onair_time`
     ";
-
+  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+?>
+<table id="streamlist">
+<tr>
+  <th>TIME</th>
+  <th>STATION</th>
+  <th>CITY</th>
+  <th>COUNTRY</th>
+</tr>
+<?php
+  $bgclr = 0;
+  while(list($time, $name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
+    echo "<tr class=\"bg$bgclr\">\n";
+    $bgclr += 1;
+    $bgclr = fmod($bgclr, 2);
+    echo "  <td>$time</td>\n";
+    if ($homepage == '') {
+      echo "  <td><a href=\"$url\"><img class=\"icon\" src=\"pix/speaker.png\" alt=\"$url\" /></a>$name</td>\n";
+    } else {
+      echo "  <td><a href=\"$url\"><img class=\"icon\" src=\"pix/speaker.png\" alt=\"$url\" /></a><a href=\"$homepage\">$name</a></td>\n";
+    }
+    echo "  <td>$city</td>\n";
+    echo "  <td>$country</td>\n";
+    echo "</tr>\n";
+  }
+  echo "</table>\n";
 }
 
 // ############ whatsup.php functions ################################################################
