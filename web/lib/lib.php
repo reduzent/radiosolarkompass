@@ -21,7 +21,6 @@ function switcher() {
     'index'       => 'Add new entries',
     'radios'      => 'Manage stations',
     'schedule'    => 'Schedule',
-    'whatsup'     => 'What\'s up?' 
   );
   foreach($links as $page => $text) {
     if ($_SERVER['PHP_SELF'] == "/manage/$page.php") {
