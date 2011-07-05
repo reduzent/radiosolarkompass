@@ -124,3 +124,9 @@ th {
 #hide {
   background-color:#fff;
 }
+
+.icon {
+  border:none;
+  margin:none;
+  padding-right:20px;
+}

@@ -19,9 +19,9 @@ function closedb() {
 function switcher() {
   $links = array(
     'index'       => 'Add new entries',
-    'radios'      => 'Manage radio stations',
-    //'locations'   => 'Manage locations',
-    'schedule'    => 'Schedule'
+    'radios'      => 'Manage stations',
+    'schedule'    => 'Schedule',
+    'whatsup'     => 'What\'s up?' 
   );
   foreach($links as $page => $text) {
     if ($_SERVER['PHP_SELF'] == "/manage/$page.php") {
@@ -436,7 +436,9 @@ function displayStreamList() {
        `radios`.`id`, 
        `radios`.`name`, 
        `radios`.`homepage`, 
-       `radios`.`url`, 
+       `radios`.`url`,
+       `radios`.`trycnt`,
+       `radios`.`playcnt`, 
        `cities`.`name`, 
        `countries`.`name` 
     from `radios` 
@@ -454,14 +456,15 @@ function displayStreamList() {
 <tr>
   <th id="hide"></th>
   <th>STATION</th>
-  <th>URL</th>
   <th>CITY</th>
   <th>COUNTRY</th>
+  <th>TRIED</th>
+  <th>PLAYED</th>
   <th id="dangerous">delete</th>
 </tr>
 <?php
   $bgclr = 0;
-  while(list($active, $id, $name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
+  while(list($active, $id, $name, $homepage, $url, $trycnt, $playcnt, $city, $country) = mysql_fetch_array($result)) {
     echo "<tr class=\"bg$bgclr\">\n";
     $bgclr += 1;
     $bgclr = fmod($bgclr, 2);
@@ -473,13 +476,14 @@ function displayStreamList() {
     }
     echo "  <td class=\"$class\"><input class=\"active\" type=\"checkbox\" name=\"active[]\" value=\"$id\" />$state</td>\n";
     if ($homepage == '') {
-      echo "  <td>$name</td>\n";
+      echo "  <td><a href=\"$url\"><img class=\"icon\" src=\"pix/speaker.png\" alt=\"$url\" /></a>$name</td>\n";
     } else {
-      echo "  <td><a href=\"$homepage\">$name</a></td>\n";
+      echo "  <td><a href=\"$url\"><img class=\"icon\" src=\"pix/speaker.png\" alt=\"$url\" /></a><a href=\"$homepage\">$name</a></td>\n";
     }
-    echo "  <td><a href=\"$url\">" . truncateUrl($url) . "</a></td>\n";
     echo "  <td>$city</td>\n";
-    echo "  <td> $country</td>\n";
+    echo "  <td>$country</td>\n";
+    echo "  <td>$trycnt</td>\n";
+    echo "  <td>$playcnt</td>\n";
     echo "  <td class=\"delete\"><input class=\"delete\" type=\"checkbox\" name=\"delete[]\" value=\"$id\" /></td>\n";
     echo "</tr>\n";
   }
@@ -514,14 +518,14 @@ function getStatusInfo() {
     $status[$row['param']] = $row;
   }
   $empty_values =  array(
-    'param' => 'n/a',
-    'value' => 'n/a',
-    'playtime' => 'n/a',
-    'name' => 'n/a',
-    'homepage' => 'n/a',
-    'url' => 'n/a',
-    'city' => 'n/a',
-    'country' => 'n/a'
+    'param' => '-',
+    'value' => '-',
+    'playtime' => '-',
+    'name' => '-',
+    'homepage' => '-',
+    'url' => '-',
+    'city' => '-',
+    'country' => '-'
     );
   $lastping = $status['online']['playtime'];
   $tz = date_default_timezone_get();
@@ -549,25 +553,23 @@ function getStatusInfo() {
 function displayWhatsupList() {
   $status_raw = getStatusInfo();
   $status = array(
-    'next' => $status_raw['next'],
-    'onair' => $status_raw['onair'],
-    'played' => $status_raw['played']
+    'NEXT' => $status_raw['next'],
+    'NOW' => $status_raw['onair'],
+    'BEFORE' => $status_raw['played']
   );
   if ($status_raw['online'] == true) {
     $online_status = 'online';
   } else {
     $online_status = 'offline';
   }
-  echo "<p>The RadioSolarKompass is currently <b>$online_status</b>.</p>";
-  echo "<table id=\"streamlist\">\n";
+  //echo "<p>The RadioSolarKompass is currently <b>$online_status</b>.</p>";
+  echo "<table>\n";
   $bgclr = 1;
-  foreach ( $status as $row) {
-    echo "<tr class=\"bg$bgclr\">\n";
-    $bgclr += 1;
-    $bgclr = fmod($bgclr, 2);
-    echo " <td>${row['param']}</td>\n";
+  foreach ( $status as $key => $row) {
+    echo "<tr id=\"$key\">\n";
+    echo " <td>$key</td>\n";
     echo " <td>${row['playtime']}</td>\n";
-    if ($row['homepage'] == 'n/a') {
+    if ($row['homepage'] == '-') {
       echo "  <td>${row['name']}</td>\n";
     } else {
       echo "  <td><a href=\"${row['homepage']}\">${row['name']}</a></td>\n";
