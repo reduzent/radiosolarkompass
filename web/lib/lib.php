@@ -21,6 +21,7 @@ function switcher() {
     'index'       => 'Add new entries',
     'radios'      => 'Manage stations',
     'schedule'    => 'Schedule',
+    'log'         => 'Onair Log'
   );
   foreach($links as $page => $text) {
     if ($_SERVER['PHP_SELF'] == "/manage/$page.php") {
@@ -490,28 +491,54 @@ function displayStreamList() {
   echo "<input class=\"button\" type=\"submit\" value=\"Update / Delete\" />";
 }
 
-// ############ whatsup.php functions ################################################################
+// ############ log.php functions ####################################################################
 
-function getStatusInfo() {
+function displayLog() {
   $query = "
      select
-       `status`.`param`,
-       `status`.`value`,
-       `status`.`playtime`, 
+       `onair_log`.`onair_time`,
        `radios`.`name`, 
        `radios`.`homepage`, 
        `radios`.`url`, 
        `cities`.`name` as `city`, 
        `countries`.`name` as `country` 
-    from `status` 
-    left join `radios` on 
-      `radios`.`id` = `status`.`value` 
+    from `onair_log` 
+    join `radios` on 
+      `radios`.`id` = `onair_log`.`radio_id` 
     left join `cities` on 
       `cities`.`id` = `radios`.`city_id`
     left join `countries` on
       `countries`.`iso` = `cities`.`country_code`
-    order by `status`.`playtime`
+    where `onair_log`.`onair_time` >=  '$date 00:00:00' 
+    and `onair_log`.`onair_time` <= '$date 23:59:59'
+    order by `onair_log`.`onair_time`
     ";
+
+}
+
+// ############ whatsup.php functions ################################################################
+
+function getStatusInfo() {
+  $query = "
+   select
+     `status`.`param`,
+     `status`.`value`,
+     `status`.`playtime`, 
+     `radios`.`name`, 
+     `radios`.`homepage`, 
+     `radios`.`url`, 
+     `cities`.`name` as `city`, 
+     `countries`.`name` as `country` 
+  from `status` 
+  left join `radios` on 
+    `radios`.`id` = `status`.`value` 
+  left join `cities` on 
+    `cities`.`id` = `radios`.`city_id`
+  left join `countries` on
+    `countries`.`iso` = `cities`.`country_code`
+  order by `status`.`playtime`
+    ";
+
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
   while ($row = mysql_fetch_assoc($result)) {
     $status[$row['param']] = $row;
