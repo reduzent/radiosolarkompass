@@ -21,7 +21,7 @@ function start_rsk {
   cd $rundir
   DISPLAY=:6 \
     pd -noaudio -nomidi -nrt \
-    -open include/rsk_indicate_online.pd \
+    -open RSK.pd \
     > /dev/null 2>&1 &
     echo $! > $rskpdpidfile
   return 0
