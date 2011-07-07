@@ -4,6 +4,12 @@ rundir=$(dirname $0)
 rskpdpidfile=/tmp/rsk_pd_pid
 rskonlinefile=/tmp/rsk_online
 
+touch $rskonlinefile
+if [ ! -f $rskpdpidfile ]
+then
+  echo "50000" > $rskpdpidfile
+fi
+
 function stop_rsk {
   rskpdpid=0
   if [ -f $rskpdpidfile ]
@@ -20,6 +26,7 @@ function stop_rsk {
 function start_rsk {
   cd $rundir
   DISPLAY=:6 \
+    #xterm -T "RadioSolarKompass" -e \
     pd -noprefs -noaudio -nomidi -nrt \
     -open RSK.pd \
     > /dev/null 2>&1 &
