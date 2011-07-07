@@ -20,7 +20,7 @@ function stop_rsk {
 function start_rsk {
   cd $rundir
   DISPLAY=:6 \
-    pd -noaudio -nomidi -nrt \
+    pd -noprefs -noaudio -nomidi -nrt \
     -open RSK.pd \
     > /dev/null 2>&1 &
     echo $! > $rskpdpidfile
