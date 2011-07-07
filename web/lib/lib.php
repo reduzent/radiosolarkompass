@@ -21,7 +21,7 @@ function switcher() {
     'index'       => 'Add new entries',
     'radios'      => 'Manage stations',
     'schedule'    => 'Schedule',
-    'log'         => 'Onair Log'
+    'log'         => 'OnAir Log'
   );
   foreach($links as $page => $text) {
     if ($_SERVER['PHP_SELF'] == "/manage/$page.php") {
