@@ -496,7 +496,7 @@ function displayStreamList() {
 function displayLog($date) {
   $query = "
      select
-       `onair_log`.`onair_time`,
+       substring(`onair_log`.`onair_time`,11),
        `radios`.`name`, 
        `radios`.`homepage`, 
        `radios`.`url`, 
@@ -528,7 +528,7 @@ function displayLog($date) {
     echo "<tr class=\"bg$bgclr\">\n";
     $bgclr += 1;
     $bgclr = fmod($bgclr, 2);
-    echo "  <td>$time</td>\n";
+    echo "  <td class=\"numeric\">$time</td>\n";
     if ($homepage == '') {
       echo "  <td><a href=\"$url\"><img class=\"icon\" src=\"pix/speaker.png\" alt=\"$url\" /></a>$name</td>\n";
     } else {
