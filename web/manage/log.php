@@ -13,29 +13,6 @@ if (isset($_GET['date'])) {
   $selected_date = $today;
 }
 
-function generateLogDateSelector() {
-  $query = "select 
-     substring(`onair_time`, 1, 10) 
-     as `date` 
-     from `onair_log` 
-     group by `date` 
-     order by `date` desc
-  ";
-  global $today;
-  global $selected_date;
-  $result = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
-  echo "<select name=\"date\" onChange=\"this.form.submit()\" id=\"logdate\">\n";
-  echo "  <option value=\"$today\">today</option>\n";
-  while(list($date) = mysql_fetch_array($result)) {
-    if ( $date == $selected_date ) {
-      echo "  <option selected value=\"$date\">$date</option>\n";
-    } else {
-      echo "  <option value=\"$date\">$date</option>\n";
-    }
-  }
-  echo "</select>\n";
-}
- 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
