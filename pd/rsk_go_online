@@ -26,11 +26,11 @@ function stop_rsk {
 function start_rsk {
   cd $rundir
   DISPLAY=:6 \
-    #xterm -T "RadioSolarKompass" -e \
     pd -noprefs -noaudio -nomidi -nrt \
     -open RSK.pd \
     > /dev/null 2>&1 &
     echo $! > $rskpdpidfile
+  sleep 5
   return 0
 }
 
