@@ -644,12 +644,10 @@ function displayWhatsupList() {
     echo " <td>$key</td>\n";
     echo " <td>${row['playtime']}</td>\n";
     if ($row['homepage'] == '-') {
-      echo "  <td>${row['name']}</td>\n";
+      echo "  <td>${row['name']}, ${row['city']}, ${row['country']}</td>\n";
     } else {
-      echo "  <td><a href=\"${row['homepage']}\">${row['name']}</a></td>\n";
+      echo "  <td><a href=\"${row['homepage']}\">${row['name']}</a>, ${row['city']}, ${row['country']}</td>\n";
     }
-    echo "  <td>${row['city']}</td>\n";
-    echo "  <td>${row['country']}</td>\n";
     echo "</tr>\n";
   }
   echo "</table>\n";
