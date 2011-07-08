@@ -642,7 +642,13 @@ function displayWhatsupList() {
   foreach ( $status as $key => $row) {
     echo "<tr id=\"$key\">\n";
     echo " <td>$key</td>\n";
-    echo " <td>${row['playtime']}</td>\n";
+    if ( $row['playtime'] != '-' ) {
+      $arr = preg_split('/:/', $row['playtime']);
+      $time = (string)$arr[0] . '.' . (string)$arr[1] . ':' . (string)($arr[2]);
+    } else {
+      $time = '-';
+    }
+    echo " <td>$time</td>\n";
     if ($row['homepage'] == '-') {
       echo "  <td>${row['name']}, ${row['city']}, ${row['country']}</td>\n";
     } else {
