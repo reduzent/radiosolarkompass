@@ -11,7 +11,8 @@ $(document).ready(function(){
       demoInstanceInfo(this.element, $("#demo_info")); // This displays information about jPlayer's configuration in the demo page
     },
     solution: "html, flash",
-    swfPath: "js"
+    swfPath: "js",
+    volume: 100
   })
 });
 
