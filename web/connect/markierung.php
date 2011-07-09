@@ -20,7 +20,7 @@ list($lat, $lon) = mysql_fetch_array($result);
 
 // CONVERT WGS1984 COORDINATES TO WORLDMAP IMAGE POSITIONS IN PERCENT WITH 0%/0% BEING THE UPPER LEFT CORNER
 $x_perc = $lon / 4.0684 + 48.36;
-$y_perc = rad2deg(1.25 * log(tan(0.4 * deg2rad($lat) + pi() / 4 ))) / -2.36611 + 50;
+$y_perc = 0.9671875 * (rad2deg(1.25 * log(tan(0.4 * deg2rad($lat) + pi() / 4 ))) / -2.36611 + 50);
 
 closedb();
 ?>
