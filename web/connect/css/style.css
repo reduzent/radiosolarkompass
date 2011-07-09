@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	margin:0;
+}
+
+#playlist {
+	position:absolute;
+	top:775px;
+	left:680px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:20px;
+	color:#FF0;
+	text-align:left;
+}
+
+#NOW {
+	font-weight:bold;
+}
+
+a {
+	color:#ff0;
+}
+
+td
+{
+	padding-right:30px;
+}
+
+#worldmap {
+	background-image: url(../pix/bgAusstellung.jpg);
+	background-repeat: no-repeat;
+	width:1920px;
+	height:1080px;
+	margin:none;
+}
+
+#location {
+        position:relative;
+        width:30px;
+        height:30px;
+}
+
+#aussenden {
+        position:relative;
+        top:-15px;
+        left:-15px;
+}
+				
