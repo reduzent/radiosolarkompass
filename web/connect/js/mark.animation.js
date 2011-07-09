@@ -1,5 +1,5 @@
   var delay = 80;
-  var num = 4;
+  var num = 12;
   var current = 0;
   var urlbase = 'pix/aussenden_';
   function timeMsg()
