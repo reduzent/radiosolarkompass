@@ -19,6 +19,10 @@ body {
 	font-weight:bold;
 }
 
+td.pl_title {
+	font-size:small;
+}
+
 a {
 	color:#ff0;
 }
