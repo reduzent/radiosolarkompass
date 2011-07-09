@@ -592,14 +592,14 @@ function getStatusInfo() {
     $status[$row['param']] = $row;
   }
   $empty_values =  array(
-    'param' => '-',
-    'value' => '-',
-    'playtime' => '-',
-    'name' => '-',
-    'homepage' => '-',
-    'url' => '-',
-    'city' => '-',
-    'country' => '-'
+    'param' => '—',
+    'value' => '—',
+    'playtime' => '—',
+    'name' => '—',
+    'homepage' => '—',
+    'url' => '—',
+    'city' => '—',
+    'country' => '—'
     );
   $lastping = $status['online']['playtime'];
   $tz = date_default_timezone_get();
@@ -629,7 +629,7 @@ function displayWhatsupList() {
   $status = array(
     'NEXT' => $status_raw['next'],
     'NOW' => $status_raw['onair'],
-    'BEFORE' => $status_raw['played']
+    'LAST' => $status_raw['played']
   );
   if ($status_raw['online'] == true) {
     $online_status = 'online';
@@ -641,15 +641,17 @@ function displayWhatsupList() {
   $bgclr = 1;
   foreach ( $status as $key => $row) {
     echo "<tr id=\"$key\">\n";
-    echo " <td>$key</td>\n";
-    if ( $row['playtime'] != '-' ) {
+    echo " <td class=\"pl_title\">$key</td>\n";
+    if ( $row['playtime'] != '—' ) {
       $arr = preg_split('/:/', $row['playtime']);
       $time = (string)$arr[0] . '.' . (string)$arr[1] . ':' . (string)($arr[2]);
     } else {
-      $time = '-';
+      $time = '—';
     }
     echo " <td>$time</td>\n";
-    if ($row['homepage'] == '-') {
+    if ($row['name'] == '—') {
+      echo "  <td>—</td>\n";
+    } elseif ($row['homepage'] == '—') {
       echo "  <td>${row['name']}, ${row['city']}, ${row['country']}</td>\n";
     } else {
       echo "  <td><a href=\"${row['homepage']}\">${row['name']}</a>, ${row['city']}, ${row['country']}</td>\n";
