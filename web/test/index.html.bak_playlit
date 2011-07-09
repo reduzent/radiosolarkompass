@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- jPlayer Zeugs -->
+        <link href="skin/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+        <script type="text/javascript" src="js/rsk.stream.player.js"></script>
+        <!-- jPlayer Zeugs -->
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+<!-- markierungsanimationsskript -->
+	<script type="text/javascript" src="js/mark.animation.js"></script>
+
+	<!-- Autorefresh Playlist & Markierung 
+	<script>
+	var auto_refresh = setInterval(
+	function()
+	{
+	$('#playlist').load('playlist.php');
+	$('#worldmap').load('markierung.php');
+	}, 3000);
+	</script>
+	bis hier Autorefresh Playlist -->
+<title>RadioSolarKompass</title>
+<style type="text/css">
+
+</style>
+</head>
+
+<body>
+
+<div id="worldmap">
+ <div id="location" style="left:48.311602595615%;top:47.649474784694%;">
+   <img  id="aussenden" src="pix/aussenden_0.png"  alt="o" />
+ </div>
+
+ 
+ <div id="logo"></div>
+ 
+ <div id="playlist">
+ <table>
+   <tr id="NEXT">
+     <td><span class="vorsage">NEXT</span></td>
+     <td>08:42:09</td>
+     <td><a class="radio" href="http://www.joyfm.ca/">CIXN Joy FM</a><span class="cityland">,</span></td>
+     <td class="citylandtd"><span class="cityland">Fredericton</span><span class="cityland">,</span></td>
+     <td class="citylandtd"><span class="cityland">Canada</span><span class="cityland"></td>
+   </tr>
+  </table>
+  <table>
+   <tr id="NOW">
+     <td><span class="vorsagenow">NOW</span></td>
+     <td><span class="citylandnow">05:51:30</span></td>
+     <td class="nowtd"><a class="radionow" href="http://www.asempafmonline.com/index.php">M 106.1 Pensacola Classic Soul And RB</a><span class="kommannow">,</span></td>
+     <td class="citylandnowtd"><span class="citylandnow">Pensacola</span><span class="citylandnow">,</span></td>
+     <td class="citylandnowtd"><span class="citylandnow">United States</span></td>
+   </tr>
+  </table>
+  <table>
+   <tr id="BEFORE">
+     <td><span class="vorsage">LAST</span></td>
+     <td>05:35:37</td>
+     <td><a class="radio" href="http://www.unity1960.com/">Unity1960</a><span class="cityland">,</span></td>
+     <td class="citylandtd"><span class="cityland">Lagos</span><span class="cityland">,</span></td>
+     <td class="citylandtd"><span class="cityland">Nigeria</span></td>
+   </tr>
+  </table>
+</div>
+
+<!-- jPlayer Code -->
+<div id="player">
+ <div id="jquery_jplayer"></div>
+ <div class="jp-single-player"> 
+        <div class="jp-interface">
+                <ul class="jp-controls">
+                        <li><a href="#" id="jplayer_play" class="jp-play" tabindex="1">play</a></li>
+                        <li><a href="#" id="jplayer_pause" class="jp-pause" tabindex="1">stop</a></li>
+                        <li><a href="#" id="jplayer_volume_min" class="jp-volume-min" tabindex="1">min volume</a></li>
+                        <li><a href="#" id="jplayer_volume_max" class="jp-volume-max" tabindex="1">max volume</a></li>
+                </ul>
+                <div id="jplayer_volume_bar" class="jp-volume-bar">
+                        <div id="jplayer_volume_bar_value" class="jp-volume-bar-value"></div>
+                </div>
+        </div>
+ </div> 
+</div>
+<!-- jPlayer  bis hier -->
+
+
+
+
+
+
+
+
+
+</div>
+</body>
+</html>

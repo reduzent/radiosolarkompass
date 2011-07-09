@@ -1,0 +1,170 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+	background-image: url(../pix/bg.jpg);
+	background-repeat: repeat-x;
+	background-color: #0d0d0d;
+}
+
+
+
+
+#worldmap {
+	width:1280px;
+	height:720px;
+	margin: 0 auto;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:15px;
+	color:#FF0;
+	background-image:url(../pix/worldmap.jpg);
+	z-index:1;
+	
+}
+
+
+#logo { background-image:url(../pix/logo.png);
+     width:336px;
+	 height:31px;
+	z-index:2;
+	position:relative;
+	top:566px;
+	left:15px;
+}
+
+
+#player {
+	width: 310px;
+	height:60px;
+	background-color: #366;
+	z-index:3;
+}
+
+div.jp-interface {
+	position: relative;
+	float:left;
+	background-color:#eee;
+	width:400px;
+	height:100px;
+}
+
+
+
+#playlist {
+	position:relative;
+	top:500px;
+	left:400px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:15px;
+	color:#FF0;
+	z-index:2;
+	text-align:left;
+}
+
+
+#NOW {
+	font-weight:bold;
+}
+
+a {
+	color:#ff0;
+}
+
+td
+{
+padding-left:30px;
+}
+
+.nowtd{
+padding-left:20px;
+}
+
+.citylandtd{
+padding-left:4px;
+}
+
+.citylandnowtd{
+padding-left:5px;
+}
+
+
+/* Font */
+
+.vorsage {
+	font-size:15px;
+	color:#FF0;
+         }
+
+.vorsagenow {
+	font-size:15px;
+	font-weight:bold;
+         }
+
+.kommannow {
+	font-size:15px;
+	font-weight:bold;
+         }
+
+.cityland {
+	font-size:15px;
+	      }
+		  
+.citylandnow {
+	font-size:15px;
+	font-weight:bold;
+	      }
+
+
+
+/* Radiolinks */
+a.radio:link {
+	          font-size:15px;
+	          color:#FF0; 
+			  text-decoration:underline;
+			  }      
+a.radio:visited {
+	          font-size:15px;
+	          color:#FF0;
+			  text-decoration:underline;
+			  }  
+a.radio:hover {
+	           font-size:15px;
+	           font-weight:bold;
+	           color:#FF0;
+			   }  
+a.radio:active {
+	            font-size:15px;
+	            font-weight:bold;
+	            color:#FF0;
+				}
+/* Radiolinks Now */	
+a.radionow:link {
+	          font-size:15px;
+	          font-weight:bold;
+	          color:#FF0;
+			  }      
+a.radionow:visited {
+	             font-size:15px;
+	             font-weight:bold;
+	             color:#FF0;
+				 text-decoration:underline;
+				 }  
+a.radionow:hover {
+	           font-size:15px;
+	           font-weight:bold;
+	           color:#FF0;
+			   text-decoration:underline;
+			   }  
+a.radionow:active {
+	            font-size:15px;
+	            font-weight:bold;
+	            color:#FF0;
+				text-decoration:underline;
+				}
+
+
+				
