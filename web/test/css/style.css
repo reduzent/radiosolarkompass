@@ -31,7 +31,7 @@ body {
 
 #logo {
 	position:absolute;
-	top:567px;
+	top:562px;
 	left:26px;
 	width:320px;
 	height:29px;
@@ -40,16 +40,18 @@ body {
 
 #player {
 	position:absolute;
-	top:506px;
-	left:17px;
+	top:504px;
+	left:18px;
 	width: 325px;
 	height:60px;
 }
 
 #playlist {
 	position:absolute;
-	top:514px;
+	top:515px;
 	left:600px;
+	text-shadow: #000 4px 4px 3px;
+
 }
 
 #playlist td {
@@ -70,14 +72,20 @@ td.pl_title {
 
 #menu {
 	position:absolute;
-	top:510px;
+	top:511px;
 	left:450px;
 	text-align:left;
 	background-color:#0d0d0d;
 	padding:4px;
 	border:0;
 	font-size:12px;
-	
+	box-shadow:#000 4px 4px 6px;
+	-moz-box-shadow:#000 4px 4px 6px;
+	-webkit-box-shadow:#000 4px 4px 6px;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
 
 #menu tr {
@@ -95,6 +103,13 @@ td.pl_title {
 	background-color:#FF0;
 	visibility:hidden;
 	padding:15px;
+	box-shadow:#000 4px 4px 6px;
+	-moz-box-shadow:#000 4px 4px 6px;
+	-webkit-box-shadow:#000 4px 4px 6px;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
 
 #close {
