@@ -31,24 +31,24 @@ body {
 
 #logo {
 	position:absolute;
-	top:430px;
-	left:12px;
-	width:336px;
-	height:31px;
+	top:567px;
+	left:26px;
+	width:320px;
+	height:29px;
 	background-image:url(../pix/logo.png);
 }
 
 #player {
 	position:absolute;
 	top:506px;
-	left:5px;
+	left:17px;
 	width: 325px;
 	height:60px;
 }
 
 #playlist {
 	position:absolute;
-	top:510px;
+	top:514px;
 	left:600px;
 }
 
@@ -70,12 +70,13 @@ td.pl_title {
 
 #menu {
 	position:absolute;
-	top:506px;
+	top:510px;
 	left:450px;
 	text-align:left;
 	background-color:#0d0d0d;
 	padding:4px;
 	border:0;
+	font-size:12px;
 	
 }
 
