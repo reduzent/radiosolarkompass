@@ -73,7 +73,7 @@ td.pl_title {
 	top:506px;
 	left:450px;
 	text-align:left;
-	background-color:#000;
+	background-color:#0d0d0d;
 	padding:4px;
 	border:0;
 	
@@ -124,6 +124,5 @@ a:hover {
 }
 
 a.menu {
-	font-size:12px;
 	text-decoration:none;
 }
