@@ -14,6 +14,8 @@ body {
 	color:#FF0;
 	text-align:left;
 	font-size:x-large;
+	text-shadow: #000 6px 6px 8px;
+
 }
 
 #NOW {
