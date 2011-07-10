@@ -30,7 +30,7 @@ body {
 
 #logo {
 	position:absolute;
-	top:534px;
+	top:430px;
 	left:12px;
 	width:336px;
 	height:31px;
@@ -39,7 +39,7 @@ body {
 
 #player {
 	position:absolute;
-	top:180px;
+	top:506px;
 	left:5px;
 	width: 325px;
 	height:60px;
@@ -47,17 +47,29 @@ body {
 
 #playlist {
 	position:absolute;
-	top:0px;
-	left:0px;
+	top:510px;
+	left:600px;
+}
+
+#playlist td {
+	padding-right:15px;
+}
+
+#playlist tr {
+	height:22px;	
 }
 
 #NOW {
 	font-weight:bold;
 }
 
+td.pl_title {
+	font-size:12px;
+}
+
 #menu {
 	position:absolute;
-	top:379px;
+	top:506px;
 	left:450px;
 	text-align:left;
 	background-color:#000;
@@ -66,17 +78,21 @@ body {
 	
 }
 
+#menu tr {
+        height:22px; 
+}
+
 #menuabout {
 	position:absolute;
-	top:200px;
+	top:20px;
 	left:450px;
 	width:520px;
-	height:460px;
+	height:450px;
 	font-size:12px;
 	color:#000;
 	background-color:#FF0;
 	visibility:hidden;
-	padding-left:15px;
+	padding:15px;
 }
 
 #close {
@@ -98,124 +114,15 @@ body {
 	left:-45px;
 }
 
-/*
-tdstil
-{
-padding-left:30px;
+a {
+	color:#ff0;
 }
 
-.nowtd{
-padding-left:20px;
-}
-
-.citylandtd{
-padding-left:4px;
-}
-
-.citylandnowtd{
-padding-left:5px;
-}
-
-
-.vorsage {
-	font-size:15px;
-	color:#FF0;
-         }
-
-.vorsagenow {
-	font-size:15px;
+a:hover {
 	font-weight:bold;
-         }
+}
 
-.kommannow {
-	font-size:15px;
-	font-weight:bold;
-         }
-
-.cityland {
-	font-size:15px;
-	      }
-		  
-.citylandnow {
-	font-size:15px;
-	font-weight:bold;
-	      }
-
-
-
-
-
-
-a.menu:link {
-	          font-size:13px;
-	          color:#FF0; text-decoration:none;
-
-			  }      
-a.menu:visited {
-	          font-size:13px;
-	          color:#FF0;
-			  color:#FF0; text-decoration:none;
-			 
-			  }  
-a.menu:hover {
-	           font-size:13px;
-	           font-weight:bold;
-	           color:#FF0;
-			   color:#FF0; text-decoration:none;
-			   
-			   }  
-a.menu:active {
-	            font-size:13px;
-	            font-weight:bold;
-	            color:#FF0;
-				color:#FF0; text-decoration:none;
-				
-				}
-
-a.radio:link {
-	          font-size:15px;
-	          color:#FF0; 
-			  text-decoration:underline;
-			  }      
-a.radio:visited {
-	          font-size:15px;
-	          color:#FF0;
-			  text-decoration:underline;
-			  }  
-a.radio:hover {
-	           font-size:15px;
-	           font-weight:bold;
-	           color:#FF0;
-			   text-decoration:underline;
-			   }  
-a.radio:active {
-	            font-size:15px;
-	            font-weight:bold;
-	            color:#FF0;
-				text-decoration:underline;
-				}
-a.radionow:link {
-	          font-size:15px;
-	          font-weight:bold;
-	          color:#FF0;
-			  }      
-a.radionow:visited {
-	             font-size:15px;
-	             font-weight:bold;
-	             color:#FF0;
-				 text-decoration:underline;
-				 }  
-a.radionow:hover {
-	           font-size:15px;
-	           font-weight:bold;
-	           color:#FF0;
-			   text-decoration:underline;
-			   }  
-a.radionow:active {
-	            font-size:15px;
-	            font-weight:bold;
-	            color:#FF0;
-				text-decoration:underline;
-				}
-*/
-				
+a.menu {
+	font-size:12px;
+	text-decoration:none;
+}
