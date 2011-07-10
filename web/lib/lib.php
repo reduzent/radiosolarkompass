@@ -625,6 +625,10 @@ function getStatusInfo() {
 }
 
 function displayWhatsupList() {
+  $offset = 0;
+  if (isset($_GET['offset'])) {
+    $offset = $_GET['offset'];
+  }
   $status_raw = getStatusInfo();
   $status = array(
     'NEXT' => $status_raw['next'],
@@ -636,7 +640,6 @@ function displayWhatsupList() {
   } else {
     $online_status = 'offline';
   }
-  //echo "<p>The RadioSolarKompass is currently <b>$online_status</b>.</p>";
   echo "<table class=\"playlist\">\n";
   $bgclr = 1;
   foreach ( $status as $key => $row) {
@@ -644,7 +647,8 @@ function displayWhatsupList() {
     echo " <td class=\"pl_title\">$key</td>\n";
     if ( $row['playtime'] != '—' ) {
       $arr = preg_split('/:/', $row['playtime']);
-      $time = (string)$arr[0] . '.' . (string)$arr[1] . ':' . (string)($arr[2]);
+      $localepoch = gmmktime($arr[0], $arr[1] - $offset, $arr[2]);
+      $time = gmdate('H.i:s', $localepoch);
     } else {
       $time = '—';
     }
