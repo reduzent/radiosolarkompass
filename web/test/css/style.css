@@ -26,16 +26,27 @@ body {
 	
 }
 
+#location {
+	position:relative;
+	width:90px;
+	height:90px;
+}
 
-#logo { background-image:url(../pix/logo.png);
-     width:336px;
-	 height:31px;
+#aussenden {
+	position:relative;
+	top:-45px;
+	left:-45px;
+}
+
+#logo {
+	background-image:url(../pix/logo.png);
+	width:336px;
+	height:31px;
 	z-index:2;
 	position:relative;
 	top:534px;
 	left:12px;
 }
-
 
 #player {
 	width: 325px;
