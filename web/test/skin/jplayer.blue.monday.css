@@ -167,18 +167,20 @@ div.jp-volume-bar {
 	overflow:hidden;
 	top:21px;
 	background: url("volumebarempty.png") 0 0 repeat-x;
-	width:107px;
-	height:15px;
+	width:100px;
+	height:12px;
 	cursor: pointer;
 	left:141px;
+	
 }
 /*div.jp-single-player div.jp-volume-bar {
 	left:76px;
 }*/
 div.jp-volume-bar-value {
 	background: url("volumebarfull.png") 0 0 repeat-x;
-	width:0px;
-	height:50px;
+	width:100px;
+	height:12px;
+	
 }
 div.jp-play-time,
 div.jp-total-time {
