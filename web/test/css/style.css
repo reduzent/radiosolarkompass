@@ -32,32 +32,36 @@ body {
 	 height:31px;
 	z-index:2;
 	position:relative;
-	top:566px;
-	left:15px;
+	top:534px;
+	left:12px;
 }
 
 
 #player {
-	width: 310px;
+	width: 325px;
 	height:60px;
-	background-color: #366;
 	z-index:3;
+	position:relative;
+	top:-180px;
+	left:5px;
 }
+
+
 
 div.jp-interface {
 	position: relative;
 	float:left;
-	background-color:#eee;
+	background-color:none;
 	width:400px;
-	height:100px;
+	height:60px;
 }
 
 
 
 #playlist {
 	position:relative;
-	top:500px;
-	left:400px;
+	top:457px;
+	left:570px;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size:15px;
 	color:#FF0;
@@ -65,16 +69,50 @@ div.jp-interface {
 	text-align:left;
 }
 
-
 #NOW {
 	font-weight:bold;
 }
 
-a {
-	color:#ff0;
+#menu {
+	position:relative;
+	top:379px;
+	left:450px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:15px;
+	color:#FF0;
+	z-index:2;
+	text-align:left;
+	background-color:#000;
+	width:78px;
+	height:72px;
+	padding:4px;
+	border:0;
+	
 }
 
-td
+#menuabout {
+	position:relative;
+	top:-200px;
+	left:450px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#000000;
+	z-index:2;
+	width:520px;
+	height:460px;
+	background-color:#FF0;
+	visibility:hidden;
+	text-align:left;
+	padding-left:15px;
+}
+
+#close { width:41px;
+height:36px;
+position: relative;
+    left: 472px;
+}
+
+tdstil
 {
 padding-left:30px;
 }
@@ -90,7 +128,7 @@ padding-left:4px;
 .citylandnowtd{
 padding-left:5px;
 }
-
+*/
 
 /* Font */
 
@@ -120,6 +158,38 @@ padding-left:5px;
 
 
 
+
+/* Menulinks */
+
+
+a.menu:link {
+	          font-size:13px;
+	          color:#FF0; text-decoration:none;
+
+			  }      
+a.menu:visited {
+	          font-size:13px;
+	          color:#FF0;
+			  color:#FF0; text-decoration:none;
+			 
+			  }  
+a.menu:hover {
+	           font-size:13px;
+	           font-weight:bold;
+	           color:#FF0;
+			   color:#FF0; text-decoration:none;
+			   
+			   }  
+a.menu:active {
+	            font-size:13px;
+	            font-weight:bold;
+	            color:#FF0;
+				color:#FF0; text-decoration:none;
+				
+				}
+
+
+
 /* Radiolinks */
 a.radio:link {
 	          font-size:15px;
@@ -135,11 +205,13 @@ a.radio:hover {
 	           font-size:15px;
 	           font-weight:bold;
 	           color:#FF0;
+			   text-decoration:underline;
 			   }  
 a.radio:active {
 	            font-size:15px;
 	            font-weight:bold;
 	            color:#FF0;
+				text-decoration:underline;
 				}
 /* Radiolinks Now */	
 a.radionow:link {
@@ -165,6 +237,4 @@ a.radionow:active {
 	            color:#FF0;
 				text-decoration:underline;
 				}
-
-
 				

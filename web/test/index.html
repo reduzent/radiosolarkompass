@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- jPlayer Zeugs -->
         <link href="skin/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/closeme.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
         <script type="text/javascript" src="js/rsk.stream.player.js"></script>
@@ -23,6 +24,16 @@
 	}, 3000);
 	</script>
 	bis hier Autorefresh Playlist -->
+
+  <script type="text/javascript">
+    function showstuff(boxid){
+      document.getElementById(boxid).style.visibility="visible";
+    }
+    function hidestuff(boxid){
+      document.getElementById(boxid).style.visibility="hidden";
+    }
+  </script>
+
 <title>RadioSolarKompass</title>
 <style type="text/css">
 
@@ -31,33 +42,74 @@
 
 <body>
 
+
 <div id="worldmap">
  <div id="location" style="left:48.311602595615%;top:47.649474784694%;">
    <img  id="aussenden" src="pix/aussenden_0.png"  alt="o" />
  </div>
 
+
+ 
  
  <div id="logo"></div>
  
  <div id="playlist">
-   <table>
-     <tr id="NEXT">
-       <td>NEXT</td>
-       <td>00.29:41</td>
-       <td><a href="http://www.slbc.lk/">RADiO Sri Lanka</a>, Colombo, Sri Lanka</td>
-     </tr>
-     <tr id="NOW">
-       <td>NOW</td>
-       <td>23.16:36</td>
-       <td><a href="http://www.radiofremantle.com/">Radio Fremantle</a>, Fremantle, Australia</td>
-     </tr>
-     <tr id="BEFORE">
-       <td>BEFORE</td>
-       <td>23.08:26</td>
-       <td><a href="http://www.mutiarafm.gov.my/">Mutiara FM</a>, Kuala Lumpur, Malaysia</td>
-     </tr>
-   </table>
- </div>
+<table>
+<tr id="NEXT">
+ <td class="pl_title">NEXT</td>
+ <td>—</td>
+  <td>—</td>
+</tr>
+<tr id="NOW">
+ <td class="pl_title">NOW</td>
+ <td>23.16:24</td>
+  <td><a href="http://www.radiofremantle.com/">Radio Fremantle</a>, Fremantle, Australia</td>
+</tr>
+<tr id="LAST">
+ <td class="pl_title">LAST</td>
+ <td>23.06:13</td>
+  <td><a href="http://www.sunshinefm.com/songkhla/">Sunshine Songkhla 94.5 FM</a>, Songkhla, Thailand</td>
+</tr>
+</table>
+
+ 
+</div>
+
+
+<div id="menu">
+<table cellpadding="0" cellspacing="5" style="text-align:left;">
+<tr>
+<td ><a class="menu" href=# onclick="showstuff('menuabout');">ABOUT</a></td>
+</tr>
+<tr>
+<td><a class="menu" href="http://www.irgendwo.ch">RADIO LIST</a></td>
+</tr>
+<tr>
+<td><a class="menu" href="http://www.radiosolarkompass.org/guestbook" target="_blank">GUESTBOOK</a></td>
+</tr>
+</table>
+</div> 
+
+<div id="menuabout">
+<div id="close"><a href=# onclick="hidestuff('menuabout');"><img src="pix/close.png" width="41" height="36" border="0" /></a></div>
+The radio composition of an invisible reality follows the sunrise: The programme behind RadioSolarKompass connects radios from all over the world depending on the time of sunrise. You can see on the worldmap, where actually the sun is rising and from this location, you can hear a radio broadcast. 
+The collection consists of 1500 radio stations and the density is not constant.  The times of changes between the radio stations will be of longer and shorter duration.
+RadioSolarKompass can also be interpreted as sonification of the rotation of our earth. <br />
+<br />
+Philosophy<br />
+
+Space. We can feel the impact of the connection to the macrocosmos, when we watch the stars. The extraordinarily beautiful moment of sunrise evokes a concentrated reference to the sun within the magic ofcosmic space. RadioSolarKompass aims to be a compass to stimulate sense and imagination, a planetary feeling for the space around us.
+Space as a metaphor for freedom: We embrace the fundamental changes, which the Internet has brought by multiplying media channels and by increasing the possibilities for a wider spectrum of broadcasts and information.
+</div>
+
+
+
+
+
+
+
+
+
 
 <!-- jPlayer Code -->
 <div id="player">
@@ -66,7 +118,7 @@
         <div class="jp-interface">
                 <ul class="jp-controls">
                         <li><a href="#" id="jplayer_play" class="jp-play" tabindex="1">play</a></li>
-                        <li><a href="#" id="jplayer_stop" class="jp-stop" tabindex="1">stop</a></li>
+                        <li><a href="#" id="jplayer_pause" class="jp-pause" tabindex="1">pause</a></li>
                         <li><a href="#" id="jplayer_volume_min" class="jp-volume-min" tabindex="1">min volume</a></li>
                         <li><a href="#" id="jplayer_volume_max" class="jp-volume-max" tabindex="1">max volume</a></li>
                 </ul>

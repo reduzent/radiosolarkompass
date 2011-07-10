@@ -57,8 +57,8 @@ div.jp-interface ul.jp-controls a {
 a.jp-play,
 a.jp-pause {
 	top:3px;
-	width:40px;
-	height:40px;
+	width:49px;
+	height:47px;
 }
 div.jp-single-player a.jp-play,
 div.jp-single-player a.jp-pause {
@@ -68,14 +68,14 @@ a.jp-play {
 	background: url("play.png") 0 0 no-repeat;
 }
 a.jp-play:hover {
-	background: url("play.png") -41px 0 no-repeat;
+	background: url("play.png") 0 0 no-repeat;
 }
 a.jp-pause {
-	background: url("jplayer.blue.monday.jpg") 0 -42px no-repeat;
+	background: url("pause.png") 0 0 no-repeat;
 	display: none;
 }
 a.jp-pause:hover {
-	background: url("jplayer.blue.monday.jpg") -41px -42px no-repeat;
+	background: url("pause.jpg") 0 0 no-repeat;
 }
 a.jp-stop {
 	top:26px;
@@ -84,7 +84,7 @@ a.jp-stop {
 	height:28px;
 }
 div.jp-single-player a.jp-stop {
-	top:3px;
+	left:90px;
 }
 a.jp-stop:hover {
 	background: url("jplayer.blue.monday.jpg") -29px -83px no-repeat;
@@ -138,7 +138,8 @@ a.jp-volume-min {
 	height:54px;
 }
 div.jp-single-player a.jp-volume-min {
-	left:55px;
+	left:66px;
+	top:3px;
 }
 a.jp-volume-min:hover {
 	background: url("volumedown.png") 0 0 no-repeat;
@@ -146,11 +147,11 @@ a.jp-volume-min:hover {
 	height:54px;
 }
 a.jp-volume-max {
-	top:16px;
+	top:4px;
 	background: url("volumeup.png") 0 0 no-repeat;
 	width:50px;
 	height:50px;
-	left:300px;
+	left:270px;
 }
 /*div.jp-single-player a.jp-volume-max {
 	left:146px;
@@ -165,18 +166,19 @@ div.jp-volume-bar {
 	position: absolute;
 	overflow:hidden;
 	top:21px;
-	background: url("jplayer.blue.monday.jpg") 0 -250px repeat-x;
-	width:61px;
-	height:5px;
+	background: url("volumebarempty.png") 0 0 repeat-x;
+	width:107px;
+	height:15px;
 	cursor: pointer;
+	left:141px;
 }
-div.jp-single-player div.jp-volume-bar {
+/*div.jp-single-player div.jp-volume-bar {
 	left:76px;
-}
+}*/
 div.jp-volume-bar-value {
-	background: url("jplayer.blue.monday.jpg") 0 -256px repeat-x;
+	background: url("volumebarfull.png") 0 0 repeat-x;
 	width:0px;
-	height:5px;
+	height:50px;
 }
 div.jp-play-time,
 div.jp-total-time {
