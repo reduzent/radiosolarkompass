@@ -637,7 +637,7 @@ function displayWhatsupList() {
     $online_status = 'offline';
   }
   //echo "<p>The RadioSolarKompass is currently <b>$online_status</b>.</p>";
-  echo "<table>\n";
+  echo "<table class=\"playlist\">\n";
   $bgclr = 1;
   foreach ( $status as $key => $row) {
     echo "<tr id=\"$key\">\n";
