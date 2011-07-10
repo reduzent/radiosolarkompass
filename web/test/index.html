@@ -1,30 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!-- jPlayer Zeugs -->
-        <link href="skin/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="js/closeme.js"></script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
-        <script type="text/javascript" src="js/rsk.stream.player.js"></script>
-        <!-- jPlayer Zeugs -->
-<link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+  <!-- jQuery fuer jplayer und dynamischen autorefresh -->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+ 
+  <!-- jPlayer Zeugs -->
+  <link href="skin/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/closeme.js"></script>
+  <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+  <script type="text/javascript" src="js/rsk.stream.player.js"></script>
+  <!-- jPlayer Zeugs -->
 
-<!-- markierungsanimationsskript -->
-	<script type="text/javascript" src="js/mark.animation.js"></script>
+  <!-- style -->
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
 
-	<!-- Autorefresh Playlist & Markierung 
-	<script>
-	var auto_refresh = setInterval(
-	function()
-	{
-	$('#playlist').load('playlist.php');
-	$('#worldmap').load('markierung.php');
-	}, 3000);
-	</script>
-	bis hier Autorefresh Playlist -->
+  <!-- markierungsanimationsskript -->
+  <script type="text/javascript" src="js/mark.animation.js"></script>
 
+  <!-- Autorefresh Playlist & Markierung 
+  <script>
+  var auto_refresh = setInterval(
+  function()
+  {
+  $('#playlist').load('playlist.php');
+  $('#worldmap').load('markierung.php');
+  }, 3000);
+  </script>
+  bis hier Autorefresh Playlist -->
+
+  <!-- Texboxen ein- und ausblenden -->
   <script type="text/javascript">
     function showstuff(boxid){
       document.getElementById(boxid).style.visibility="visible";
@@ -34,26 +40,23 @@
     }
   </script>
 
-<title>RadioSolarKompass</title>
-<style type="text/css">
-
-</style>
+  <title>RadioSolarKompass</title>
 </head>
 
 <body>
 
-
+<!-- WELTKARTE -->
 <div id="worldmap">
  <div id="location" style="left:48.311602595615%;top:47.649474784694%;">
    <img  id="aussenden" src="pix/aussenden_0.png"  alt="o" />
  </div>
-
-
+</div>
  
+<!-- RSK LOGO -->
+<div id="logo"></div>
  
- <div id="logo"></div>
- 
- <div id="playlist">
+<!-- PLAYLIST -->
+<div id="playlist">
 <table>
 <tr id="NEXT">
  <td class="pl_title">NEXT</td>
@@ -71,11 +74,9 @@
   <td><a href="http://www.sunshinefm.com/songkhla/">Sunshine Songkhla 94.5 FM</a>, Songkhla, Thailand</td>
 </tr>
 </table>
-
- 
 </div>
 
-
+<!-- MENU -->
 <div id="menu">
 <table cellpadding="0" cellspacing="5" style="text-align:left;">
 <tr>
@@ -90,6 +91,7 @@
 </table>
 </div> 
 
+<!-- ABOUT TEXT -->
 <div id="menuabout">
 <div id="close"><a href=# onclick="hidestuff('menuabout');"><img src="pix/close.png" width="41" height="36" border="0" /></a></div>
 The radio composition of an invisible reality follows the sunrise: The programme behind RadioSolarKompass connects radios from all over the world depending on the time of sunrise. You can see on the worldmap, where actually the sun is rising and from this location, you can hear a radio broadcast. 
@@ -102,15 +104,7 @@ Space. We can feel the impact of the connection to the macrocosmos, when we watc
 Space as a metaphor for freedom: We embrace the fundamental changes, which the Internet has brought by multiplying media channels and by increasing the possibilities for a wider spectrum of broadcasts and information.
 </div>
 
-
-
-
-
-
-
-
-
-
+<!-- RSK PLAYER -->
 <!-- jPlayer Code -->
 <div id="player">
  <div id="jquery_jplayer"></div>
@@ -130,14 +124,5 @@ Space as a metaphor for freedom: We embrace the fundamental changes, which the I
 </div>
 <!-- jPlayer  bis hier -->
 
-
-
-
-
-
-
-
-
-</div>
 </body>
 </html>
