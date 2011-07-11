@@ -75,7 +75,7 @@ a.jp-pause {
 	display: none;
 }
 a.jp-pause:hover {
-	background: url("pause.jpg") 0 0 no-repeat;
+	background: url("pause.png") 0 0 no-repeat;
 }
 a.jp-stop {
 	top:26px;
