@@ -204,6 +204,37 @@ function generateSunriseSchedule () {
   echo "</table>\n";
 }
 
+function displayRadioList() {
+  $query = '
+     select 
+       `radios`.`name`, 
+       `radios`.`homepage`, 
+       `radios`.`url`,
+       `cities`.`name`, 
+       `countries`.`name` 
+    from `radios` 
+    left join `cities` on 
+      `cities`.`id` = `radios`.`city_id` 
+    left join `countries` on 
+      `countries`.`iso` = `cities`.`country_code` 
+    where `radios`.`active` = true
+    order by `countries`.`name`,
+      `cities`.`name`,
+      `radios`.`name`
+    ';
+  echo "  <ul>\n";
+  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  while(list($name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
+    echo "    <li><span class=\"country\">$country</span>, <span class=\"city\">$city</span>, ";
+    if ( $homepage == "" ) {
+      echo "<span class=\"radio\">$name</span>";
+    } else {
+      echo "<span class=\"radio\"><a href=\"$homepage\">$name</a></span>";
+    }
+    echo "</li>\n";
+  }
+  echo " </ul>\n";
+}
 
 
 //###### index.php functions ##########################
