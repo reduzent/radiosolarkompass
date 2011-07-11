@@ -20,10 +20,12 @@
 
   <!-- Autorefresh Playlist & Markierung -->
   <script>
+    var d = new Date();
+    var playlisturl = "playlist.php?offset="  + d.getTimezoneOffset();
     var auto_refresh = setInterval(
     function()
     {
-    $('#playlist').load('playlist.php');
+    $('#playlist').load(playlisturl);
     $('#worldmap').load('markierung.php');
     }, 3000);
   </script>
