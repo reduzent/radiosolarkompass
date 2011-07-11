@@ -98,7 +98,7 @@ td.pl_title {
 }
 
 #menuradiolist {
-        width:600px;
+        width:520px;
         height:450px;
 }
 
@@ -158,4 +158,12 @@ a.menu {
 	height:414px;
 	width:100%;
 	margin:0;
+}
+
+.radio a {
+	color:#000;
+}
+
+ul {
+	list-style-type:none;
 }
