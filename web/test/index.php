@@ -83,7 +83,7 @@ opendb();
     <td ><a class="menu" href="#" onclick="showstuff('menuabout');hidestuff('menuradiolist');">ABOUT</a></td>
   </tr>
   <tr>
-    <td><a class="menu" href="#" onclick="showstuff('menuradiolist');hidestuff('menuabout');">RADIO LIST</a></td>
+    <td><a class="menu" href="#" onclick="showstuff('menuradiolist');hidestuff('menuabout');$('#radiolist').load('radiolist.php');">RADIO LIST</a></td>
   </tr>
   <tr>
     <td><a class="menu" href="http://www.radiosolarkompass.org/guestbook" target="_blank">GUESTBOOK</a></td>
@@ -132,8 +132,9 @@ Space as a metaphor for freedom: We embrace the fundamental changes, which the I
 <!-- RADIOLIST -->
 <div id="menuradiolist" class="popupbox">
 <div class="close"><a href="#" onclick="hidestuff('menuradiolist');"><img src="pix/close.png" border="0" alt="close" /></a></div>
-<div class="scrollpane">
-<?php displayRadioList(); ?>
+<div class="scrollpane" id="radiolist">
+<h2>......L O A D I N G .........</h2>
+<?php //displayRadioList(); ?>
 </div>
 </div>
 
