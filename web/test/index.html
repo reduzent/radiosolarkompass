@@ -38,7 +38,7 @@
   <script type="text/javascript" id="sourcecode">
     $(function()
     {
-    $('#menuradiolist').jScrollPane();
+    $('.scrollpane').jScrollPane();
     });
   </script>
 
@@ -76,10 +76,10 @@
 <div id="menu">
 <table class="menu">
   <tr>
-    <td ><a class="menu" href="#" onclick="showstuff('menuabout');">ABOUT</a></td>
+    <td ><a class="menu" href="#" onclick="showstuff('menuabout');hidestuff('menuradiolist');">ABOUT</a></td>
   </tr>
   <tr>
-    <td><a class="menu" href="#" onclick="showstuff('menuradiolist')">RADIO LIST</a></td>
+    <td><a class="menu" href="#" onclick="showstuff('menuradiolist');hidestuff('menuabout');">RADIO LIST</a></td>
   </tr>
   <tr>
     <td><a class="menu" href="http://www.radiosolarkompass.org/guestbook" target="_blank">GUESTBOOK</a></td>
@@ -109,20 +109,25 @@
 
 <!-- ABOUT TEXT -->
 <div id="menuabout">
-<div id="close"><a href="#" onclick="hidestuff('menuabout');"><img src="pix/close.png" width="41" height="36" border="0" alt="close" /></a></div>
+<div class="close"><a href="#" onclick="hidestuff('menuabout');"><img src="pix/close.png"  border="0" alt="close" /></a></div>
+<div class="scrollpane">
+<p>
 The radio composition of an invisible reality follows the sunrise: The programme behind RadioSolarKompass connects radios from all over the world depending on the time of sunrise. You can see on the worldmap, where actually the sun is rising and from this location, you can hear a radio broadcast. 
 The collection consists of 1500 radio stations and the density is not constant.  The times of changes between the radio stations will be of longer and shorter duration.
 RadioSolarKompass can also be interpreted as sonification of the rotation of our earth. <br />
-<br />
-Philosophy<br />
-
+<p/>
+<h3>Pilosophy</h3>
+<p>
 Space. We can feel the impact of the connection to the macrocosmos, when we watch the stars. The extraordinarily beautiful moment of sunrise evokes a concentrated reference to the sun within the magic ofcosmic space. RadioSolarKompass aims to be a compass to stimulate sense and imagination, a planetary feeling for the space around us.
 Space as a metaphor for freedom: We embrace the fundamental changes, which the Internet has brought by multiplying media channels and by increasing the possibilities for a wider spectrum of broadcasts and information.
+</p>
+</div>
 </div>
 
 <!-- RADIOLIST -->
 <div id="menuradiolist">
-<div id="close"><a href="#" onclick="hidestuff('menuradiolist');"><img src="pix/close.png" width="41" height="36" border="0" alt="close" /></a></div>
+<div class="close"><a href="#" onclick="hidestuff('menuradiolist');"><img src="pix/close.png" border="0" alt="close" /></a></div>
+<div class="scrollpane">
 <p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in ligula id sem tristique ultrices
 					eget id neque. Duis enim turpis, tempus at accumsan vitae, lobortis id sapien. Pellentesque nec orci
@@ -177,6 +182,7 @@ Space as a metaphor for freedom: We embrace the fundamental changes, which the I
 					Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
 					amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
 				</p>
+</div>
 </div>
 
 
