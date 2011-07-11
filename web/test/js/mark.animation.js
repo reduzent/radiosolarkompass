@@ -1,5 +1,5 @@
   var delay = 120;
-  var num = 8;
+  var num = 12;
   var current = 0;
   var urlbase = 'pix/aussenden_';
   var aussenden = document.getElementById("aussenden");
