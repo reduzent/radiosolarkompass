@@ -93,11 +93,19 @@ td.pl_title {
 }
 
 #menuabout {
+	width:520px;
+	height:450px;
+}
+
+#menuradiolist {
+        width:600px;
+        height:450px;
+}
+
+.popupbox {
 	position:absolute;
 	top:20px;
 	left:450px;
-	width:520px;
-	height:450px;
 	font-size:12px;
 	color:#000;
 	background-color:#FF0;
@@ -111,27 +119,6 @@ td.pl_title {
 	/* For IE 5.5 - 7 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
-
-#menuradiolist {
-        position:absolute;
-        top:20px;
-        left:450px;
-        width:600px;
-        height:450px;
-        font-size:12px;
-        color:#000;
-        background-color:#FF0;
-        visibility:hidden;
-	padding:15px;
-        box-shadow:#000 4px 4px 6px;
-        -moz-box-shadow:#000 4px 4px 6px;
-        -webkit-box-shadow:#000 4px 4px 6px;
-        /* For IE 8 */
-        -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
-        /* For IE 5.5 - 7 */
-        filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
-}
-
 
 .close {
 	position:relative;
