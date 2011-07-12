@@ -55,3 +55,11 @@ td
         left:-45px;
 }
 				
+#logo {
+	background-image: url(../pix/logo.png);
+	width:418px;
+	height:134px;
+	position:absolute;
+	top:760px;
+	left:100px;
+}
