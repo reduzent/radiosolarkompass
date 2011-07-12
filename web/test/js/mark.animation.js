@@ -5,8 +5,8 @@
   var aussenden = document.getElementById("aussenden");
   function timeMsg() {
     var t=setTimeout("timeMsg()",delay);
-    current = (current + 1) % num + 1;
-    document.getElementById('aussenden').src = urlbase + current + '.png';
+    current = (current + 1) % num;
+    document.getElementById('aussenden').src = urlbase + (current + 1) + '.png';
   }
   if (aussenden != null) {
     timeMsg();
