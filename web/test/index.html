@@ -49,6 +49,16 @@
     function hidestuff(boxid){
       document.getElementById(boxid).style.visibility="hidden";
     }
+    var loaded = 0;
+    function loadstuff(boxid){
+      if ( loaded == 1 ) {
+        return;
+      }
+      $('#radiolist').load('radiolist.php',  function(){
+        $('#radiolist').addClass('scrollpane').jScrollPane();
+      });
+      loaded = 1;
+    }
   </script>
 
   <title>RadioSolarKompass</title>
@@ -78,7 +88,7 @@
     <td ><a class="menu" href="#" onclick="showstuff('menuabout');hidestuff('menuradiolist');">ABOUT</a></td>
   </tr>
   <tr>
-    <td><a class="menu" href="#" onclick="showstuff('menuradiolist');hidestuff('menuabout');$('#radiolist').load('radiolist.php',  function(){$('#radiolist').addClass('scrollpane').jScrollPane();});">RADIO LIST</a></td>
+    <td><a class="menu" href="#" onclick="showstuff('menuradiolist');hidestuff('menuabout');loadstuff('#radiolist');">RADIO LIST</a></td>
   </tr>
   <tr>
     <td><a class="menu" href="http://www.radiosolarkompass.org/guestbook" target="_blank">GUESTBOOK</a></td>
@@ -160,7 +170,9 @@ RadioSolarKompass is written in Pure Data, PHP and MySQL.<br />
 
 <!-- RADIOLIST -->
 <div id="menuradiolist" class="popupbox">
-<div class="close"><a href="#" onclick="hidestuff('menuradiolist');"><img src="pix/close.png" border="0" alt="close" /></a></div>
+<div class="close">
+  <a href="#" onclick="hidestuff('menuradiolist');"><img src="pix/close.png" border="0" alt="close" /></a>
+</div>
 <div id="radiolist">
 <h2>......L O A D I N G .........</h2>
 </div>
