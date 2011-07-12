@@ -4,4 +4,3 @@ opendb();
 displayRadioList();
 closedb(); 
 ?>
-
