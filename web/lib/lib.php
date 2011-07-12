@@ -225,11 +225,11 @@ function displayRadioList() {
   echo "  <ul>\n";
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
   while(list($name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
-    echo "    <li><span class=\"country\">$country</span>, <span class=\"city\">$city</span>, ";
+    echo "    <li>$country, $city, ";
     if ( $homepage == "" ) {
-      echo "<span class=\"radio\">$name</span>";
+      echo "$name";
     } else {
-      echo "<span class=\"radio\"><a href=\"$homepage\">$name</a></span>";
+      echo "<a href=\"$homepage\">$name</a>";
     }
     echo "</li>\n";
   }
