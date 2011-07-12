@@ -15,11 +15,11 @@
  */
 
 #jquery_jplayer {
+	width:0;
+	height:0;
 }
 
-div.jp-single-player,
-div.jp-playlist-player {
-
+div.jp-single-player {
 	/* Edit the font-size to counteract inherited font sizing.
 	 * Eg. 1.25em = 1 / 0.8em
 	 */
@@ -36,7 +36,9 @@ div.jp-interface {
 	width:170px;
 	height:48px;
 	border:1px solid #bbb;
+	margin:30px;
 }
+
 div.jp-interface ul.jp-controls {
 	list-style-type:none;
 	padding:0;
@@ -50,6 +52,8 @@ div.jp-interface ul.jp-controls a {
 	overflow:hidden;
 	text-indent:-9999px;
 }
+
+
 a.jp-play,
 a.jp-pause {
 	top:3px;
