@@ -121,6 +121,10 @@ td.pl_title {
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
 }
 
+.popupbox a {
+	color:#000;
+}
+
 .close {
 	position:relative;
 	margin-left:100%;
