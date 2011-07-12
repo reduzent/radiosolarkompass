@@ -40,9 +40,8 @@ opendb();
   <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
   <link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
   <script type="text/javascript" id="sourcecode">
-    $(function()
-    {
-    $('.scrollpane').jScrollPane();
+    $(function(){
+       $('.scrollpane').jScrollPane();
     });
   </script>
 
@@ -83,7 +82,7 @@ opendb();
     <td ><a class="menu" href="#" onclick="showstuff('menuabout');hidestuff('menuradiolist');">ABOUT</a></td>
   </tr>
   <tr>
-    <td><a class="menu" href="#" onclick="showstuff('menuradiolist');hidestuff('menuabout');$('#radiolist').load('radiolist.php');">RADIO LIST</a></td>
+    <td><a class="menu" href="#" onclick="showstuff('menuradiolist');hidestuff('menuabout');$('#radiolist').load('radiolist.php',  function(){$('#radiolist').addClass('scrollpane').jScrollPane();});">RADIO LIST</a></td>
   </tr>
   <tr>
     <td><a class="menu" href="http://www.radiosolarkompass.org/guestbook" target="_blank">GUESTBOOK</a></td>
@@ -126,13 +125,37 @@ RadioSolarKompass can also be interpreted as sonification of the rotation of our
 Space. We can feel the impact of the connection to the macrocosmos, when we watch the stars. The extraordinarily beautiful moment of sunrise evokes a concentrated reference to the sun within the magic ofcosmic space. RadioSolarKompass aims to be a compass to stimulate sense and imagination, a planetary feeling for the space around us.
 Space as a metaphor for freedom: We embrace the fundamental changes, which the Internet has brought by multiplying media channels and by increasing the possibilities for a wider spectrum of broadcasts and information.
 </p>
+<p>
+<b>Authors</b><br/>
+Roman Haefeli<br />
+Anja Kaufmann<br/><br/>
+<b>Graphic design</b><br/>
+Jan Kříbek<br/><br/>
+<b>Illustrations</b><br />
+Václav Havlíček<br /><br />
+<b>Exhibition concept</b><br />
+Robert Köhler<br />
+<br />
+<b>Contact </b><br />
+<a href="mailto:info@radiosolarkompass.org">info@radiosolarkompass.org</a><br />
+<br />
+<b>Thanks and credits to</b><br />
+All the Radios, which are part of RadioSolarKompass<br />
+surfmusik.de for the radio collection<br />
+sitemapping.ch for support<br />
+<br />
+<b>Technical notices</b><br />
+JavaScipt must be enabled<br />
+Flashplayer is needed for non-HTML5 browsers.<br />
+RadioSolarKompass is written in Pure Data, PHP and MySQL.<br />
+</p>
 </div>
 </div>
 
 <!-- RADIOLIST -->
 <div id="menuradiolist" class="popupbox">
 <div class="close"><a href="#" onclick="hidestuff('menuradiolist');"><img src="pix/close.png" border="0" alt="close" /></a></div>
-<div class="scrollpane" id="radiolist">
+<div id="radiolist">
 <h2>......L O A D I N G .........</h2>
 <?php //displayRadioList(); ?>
 </div>
