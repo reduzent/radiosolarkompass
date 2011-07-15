@@ -31,10 +31,10 @@ body {
 
 #logo {
 	position:absolute;
-	top:562px;
+	top:550px;
 	left:26px;
-	width:404px;
-	height:47px;
+	width:325px;
+	height:46px;
 	background-image:url(../pix/logo.png);
 }
 
@@ -76,7 +76,7 @@ td.pl_title {
 	top:511px;
 	left:450px;
 	text-align:left;
-	background-color:#0d0d0d;
+	background-color:#ff0;
 	padding:4px;
 	border:0;
 	font-size:12px;
@@ -155,6 +155,7 @@ a:hover {
 
 a.menu {
 	text-decoration:none;
+	color:#000;
 }
 
 .scrollpane {
