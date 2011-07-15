@@ -25,5 +25,5 @@ $y_perc = rad2deg(1.25 * log(tan(0.4 * deg2rad($lat) + pi() / 4 ))) / -2.36611 +
 closedb();
 ?>
      <div id="location" style="left:<?php echo $x_perc; ?>%;top:<?php echo $y_perc; ?>%;">
-       <img  id="aussenden" src="pix/aussenden_1.png"  alt="o" />
+       <img  id="aussenden" src="pix/aussenden3_6.png"  alt="o" />
      </div>
