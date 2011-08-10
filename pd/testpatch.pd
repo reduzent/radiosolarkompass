@@ -1,4 +1,4 @@
-#N canvas 0 44 738 425 10;
+#N canvas 434 1573 738 425 10;
 #X declare -stdpath extra/ggee;
 #X declare -path include;
 #X declare -stdpath extra/ggee -stdpath extra/zexy -stdlib extra/zexy
@@ -66,6 +66,7 @@
 #X obj 595 85 r debug;
 #X obj 548 85 r error;
 #X obj 548 108 print;
+#X obj 499 5 rsk_indicate_online;
 #X connect 0 0 1 0;
 #X connect 0 0 31 0;
 #X connect 0 1 31 1;

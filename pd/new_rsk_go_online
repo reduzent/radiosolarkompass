@@ -1,0 +1,89 @@
+#!/bin/bash
+
+rskpdpidfile=/tmp/rsk_pd_pid
+rskonlinefile=/tmp/rsk_online
+rskwatchdogpidfile=/tmp/rsk_watchdog_pid
+rundir=$(dirname $0)
+
+touch $rskonlinefile
+if [ ! -f $rskpdpidfile ]
+then
+  echo "50000" > $rskpdpidfile
+fi
+
+function stop_rsk {
+  rskpdpid=0
+  if [ -f $rskpdpidfile ]
+  then 
+    rskpdpid=$(cat $rskpdpidfile)
+  fi
+  while kill $rskpdpid 2> /dev/null
+  do
+    sleep 2
+  done
+  return 0
+}
+
+function start_rsk {
+  cd $rundir
+  pd -noprefs -noaudio -nomidi -nrt -open testpatch.pd \
+    > /dev/null 2>&1 &
+    echo $! > $rskpdpidfile
+  sleep 5
+  return 0
+}
+
+function restart_rsk {
+  stop_rsk && start_rsk && return 0 || return 1
+}
+
+function watchdog {
+  (
+    while true
+    do
+      restart_rsk
+      while true
+      do
+        sleep 2
+        age=$(($(date +%s) - $(stat -c %Y $rskonlinefile)))
+        if [ $age -gt 7 ]
+        then
+          break
+        fi
+      done
+    done
+  ) &
+  echo $! > $rskwatchdogpidfile
+  return 0
+}
+
+function shutdown_rsk {
+  if [ -f $rskwatchdogpidfile]
+  then
+    rskwatchdogpid=$(cat $rskwatchdogpidfile)
+    if kill -0 $rskwatchdogpid 2> /dev/null
+    then
+      echo -n "Stopping watchdog daemon..."
+      kill $rskwatchdogpid 2> /dev/null && echo " done" || echo " failed"
+    fi
+    echo -n "Removing stale watchdog pid file..."
+    rm $rskwatchdogpidfile || echo " done" || echo " failed" 
+  fi
+  echo "Shutting down RadioSolarKompass..."
+  stop_rsk
+  exitstop=$?
+  echo "Done."
+  exit $exitstop
+}
+
+function launch_rsk {
+  if [ -f $rskwatchdogpidfile ] && kill -0 $(cat $rskwatchdogpidfile) 2> /dev/null  
+  then 
+    echo "RadioSolarKompass already running."
+    exit 1
+  fi
+  watchdog
+  exit 0
+}
+
+
