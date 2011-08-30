@@ -58,7 +58,7 @@ function watchdog {
 }
 
 function shutdown_rsk {
-  if [ -f $rskwatchdogpidfile]
+  if [ -f $rskwatchdogpidfile ]
   then
     rskwatchdogpid=$(cat $rskwatchdogpidfile)
     if kill -0 $rskwatchdogpid 2> /dev/null
@@ -66,10 +66,9 @@ function shutdown_rsk {
       echo -n "Stopping watchdog daemon..."
       kill $rskwatchdogpid 2> /dev/null && echo " done" || echo " failed"
     fi
-    echo -n "Removing stale watchdog pid file..."
-    rm $rskwatchdogpidfile || echo " done" || echo " failed" 
+    rm $rskwatchdogpidfile || exit 1
   fi
-  echo "Shutting down RadioSolarKompass..."
+  echo -n "Shutting down RadioSolarKompass..."
   stop_rsk
   exitstop=$?
   echo "Done."
@@ -86,4 +85,12 @@ function launch_rsk {
   exit 0
 }
 
+case $1 in
+  start) launch_rsk ;;
+  stop)  shutdown_rsk ;;
+  *)  echo "Usage: $0 start|stop"; exit 1;;
+esac
+exit 0
+
+  
 
