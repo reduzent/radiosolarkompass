@@ -26,10 +26,10 @@ if (isset($_POST['delete'])) {
 }
 
 // generate title numbers
-$query = "select count(*) from radios";
+$query = "select count(*) from radios where operable = true";
 $result = mysql_query($query) or die('Datenbankabfrage fehlgeschlagen');
 list($total) = mysql_fetch_array($result);
-$query = "select count(*) from radios where active = true";
+$query = "select count(*) from radios where active = true and operable = true";
 $result = mysql_query($query) or die('Datenbankabfrage fehlgeschlagen');
 list($active) = mysql_fetch_array($result);
 
