@@ -89,7 +89,15 @@ function convertTdecThms($tdec) {
 }
 
 function pdGetStreamsOfLocation($city_id) {
-  $query = "select `id`, `url` from `radios` where `city_id` = $city_id";
+  $query = "
+    select 
+      `id`, `url` 
+    from `radios` 
+    where `city_id` = $city_id and `active` = true and trycnt = (
+       select min(trycnt) 
+       from `radios` 
+       where `city_id` = $city_id and `active` = true
+    ) limit 1";
   $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
   while(list($id, $url) = mysql_fetch_array($result)) {
     echo "$id $url;\n";
