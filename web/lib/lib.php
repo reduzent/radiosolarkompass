@@ -476,7 +476,8 @@ function displayStreamList() {
     left join `cities` on 
       `cities`.`id` = `radios`.`city_id` 
     left join `countries` on 
-      `countries`.`iso` = `cities`.`country_code` 
+      `countries`.`iso` = `cities`.`country_code`
+    where `operable` = true 
     order by `countries`.`name`,
       `cities`.`name`,
       `radios`.`name`
@@ -679,7 +680,7 @@ function displayWhatsupList() {
     if ( $row['playtime'] != '—' ) {
       $arr = preg_split('/:/', $row['playtime']);
       $localepoch = gmmktime($arr[0], $arr[1] - $offset, $arr[2]);
-      $time = gmdate('H.i:s', $localepoch);
+      $time = gmdate('H:i:s', $localepoch);
     } else {
       $time = '—';
     }
