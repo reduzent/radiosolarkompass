@@ -71,7 +71,7 @@ function shutdown_rsk {
   echo -n "Shutting down RadioSolarKompass..."
   stop_rsk
   exitstop=$?
-  echo "Done."
+  echo "done"
   exit $exitstop
 }
 
@@ -81,7 +81,9 @@ function launch_rsk {
     echo "RadioSolarKompass already running."
     exit 1
   fi
+  echo -n "Starting RSK..."
   watchdog
+  echo "done"
   exit 0
 }
 
