@@ -197,6 +197,37 @@ function generateDailySchedule() {
   }
 }
 
+function getNextStreamData() {
+  $query = "
+    select
+       r.name as station,
+       r.url as url,
+       c.name as city, 
+       l.name as country, 
+       ds.sunrise_time as sunrise_time
+    from radios r 
+    join cities c on c.id = r.city_id 
+    join countries l on l.iso = c.country_code 
+    join daily_schedule ds on ds.city_id = c.id 
+    where 
+      r.city_id = (
+        select city_id 
+        from daily_schedule 
+        where sunrise_time > addtime(now(), '0:00:30')
+        order by sunrise_time asc 
+        limit 1
+        ) 
+    and r.active = 1 
+    and r.operable = 1 
+    order by r.trycnt asc 
+    limit 1
+    ";
+  $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
+  $next = mysql_fetch_assoc($result);
+  $output = json_encode($next, JSON_PRETTY_PRINT);
+   echo $output;
+}
+
 function generateSunriseSchedule () {
   $query = "
     select 
