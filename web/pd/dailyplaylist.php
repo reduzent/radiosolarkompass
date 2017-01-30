@@ -2,7 +2,7 @@
 include '../lib/lib.php';
 opendb();
 
-generatePdPlaylist();
+generateDailySchedule();
 // close db connection
 closedb();
 ?>

@@ -157,6 +157,43 @@ function generatePdPlaylist() {
   }
 }
 
+function generateDailySchedule() {
+  $query = "
+    select 
+    `cities`.`id`,
+    X(`cities`.`coord`), 
+    Y(`cities`.`coord`) 
+    from `radios`
+    join `cities`
+    on `radios`.`city_id` = `cities`.`id`
+    where  `radios`.`active` = 1 and `radios`.`operable` = 1
+    group by `cities`.`id`;
+    ";
+  $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
+  $timetable = array();
+  while(list($id, $lat, $lon) = mysql_fetch_array($result)) {
+    $sunrise_timestamp = date_sunrise(time(), SUNFUNCS_RET_TIMESTAMP, $lat, $lon, 90, 0); 
+    if ($sunrise_timestamp != false) {
+      $timetable[] = "($id, FROM_UNIXTIME($sunrise_timestamp))";
+    }
+  }
+  $values = implode("\n, ", $timetable); 
+  mysql_query("BEGIN;");
+  mysql_query("LOCK TABLES `daily_schedule` WRITE;");
+  mysql_query("TRUNCATE TABLE `daily_schedule`;");
+  $query = "
+    INSERT INTO `daily_schedule`
+      (city_id, sunrise_time)
+      VALUES $values;";
+  $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
+  if ($result) {
+    mysql_query("UNLOCK TABLES;");
+    mysql_query("COMMIT;");
+  } else {
+    mysql_query("ROLLBACK;");
+  }
+}
+
 function generateSunriseSchedule () {
   $query = "
     select 
