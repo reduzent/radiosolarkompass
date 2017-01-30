@@ -211,6 +211,7 @@ function generateSunriseSchedule () {
     on `admin_codes`.`code` = concat(`cities`.`country_code`, '.', `cities`.`admin1_code`)
     right join `radios`
     on `radios`.`city_id` = `cities`.`id`
+    where `radios`.`active` = 1 and `radios`.`operable` = 1
     group by `radios`.`city_id`
     ";
   $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
