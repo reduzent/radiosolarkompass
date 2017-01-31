@@ -192,9 +192,14 @@ function generateDailySchedule() {
   if ($result) {
     mysql_query("UNLOCK TABLES;");
     mysql_query("COMMIT;");
+    $status = "OK";
   } else {
     mysql_query("ROLLBACK;");
+    $status = "failed";
   }
+  $statusarray = array('status' => $status);
+  $output = json_encode($statusarray, JSON_PRETTY_PRINT);
+  echo $output;
 }
 
 function getNextStreamData() {
@@ -224,8 +229,15 @@ function getNextStreamData() {
     ";
   $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
   $next = mysql_fetch_assoc($result);
-  $output = json_encode($next, JSON_PRETTY_PRINT);
-   echo $output;
+  if (mysql_num_rows($result)==0) {
+    $status = "failed";
+    $next = "";
+  } else {
+    $status = "OK";
+  }
+  $nextarray =  array('status' => $status, 'data' => $next);
+  $output = json_encode($nextarray, JSON_PRETTY_PRINT);
+  echo $output;
 }
 
 function generateSunriseSchedule () {
