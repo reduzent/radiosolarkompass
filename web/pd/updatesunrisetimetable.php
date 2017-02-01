@@ -2,7 +2,7 @@
 include '../lib/lib.php';
 opendb();
 
-generateDailySchedule();
+updateSunriseTimeTable();
 // close db connection
 closedb();
 ?>

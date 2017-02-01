@@ -157,7 +157,7 @@ function generatePdPlaylist() {
   }
 }
 
-function generateDailySchedule() {
+function updateSunriseTimeTable() {
   $query = "
     select 
     `cities`.`id`,
