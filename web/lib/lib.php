@@ -209,6 +209,47 @@ function updateSunriseTimeTable() {
 function getNextStreamData() {
   $query = "
     select
+       r.id as id,
+       r.name as station,
+       r.url as url,
+       c.name as city, 
+       l.name as country, 
+       ds.sunrise_time as sunrise_time,
+       timestampdiff(SECOND, now(), ds.sunrise_time) as leadtime
+    from radios r 
+    join cities c on c.id = r.city_id 
+    join countries l on l.iso = c.country_code 
+    join daily_schedule ds on ds.city_id = c.id 
+    where 
+      r.city_id = (
+        select city_id 
+        from daily_schedule 
+        where sunrise_time > addtime(now(), '0:00:30')
+        order by sunrise_time asc 
+        limit 1
+        ) 
+    and r.active = 1 
+    and r.operable = 1 
+    order by r.trycnt asc 
+    limit 1
+    ";
+  $result = mysql_query($query) or $status = "failed";
+  $next = mysql_fetch_assoc($result);
+  if (mysql_num_rows($result)==0) {
+    $status = "failed";
+    $next = "";
+  } else {
+    $status = "OK";
+  }
+  $nextarray =  array('status' => $status, 'data' => $next);
+  $output = json_encode($nextarray, JSON_PRETTY_PRINT);
+  echo $output;
+}
+
+function getCurrentStreamData() {
+  $query = "
+    select
+       r.id as id,
        r.name as station,
        r.url as url,
        c.name as city, 
@@ -222,8 +263,8 @@ function getNextStreamData() {
       r.city_id = (
         select city_id 
         from daily_schedule 
-        where sunrise_time > addtime(now(), '0:00:30')
-        order by sunrise_time asc 
+        where sunrise_time < now()
+        order by sunrise_time desc 
         limit 1
         ) 
     and r.active = 1 
