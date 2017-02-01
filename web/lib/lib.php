@@ -169,32 +169,36 @@ function updateSunriseTimeTable() {
     where  `radios`.`active` = 1 and `radios`.`operable` = 1
     group by `cities`.`id`;
     ";
-  $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
-  $timetable = array();
-  while(list($id, $lat, $lon) = mysql_fetch_array($result)) {
-    // somehow date_sunrise calculates sunrise times to lie between 7pm of the previous day and
-    // 7pm of the current day. In order to get new data, we need to calculate sunrise_times from
-    // 7pm on for the next day, thus 5 (+ 2 for safety) hours -> 25200 seconds. 
-    $sunrise_timestamp = date_sunrise(time() + 25200, SUNFUNCS_RET_TIMESTAMP, $lat, $lon, 90, 0); 
-    if ($sunrise_timestamp != false) {
-      $timetable[] = "($id, FROM_UNIXTIME($sunrise_timestamp))";
-    }
-  }
-  $values = implode("\n, ", $timetable); 
-  mysql_query("BEGIN;");
-  mysql_query("LOCK TABLES `daily_schedule` WRITE;");
-  mysql_query("TRUNCATE TABLE `daily_schedule`;");
-  $query = "
-    INSERT INTO `daily_schedule`
-      (city_id, sunrise_time)
-      VALUES $values;";
-  $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
+  $result = mysql_query($query);
   if ($result) {
-    mysql_query("UNLOCK TABLES;");
-    mysql_query("COMMIT;");
-    $status = "OK";
+    $timetable = array();
+    while(list($id, $lat, $lon) = mysql_fetch_array($result)) {
+      // somehow date_sunrise calculates sunrise times to lie between 7pm of the previous day and
+      // 7pm of the current day. In order to get new data, we need to calculate sunrise_times from
+      // 7pm on for the next day, thus 5 (+ 2 for safety) hours -> 25200 seconds. 
+      $sunrise_timestamp = date_sunrise(time() + 25200, SUNFUNCS_RET_TIMESTAMP, $lat, $lon, 90, 0); 
+      if ($sunrise_timestamp != false) {
+        $timetable[] = "($id, FROM_UNIXTIME($sunrise_timestamp))";
+      }
+    }
+    $values = implode("\n, ", $timetable); 
+    mysql_query("BEGIN;");
+    mysql_query("LOCK TABLES `daily_schedule` WRITE;");
+    mysql_query("TRUNCATE TABLE `daily_schedule`;");
+    $query = "
+      INSERT INTO `daily_schedule`
+        (city_id, sunrise_time)
+        VALUES $values;";
+    $result = mysql_query($query);
+    if ($result) {
+      mysql_query("UNLOCK TABLES;");
+      mysql_query("COMMIT;");
+      $status = "OK";
+    } else {
+      mysql_query("ROLLBACK;");
+      $status = "failed";
+    }
   } else {
-    mysql_query("ROLLBACK;");
     $status = "failed";
   }
   $statusarray = array('status' => $status);
@@ -227,7 +231,7 @@ function getNextStreamData() {
     order by r.trycnt asc 
     limit 1
     ";
-  $result = mysql_query($query) or header('HTTP/1.0 500 Internal Server Error');
+  $result = mysql_query($query) or $status = "failed";
   $next = mysql_fetch_assoc($result);
   if (mysql_num_rows($result)==0) {
     $status = "failed";
