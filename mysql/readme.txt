@@ -1,7 +1,14 @@
-HOW TO CREATE GEONAMES_CITIES TABLE
+WHERE TO GET GEOGRAPHIC DATA
+============================
+
+Cities:      http://download.geonames.org/export/dump/cities1000.zip
+Countries:   http://download.geonames.org/export/dump/countryInfo.txt
+
+
+HOW TO CREATE CITIES TABLE
 ===================================
 
-Create Table: CREATE TABLE `geonames_cities` (
+REATE TABLE `cities` (
   `id` int(11) NOT NULL,
   `name` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `asciiname` varchar(200) NOT NULL,
@@ -20,17 +27,18 @@ Create Table: CREATE TABLE `geonames_cities` (
   `gtopo30` int(11) DEFAULT '0',
   `timezone` varchar(32) NOT NULL,
   `mod_date` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
-
+  PRIMARY KEY (`id`),
+  KEY `fk_countries` (`country_code`),
+  CONSTRAINT `fk_countries` FOREIGN KEY (`country_code`) REFERENCES `countries` (`iso`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
 
 HOW TO IMPORT DATA FROM FILE
 ============================
 
 load data
-  local infile '/home/akita/cities1000.txt' 
-  into table geonames_cities (
+  local infile '/home/akita/radiosolarkompass/mysql/cities1000.txt' 
+  into table cities (
     `id`, 
     `name`, 
     `asciiname`,
@@ -55,10 +63,10 @@ load data
     coord = geomfromtext(concat("point(", @coordx, " ", @coordy, ")"));
 
 
-HOW TO CREATE GEONAMES_COUNTRIES TABLE
+HOW TO CREATE COUNTRIES TABLE
 ======================================
 
-Create Table: CREATE TABLE `geonames_countries` (
+CREATE TABLE `countries` (
   `iso` char(2) NOT NULL,
   `iso3` char(3) NOT NULL,
   `isonum` char(3) NOT NULL,
@@ -71,13 +79,42 @@ Create Table: CREATE TABLE `geonames_countries` (
   `tld` char(5) DEFAULT NULL,
   `currency_code` char(3) DEFAULT NULL,
   `currency_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `phone` char(5) DEFAULT NULL,
-  `postal_code_format` varchar(12) DEFAULT NULL,
-  `postal_code_regex` varchar(30) DEFAULT NULL,
-  `languages` varchar(40) DEFAULT NULL,
+  `phone` char(20) DEFAULT NULL,
+  `postal_code_format` varchar(200) DEFAULT NULL,
+  `postal_code_regex` varchar(200) DEFAULT NULL,
+  `languages` varchar(120) DEFAULT NULL,
   `id` int(11) NOT NULL,
   `neighbours` varchar(60) DEFAULT NULL,
   `equivfipscode` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `iso_key` (`iso`),
+  UNIQUE KEY `name_key` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+HOW TO IMPORT DATA FROM FILE
+============================
+
+load data
+  local infile '/home/akita/radiosolarkompass/mysql/countryInfo.txt' 
+  into table countries (
+    iso, 
+    iso3,
+    isonum,
+    fips,
+    name,
+    capital,
+    area,
+    population,
+    continent,
+    tld,
+    currency_code,
+    currency_name,
+    phone,
+    postal_code_format,
+    postal_code_regex,
+    languages,
+    id,
+    neighbours,
+    equivfipscode
+  );
 
