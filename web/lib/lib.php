@@ -240,6 +240,8 @@ function getNextStreamData() {
     $next = "";
   } else {
     $status = "OK";
+    $next['id'] = (int) $next['id'];
+    $next['leadtime'] = (int) $next['leadtime'];
   }
   $nextarray =  array('status' => $status, 'data' => $next);
   $output = json_encode($nextarray, JSON_PRETTY_PRINT);
@@ -279,6 +281,7 @@ function getCurrentStreamData() {
     $next = "";
   } else {
     $status = "OK";
+    $next['id'] = (int) $next['id'];
   }
   $nextarray =  array('status' => $status, 'data' => $next);
   $output = json_encode($nextarray, JSON_PRETTY_PRINT);
