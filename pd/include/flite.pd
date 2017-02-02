@@ -1,8 +1,0 @@
-#N canvas 264 109 450 300 10;
-#X obj 37 32 inlet;
-#X obj 29 206 outlet;
-#X obj 68 73 loadbang;
-#X msg 68 95 RSK FAILED TO LOAD CLASS flite;
-#X obj 68 117 s error;
-#X connect 2 0 3 0;
-#X connect 3 0 4 0;
