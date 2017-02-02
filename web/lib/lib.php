@@ -354,7 +354,7 @@ function displayRadioList() {
       `cities`.`id` = `radios`.`city_id` 
     left join `countries` on 
       `countries`.`iso` = `cities`.`country_code` 
-    where `radios`.`active` = true
+    where `radios`.`active` = 1 and `radios`.`operable` = 1
     order by `countries`.`name`,
       `cities`.`name`,
       `radios`.`name`
