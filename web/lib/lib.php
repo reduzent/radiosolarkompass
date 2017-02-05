@@ -738,12 +738,26 @@ function generateLogDateSelector() {
 
 // ############ whatsup.php functions ################################################################
 
+function getOnlineStatus() {
+  $interval = 30; // inverval in seconds to indicate online status
+  $query = "
+    select
+      (unix_timestamp() - unix_timestamp(playtime)) < $interval as online
+    from status
+    where param = 'online'
+    ";
+  $result = mysql_query($query) or $online_status = 0;
+  $row = mysql_fetch_assoc($result);
+  $online_status = (int) $row['online'];
+  return $online_status;
+}
+
 function getStatusInfo() {
   $query = "
    select
      `status`.`param`,
      `status`.`value`,
-     `status`.`playtime`, 
+     unix_timestamp(`status`.`playtime`) as playtime, 
      `radios`.`name`, 
      `radios`.`homepage`, 
      `radios`.`url`, 
@@ -773,14 +787,7 @@ function getStatusInfo() {
     'city' => '—',
     'country' => '—'
     );
-  $lastping = $status['online']['playtime'];
-  $tz = date_default_timezone_get();
-  date_default_timezone_set('UTC');
-  $lastping_epoch = strtotime($lastping);
-  date_default_timezone_set($tz);
-  $now = time();
-  $delta = $now - $lastping_epoch;
-  if ( $delta < 20 ) {
+  if ( getOnlineStatus() ) {
     $status['online'] = true;
   } else {
     $status['online'] = false;
@@ -807,20 +814,14 @@ function displayWhatsupList() {
     'NOW' => $status_raw['onair'],
     'LAST' => $status_raw['played']
   );
-  if ($status_raw['online'] == true) {
-    $online_status = 'online';
-  } else {
-    $online_status = 'offline';
-  }
   echo "<table class=\"playlist\">\n";
   $bgclr = 1;
   foreach ( $status as $key => $row) {
     echo "<tr id=\"$key\">\n";
     echo " <td class=\"pl_title\">$key</td>\n";
     if ( $row['playtime'] != '—' ) {
-      $arr = preg_split('/:/', $row['playtime']);
-      $localepoch = gmmktime($arr[0], $arr[1] - $offset, $arr[2]);
-      $time = gmdate('H:i:s', $localepoch);
+      date_default_timezone_set('UTC'); 
+      $time = date('H:i:s', $row['playtime'] - ($offset*60));
     } else {
       $time = '—';
     }
