@@ -1,6 +1,7 @@
 <?php
 $dbhost = 'localhost';
-$dbuser = 'akita';
-$dbpass = 'mehRadi0s';
+$dbuser = 'someuser';
+$dbpass = 'somepass';
 $dbname  = 'radiosolarkompass';
+include 'secrets.php';
 ?>
