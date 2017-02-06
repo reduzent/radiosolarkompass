@@ -7,7 +7,7 @@ $(document).ready(function(){
 
   $("#jquery_jplayer").jPlayer({
     ready: function () {
-      this.element.jPlayer("setFile", "http://195.176.254.176:8010/rsk.mp3").jPlayer("stop");
+      this.element.jPlayer("setFile", "http://195.176.247.12:8010/rsk.mp3").jPlayer("stop");
       demoInstanceInfo(this.element, $("#demo_info")); // This displays information about jPlayer's configuration in the demo page
     },
     solution: "html, flash",
