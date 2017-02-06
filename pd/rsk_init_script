@@ -44,10 +44,16 @@ function watchdog {
       restart_rsk
       while true
       do
-        sleep 2
-        age=$(($(date +%s) - $(stat -c %Y $rskonlinefile)))
-        if [ $age -gt 7 ]
+        sleep 5
+        online=$(echo "
+          select
+            (unix_timestamp() - unix_timestamp(playtime)) < 15
+          from status 
+          where param = 'online'
+          " | mysql -N)
+        if [ "$online" == "0" ]
         then
+          echo "insert into crashlog (message, timestamp) values ('restarted by watchdog', now())" | mysql
           break
         fi
       done
