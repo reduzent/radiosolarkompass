@@ -7,8 +7,6 @@ lock tables radios write;
 select @radio := id, url
 from radios 
 where operable <> -10
-  and operable <> 1 
-  and last_checked = '2017-02-04'
 order by last_checked asc
 limit 1;
 
@@ -48,7 +46,7 @@ echo "$operable"
 
 updatestatement="
 update radios
-set operable = $operable, last_checked = curdate()
+set operable = $operable, last_checked = now()
 where id = $id;
 "
 mysql -s -N -e "$updatestatement"
