@@ -4,7 +4,7 @@
 #X msg 28 68 open \$1;
 #X obj 28 99 readanysf~;
 #X obj 216 23 loadbang;
-#X msg 216 67 6000;
+#X msg 216 67 10000;
 #X obj 216 87 del;
 #X msg 193 293 quit;
 #X obj 193 319 s pd;
