@@ -484,9 +484,9 @@ function addNewEntry() {
   if ( $allok ) {
     $query = "
       insert into `radios` 
-      (`name`, `homepage`, `url`, `city_id`, `operable`)
+      (`name`, `homepage`, `url`, `city_id`, `operable`, `created`)
       values
-      ('${todb['radio']}', '${todb['homepage']}', '${todb['url']}', '${todb['city']}', 1);";
+      ('${todb['radio']}', '${todb['homepage']}', '${todb['url']}', '${todb['city']}', 1, now());";
     mysql_query($query) or die (mysql_error());
   }
 }
