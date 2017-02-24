@@ -109,7 +109,7 @@ function updateSunriseTimeTable() {
       // 7pm on for the next day, thus 5 (+ 2 for safety) hours -> 25200 seconds. 
       $sunrise_timestamp = date_sunrise(time() + 25200, SUNFUNCS_RET_TIMESTAMP, $lat, $lon, 90, 0); 
       if ($sunrise_timestamp != false) {
-        $timetable[] = "($id, FROM_UNIXTIME($sunrise_timestamp))";
+        $timetable[] = "($id, $sunrise_timestamp)";
       }
     }
     $values = implode("\n, ", $timetable); 
