@@ -42,7 +42,7 @@ if(isset($_POST['onair'])) {
     SET 
       `value` = $id,
       `playtime` = (
-        select ds.sunrise_time
+        select from_unixtime(ds.sunrise_time)
         from daily_schedule ds 
         join radios r on r.city_id = ds.city_id 
         where r.id = $id

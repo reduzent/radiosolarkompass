@@ -145,8 +145,8 @@ function getNextStreamData() {
        r.url as url,
        c.name as city, 
        l.name as country, 
-       ds.sunrise_time as sunrise_time,
-       timestampdiff(SECOND, now(), ds.sunrise_time) as leadtime
+       from_unixtime(ds.sunrise_time) as sunrise_time,
+       timestampdiff(SECOND, now(), from_unixtime(ds.sunrise_time)) as leadtime
     from radios r 
     join cities c on c.id = r.city_id 
     join countries l on l.iso = c.country_code 
@@ -155,7 +155,7 @@ function getNextStreamData() {
       r.city_id = (
         select city_id 
         from daily_schedule 
-        where sunrise_time > addtime(now(), '0:00:30')
+        where sunrise_time > unix_timestamp() + 30
         order by sunrise_time asc 
         limit 1
         ) 
@@ -187,7 +187,7 @@ function getCurrentStreamData() {
        r.url as url,
        c.name as city, 
        l.name as country, 
-       ds.sunrise_time as sunrise_time
+       from_unixtime(ds.sunrise_time) as sunrise_time
     from radios r 
     join cities c on c.id = r.city_id 
     join countries l on l.iso = c.country_code 
@@ -196,7 +196,7 @@ function getCurrentStreamData() {
       r.city_id = (
         select city_id 
         from daily_schedule 
-        where sunrise_time < now()
+        where sunrise_time < unix_timestamp()
         order by sunrise_time desc 
         limit 1
         ) 
