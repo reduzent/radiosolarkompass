@@ -1,7 +1,7 @@
 select 
   concat(cf.name, '(', lf.name, ')') as city_from,
-  timediff(ds.sunrise_time, (
-    select i.sunrise_time
+  timediff(from_unixtime(ds.sunrise_time), (
+    select from_unixtime(i.sunrise_time)
     from daily_schedule i 
     where i.sunrise_time < ds.sunrise_time
     order by i.sunrise_time desc
