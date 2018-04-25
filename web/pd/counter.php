@@ -14,8 +14,8 @@ if(isset($_POST['try'])) {
 } elseif (isset($_POST['play'])) {
   $play_id = $_POST['play'] ; 
   $query = "UPDATE `radios` set `playcnt` = `playcnt` + 1  WHERE `id` = $play_id";
-  $result = mysql_query($query);
-  if (mysql_affected_rows() == 1) {
+  $result = mysqli_query($conn, $query);
+  if (mysqli_affected_rows($conn) == 1) {
     $status = "OK";
   }
 }

@@ -91,6 +91,7 @@ function convertTdecThms($tdec) {
 }
 
 function updateSunriseTimeTable() {
+  global $conn;
   $query = "
     select 
     `cities`.`id`,
@@ -102,10 +103,10 @@ function updateSunriseTimeTable() {
     where  `radios`.`active` = 1 and `radios`.`operable` = 1
     group by `cities`.`id`;
     ";
-  $result = $mysqli_query($conn, $query);
+  $result = mysqli_query($conn, $query);
   if ($result) {
     $timetable = array();
-    while(list($id, $lat, $lon) = mysql_fetch_array($result)) {
+    while(list($id, $lat, $lon) = mysqli_fetch_array($result)) {
       // somehow date_sunrise calculates sunrise times to lie between 7pm of the previous day and
       // 7pm of the current day. In order to get new data, we need to calculate sunrise_times from
       // 7pm on for the next day, thus 5 (+ 2 for safety) hours -> 25200 seconds. 
@@ -115,20 +116,20 @@ function updateSunriseTimeTable() {
       }
     }
     $values = implode("\n, ", $timetable); 
-    mysqli_query("BEGIN;");
-    mysqli_query("LOCK TABLES `daily_schedule` WRITE;");
-    mysqli_query("TRUNCATE TABLE `daily_schedule`;");
+    mysqli_query($conn, "BEGIN;");
+    mysqli_query($conn, "LOCK TABLES `daily_schedule` WRITE;");
+    mysqli_query($conn, "TRUNCATE TABLE `daily_schedule`;");
     $query = "
       INSERT INTO `daily_schedule`
         (city_id, sunrise_time)
         VALUES $values;";
     $result = mysqli_query($conn, $query);
     if ($result) {
-      mysqli_query("UNLOCK TABLES;");
-      mysqli_query("COMMIT;");
+      mysqli_query($conn, "UNLOCK TABLES;");
+      mysqli_query($conn, "COMMIT;");
       $status = "OK";
     } else {
-      mysqli_query("ROLLBACK;");
+      mysqli_query($conn, "ROLLBACK;");
       $status = "failed";
     }
   } else {
@@ -140,6 +141,7 @@ function updateSunriseTimeTable() {
 }
 
 function getNextStreamData() {
+  global $conn;
   $query = "
     select
        r.id as id,
@@ -166,7 +168,7 @@ function getNextStreamData() {
     order by r.trycnt asc 
     limit 1
     ";
-  $result = $conn->query($query) or $status = "failed";
+  $result = mysqli_query($conn, $query) or $status = "failed";
   $next = $result->fetch_assoc();
   if (mysqli_num_rows($result)==0) {
     $status = "failed";
@@ -223,6 +225,7 @@ function getCurrentStreamData() {
 }
 
 function generateSunriseSchedule () {
+  global $conn;
   $query = "
     select 
     count(*),
@@ -244,7 +247,7 @@ function generateSunriseSchedule () {
     ";
   $result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
   $timetable = array();
-  while(list($count, $id, $city, $region, $country, $lat, $lon) = mysql_fetch_array($result)) {
+  while(list($count, $id, $city, $region, $country, $lat, $lon) = mysqli_fetch_array($result)) {
     $sunrise_dec = calcSunriseTime($lat, $lon, 0);
     if (is_nan($sunrise_dec) == false) {
       $timetable[] = array($sunrise_dec, $count, $city, $region, $country);
@@ -279,6 +282,7 @@ function generateSunriseSchedule () {
 }
 
 function displayRadioList() {
+  global $conn;
   $query = '
      select 
        `radios`.`name`, 
@@ -298,7 +302,7 @@ function displayRadioList() {
     ';
   echo "  <ul>\n";
   $result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
-  while(list($name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
+  while(list($name, $homepage, $url, $city, $country) = mysqli_fetch_array($result)) {
     echo "    <li>$country, $city, ";
     if ( $homepage == "" ) {
       echo "$name";
@@ -424,6 +428,7 @@ function warn($type) {
 
 function generateCountrySelector() {
   global $country;
+  global $conn;
   $query = "SELECT `iso`, `name` FROM `countries` ORDER by `name`";
   $countriessql = mysqli_query($conn, $query) or die ('Datenbankabfrage fehlgeschlagen');
   echo "<select name=\"country\" onChange=\"this.form.submit()\" id=\"country\">\n";
@@ -443,6 +448,7 @@ function generateCitySelector() {
   global $longitude;
   global $country;
   global $city;
+  global $conn;
   $latitude = "";
   $longitude = "";
   if ( $country != "empty" ) {
@@ -451,7 +457,7 @@ function generateCitySelector() {
     $citiessql = mysqli_query($conn, $query) or die ('Datenbankabfrage fehlgeschlagen');
     echo "<select name=\"city\" onChange=\"this.form.submit()\" id=\"city\">\n";
     echo "  <option value=\"empty\">Select a City...</option>\n";
-    while(list($id, $citylocal, $division, $lat, $long) = mysql_fetch_array($citiessql)) {
+    while(list($id, $citylocal, $division, $lat, $long) = mysqli_fetch_array($citiessql)) {
       if ( $city == $id ) {
         echo "  <option selected value=\"$id\">$citylocal ($division)</option>\n";
         $latitude = $lat;
@@ -484,6 +490,7 @@ function showNewEntry() {
 function addNewEntry() {
   global $todb;
   global $allok;
+  global $conn;
   if ( $allok ) {
     $query = "
       insert into `radios` 
@@ -535,6 +542,7 @@ function truncateUrl($url) {
 }
 
 function displayStreamList() {
+  global $conn;
   $query = '
      select 
        `radios`.`active`, 
@@ -570,7 +578,7 @@ function displayStreamList() {
 </tr>
 <?php
   $bgclr = 0;
-  while(list($active, $id, $name, $homepage, $url, $trycnt, $playcnt, $city, $country) = mysql_fetch_array($result)) {
+  while(list($active, $id, $name, $homepage, $url, $trycnt, $playcnt, $city, $country) = mysqli_fetch_array($result)) {
     echo "<tr class=\"bg$bgclr\">\n";
     $bgclr += 1;
     $bgclr = fmod($bgclr, 2);
@@ -600,6 +608,7 @@ function displayStreamList() {
 // ############ log.php functions ####################################################################
 
 function displayLog($date) {
+  global $conn;
   $query = "
      select
        substring(`onair_log`.`onair_time`,11),
@@ -630,7 +639,7 @@ function displayLog($date) {
 </tr>
 <?php
   $bgclr = 0;
-  while(list($time, $name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
+  while(list($time, $name, $homepage, $url, $city, $country) = mysqli_fetch_array($result)) {
     echo "<tr class=\"bg$bgclr\">\n";
     $bgclr += 1;
     $bgclr = fmod($bgclr, 2);
@@ -648,6 +657,7 @@ function displayLog($date) {
 }
 
 function generateLogDateSelector() {
+  global $conn;
   $query = "select 
      substring(`onair_time`, 1, 10) 
      as `date` 
@@ -660,7 +670,7 @@ function generateLogDateSelector() {
   $result = mysqli_query($conn, $query) or die ('Datenbankabfrage fehlgeschlagen');
   echo "<select name=\"date\" onChange=\"this.form.submit()\" id=\"logdate\">\n";
   echo "  <option value=\"$today\">today</option>\n";
-  while(list($date) = mysql_fetch_array($result)) {
+  while(list($date) = mysqli_fetch_array($result)) {
     if ( $date == $selected_date ) {
       echo "  <option selected value=\"$date\">$date</option>\n";
     } else {
@@ -673,6 +683,7 @@ function generateLogDateSelector() {
 // ############ whatsup.php functions ################################################################
 
 function getOnlineStatus() {
+  global $conn;
   $interval = 30; // inverval in seconds to indicate online status
   $query = "
     select
@@ -681,12 +692,13 @@ function getOnlineStatus() {
     where param = 'online'
     ";
   $result = mysqli_query($conn, $query) or $online_status = 0;
-  $row = mysql_fetch_assoc($result);
+  $row = mysqli_fetch_assoc($result);
   $online_status = (int) $row['online'];
   return $online_status;
 }
 
 function getStatusInfo() {
+  global $conn;
   $query = "
    select
      `status`.`param`,
@@ -808,6 +820,7 @@ function displayWhatsupList() {
 
 
 function displayImportList() {
+  global $conn;
   $query = '
      select 
        `id`,
@@ -832,7 +845,7 @@ function displayImportList() {
 </tr>
 <?php
   $bgclr = 0;
-  while(list($id, $name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
+  while(list($id, $name, $homepage, $url, $city, $country) = mysqli_fetch_array($result)) {
     echo "<tr class=\"bg$bgclr\">\n";
     $bgclr += 1;
     $bgclr = fmod($bgclr, 2);
