@@ -26,7 +26,7 @@ function stop_rsk {
 
 function start_rsk {
   cd $rundir
-  /usr/bin/pd -nogui -noprefs -noaudio -nomidi -nrt -open RSK.pd \
+  pd -nogui -noprefs -noaudio -nomidi -nrt -open RSK.pd \
     > /dev/null 2>&1 &
     echo $! > $rskpdpidfile
   sleep 2
