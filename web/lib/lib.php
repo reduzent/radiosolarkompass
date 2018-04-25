@@ -7,13 +7,15 @@ function opendb() {
   global $dbpass;
   global $dbname;
   global $conn;
-  $conn = mysql_connect($dbhost, $dbuser, $dbpass) or die ('Verbindung mit Datenbank fehlgeschlagen');
-  mysql_select_db($dbname);
+  $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+  if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+  }
 }
 
 function closedb() {
   global $conn;
-  mysql_close($conn);
+  $conn->close();
 }
 
 function switcher() {
@@ -100,7 +102,7 @@ function updateSunriseTimeTable() {
     where  `radios`.`active` = 1 and `radios`.`operable` = 1
     group by `cities`.`id`;
     ";
-  $result = mysql_query($query);
+  $result = $mysqli_query($conn, $query);
   if ($result) {
     $timetable = array();
     while(list($id, $lat, $lon) = mysql_fetch_array($result)) {
@@ -113,20 +115,20 @@ function updateSunriseTimeTable() {
       }
     }
     $values = implode("\n, ", $timetable); 
-    mysql_query("BEGIN;");
-    mysql_query("LOCK TABLES `daily_schedule` WRITE;");
-    mysql_query("TRUNCATE TABLE `daily_schedule`;");
+    mysqli_query("BEGIN;");
+    mysqli_query("LOCK TABLES `daily_schedule` WRITE;");
+    mysqli_query("TRUNCATE TABLE `daily_schedule`;");
     $query = "
       INSERT INTO `daily_schedule`
         (city_id, sunrise_time)
         VALUES $values;";
-    $result = mysql_query($query);
+    $result = mysqli_query($conn, $query);
     if ($result) {
-      mysql_query("UNLOCK TABLES;");
-      mysql_query("COMMIT;");
+      mysqli_query("UNLOCK TABLES;");
+      mysqli_query("COMMIT;");
       $status = "OK";
     } else {
-      mysql_query("ROLLBACK;");
+      mysqli_query("ROLLBACK;");
       $status = "failed";
     }
   } else {
@@ -164,9 +166,9 @@ function getNextStreamData() {
     order by r.trycnt asc 
     limit 1
     ";
-  $result = mysql_query($query) or $status = "failed";
-  $next = mysql_fetch_assoc($result);
-  if (mysql_num_rows($result)==0) {
+  $result = $conn->query($query) or $status = "failed";
+  $next = $result->fetch_assoc();
+  if (mysqli_num_rows($result)==0) {
     $status = "failed";
     $next = "";
   } else {
@@ -180,6 +182,7 @@ function getNextStreamData() {
 }
 
 function getCurrentStreamData() {
+  global $conn;
   $query = "
     select
        r.id as id,
@@ -205,9 +208,9 @@ function getCurrentStreamData() {
     order by r.trycnt asc 
     limit 1
     ";
-  $result = mysql_query($query) or $status = "failed";
-  $next = mysql_fetch_assoc($result);
-  if (mysql_num_rows($result)==0) {
+  $result = mysqli_query($conn, $query) or $status = "failed";
+  $next = $result->fetch_assoc();
+  if (mysqli_num_rows($result)==0) {
     $status = "failed";
     $next = "";
   } else {
@@ -239,7 +242,7 @@ function generateSunriseSchedule () {
     where `radios`.`active` = 1 and `radios`.`operable` = 1
     group by `radios`.`city_id`
     ";
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  $result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
   $timetable = array();
   while(list($count, $id, $city, $region, $country, $lat, $lon) = mysql_fetch_array($result)) {
     $sunrise_dec = calcSunriseTime($lat, $lon, 0);
@@ -294,7 +297,7 @@ function displayRadioList() {
       `radios`.`name`
     ';
   echo "  <ul>\n";
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  $result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
   while(list($name, $homepage, $url, $city, $country) = mysql_fetch_array($result)) {
     echo "    <li>$country, $city, ";
     if ( $homepage == "" ) {
@@ -422,10 +425,10 @@ function warn($type) {
 function generateCountrySelector() {
   global $country;
   $query = "SELECT `iso`, `name` FROM `countries` ORDER by `name`";
-  $countriessql = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
+  $countriessql = mysqli_query($conn, $query) or die ('Datenbankabfrage fehlgeschlagen');
   echo "<select name=\"country\" onChange=\"this.form.submit()\" id=\"country\">\n";
   echo "  <option value=\"empty\">Select Country...</option>\n";
-  while(list($iso, $countrylocal) = mysql_fetch_array($countriessql)) {
+  while(list($iso, $countrylocal) = mysqli_fetch_array($countriessql)) {
     if ( $country == $iso ) {
       echo "  <option selected value=\"$iso\">$countrylocal</option>\n";
     } else {
@@ -445,7 +448,7 @@ function generateCitySelector() {
   if ( $country != "empty" ) {
     $cc = $country;
     $query = "SELECT `id`, `name`, `admin1_code`, X(coord), Y(coord) FROM `cities` where `country_code` = '$cc' ORDER by `name`";
-    $citiessql = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
+    $citiessql = mysqli_query($conn, $query) or die ('Datenbankabfrage fehlgeschlagen');
     echo "<select name=\"city\" onChange=\"this.form.submit()\" id=\"city\">\n";
     echo "  <option value=\"empty\">Select a City...</option>\n";
     while(list($id, $citylocal, $division, $lat, $long) = mysql_fetch_array($citiessql)) {
@@ -487,7 +490,7 @@ function addNewEntry() {
       (`name`, `homepage`, `url`, `city_id`, `operable`, `created`)
       values
       ('${todb['radio']}', '${todb['homepage']}', '${todb['url']}', '${todb['city']}', 1, now());";
-    mysql_query($query) or die (mysql_error());
+    mysqli_query($conn, $query) or die (mysql_error());
   }
 }
 
@@ -553,7 +556,7 @@ function displayStreamList() {
       `cities`.`name`,
       `radios`.`name`
     ';
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  $result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
 ?>
 <table id="streamlist">
 <tr>
@@ -616,7 +619,7 @@ function displayLog($date) {
     and `onair_log`.`onair_time` <= '$date 23:59:59'
     order by `onair_log`.`onair_time`
     ";
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  $result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
 ?>
 <table id="streamlist">
 <tr>
@@ -654,7 +657,7 @@ function generateLogDateSelector() {
   ";
   global $today;
   global $selected_date;
-  $result = mysql_query($query) or die ('Datenbankabfrage fehlgeschlagen');
+  $result = mysqli_query($conn, $query) or die ('Datenbankabfrage fehlgeschlagen');
   echo "<select name=\"date\" onChange=\"this.form.submit()\" id=\"logdate\">\n";
   echo "  <option value=\"$today\">today</option>\n";
   while(list($date) = mysql_fetch_array($result)) {
@@ -677,7 +680,7 @@ function getOnlineStatus() {
     from status
     where param = 'online'
     ";
-  $result = mysql_query($query) or $online_status = 0;
+  $result = mysqli_query($conn, $query) or $online_status = 0;
   $row = mysql_fetch_assoc($result);
   $online_status = (int) $row['online'];
   return $online_status;
@@ -704,8 +707,8 @@ function getStatusInfo() {
   order by `status`.`playtime`
     ";
 
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
-  while ($row = mysql_fetch_assoc($result)) {
+  $result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  while ($row = mysqli_fetch_assoc($result)) {
     $status[$row['param']] = $row;
   }
   $empty_values =  array(
@@ -817,7 +820,7 @@ function displayImportList() {
     where `imported` = false and `url_valid` = true
     order by `country`, `city`, `name`
     ';
-  $result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
+  $result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
 ?>
 <table id="streamlist">
 <tr>

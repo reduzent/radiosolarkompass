@@ -7,8 +7,8 @@ $status = "failed";
 if(isset($_POST['try'])) {
   $try_id = $_POST['try']; 
   $query = "UPDATE `radios` set `trycnt` = `trycnt` + 1  WHERE `id` = $try_id";
-  $result = mysql_query($query);
-  if (mysql_affected_rows() == 1) {
+  $result = mysqli_query($conn, $query);
+  if (mysqli_affected_rows($conn) == 1) {
     $status = "OK";
   }
 } elseif (isset($_POST['play'])) {

@@ -1,5 +1,5 @@
 <?php
-include '../lib/lib.php';
+include_once '../lib/lib.php';
 opendb();
 $status = "failed";
 if(isset($_POST['onair'])) {
@@ -12,7 +12,7 @@ if(isset($_POST['onair'])) {
     where s1.param = 'played' 
       and s2.param = 'onair'
      ";
-  $result = mysql_query($query);
+  $result = mysqli_query($conn, $query);
   if ($result) {
     // update current 'onair' status
     $query = "
@@ -21,7 +21,7 @@ if(isset($_POST['onair'])) {
         `value` = $id,
         `playtime` = now()
       WHERE `param` = 'onair'";
-    mysql_query($query) and $status = "OK";
+    mysqli_query($conn, $query) and $status = "OK";
     // write entry to log
     $query = "
       insert into `onair_log` 
@@ -33,7 +33,7 @@ if(isset($_POST['onair'])) {
         where param = 'onair'
         )
       )";
-    mysql_query($query);
+    mysqli_query($conn, $query);
   }
 } elseif (isset($_POST['next'])) {
   $id = $_POST['next']; 
@@ -48,7 +48,7 @@ if(isset($_POST['onair'])) {
         where r.id = $id
         )
     WHERE `param` = 'next'";
-  mysql_query($query) and $status = "OK";
+  mysqli_query($conn, $query) and $status = "OK";
 } elseif (isset($_POST['online'])) {
   $id = $_POST['online']; 
   $query = "
@@ -57,7 +57,7 @@ if(isset($_POST['onair'])) {
       `value` = $id,
       `playtime` = now() 
     WHERE `param` = 'online'";
-  mysql_query($query) and $status = "OK";
+  mysqli_query($conn, $query) and $status = "OK";
 }
 
 $jsonarray =  array('status' => $status, 'data' => "");

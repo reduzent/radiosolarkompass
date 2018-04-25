@@ -1,5 +1,5 @@
 <?php
-include '../lib/lib.php';
+include_once '../lib/lib.php';
 opendb();
 
 getNextStreamData();
