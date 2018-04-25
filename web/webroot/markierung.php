@@ -1,5 +1,5 @@
 <?php
-include '../lib/lib.php';
+include_once '../lib/lib.php';
 opendb();
 
 // GET CURRENT COORDINATES FOR THE LOCATION MARK
@@ -15,8 +15,8 @@ $query = "
     where `status`.`param` = 'onair'
     ";
 
-$result = mysql_query($query) or die ('Datenbank-Abfrage fehlgeschlagen');
-list($lat, $lon) = mysql_fetch_array($result);
+$result = mysqli_query($conn, $query) or die ('Datenbank-Abfrage fehlgeschlagen');
+list($lat, $lon) = mysqli_fetch_array($result);
 
 // CONVERT WGS1984 COORDINATES TO WORLDMAP IMAGE POSITIONS IN PERCENT WITH 0%/0% BEING THE UPPER LEFT CORNER
 $x_perc = 0.9671875 * ($lon / 4.0684 + 48.36);
