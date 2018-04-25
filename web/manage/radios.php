@@ -9,11 +9,11 @@ opendb();
 if (isset($_POST['active'])) {
   foreach ($_POST['active'] as $tochange) {
     $query = "select `active` from `radios` where `id` = $tochange";
-    $result = mysql_query($query) or die ('Datenbank-Fehler');
+    $result = mysqli_query($conn, $query) or die ('Datenbank-Fehler');
     list($active) = mysql_fetch_array($result);
     $active = fmod($active + 1, 2);
     $query = "update `radios` set `active` = $active where `id` = $tochange";
-    mysql_query($query) or die ('Datenbank-Fehler');
+    mysqli_query($conn, $query) or die ('Datenbank-Fehler');
   }
 }
 
@@ -21,21 +21,21 @@ if (isset($_POST['active'])) {
 if (isset($_POST['delete'])) {
   foreach ($_POST['delete'] as $todelete) {
     $query = "delete from `radios` where `id` = $todelete";
-    mysql_query($query) or die ('Datenbank-Fehler');
+    mysqli_query($conn, $query) or die ('Datenbank-Fehler');
   }
 }
 
 // generate title numbers
 $query = "select count(*) from radios where operable = true";
-$result = mysql_query($query) or die('Datenbankabfrage fehlgeschlagen');
-list($total) = mysql_fetch_array($result);
+$result = mysqli_query($conn, $query) or die('Datenbankabfrage fehlgeschlagen');
+list($total) = mysqli_fetch_array($result);
 $query = "select count(*) from radios where active = true and operable = true";
-$result = mysql_query($query) or die('Datenbankabfrage fehlgeschlagen');
-list($active) = mysql_fetch_array($result);
-mysql_query("select SQL_CALC_FOUND_ROWS city_id from radios where operable = 1 group by city_id;");
+$result = mysqli_query($conn, $query) or die('Datenbankabfrage fehlgeschlagen');
+list($active) = mysqli_fetch_array($result);
+mysqli_query($conn, "select SQL_CALC_FOUND_ROWS city_id from radios where operable = 1 group by city_id;");
 $query = "select FOUND_ROWS();";
-$result = mysql_query($query) or die('Datenbankabfrage fehlgeschlagen');
-list($number_of_cities) = mysql_fetch_array($result);
+$result = mysqli_query($conn, $query) or die('Datenbankabfrage fehlgeschlagen');
+list($number_of_cities) = mysqli_fetch_array($result);
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
