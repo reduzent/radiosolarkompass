@@ -1,4 +1,4 @@
-#N canvas 0 43 674 649 10;
+#N canvas 171 52 674 649 10;
 #X declare -path include;
 #N canvas 132 96 477 296 INIT 0;
 #X obj 16 7 declare -path include;
@@ -8,7 +8,7 @@
 #X restore 9 9 pd INIT;
 #X obj 277 90 rsk_get_current_stream;
 #X obj 277 113 spigot 1;
-#N canvas 248 188 571 295 get_next_stream 0;
+#N canvas 244 186 571 295 get_next_stream 0;
 #X obj 26 38 rsk_get_next_stream;
 #X obj 188 107 rsk_update_timetable;
 #X obj 188 84 sel 0 1;
@@ -23,6 +23,7 @@
 #X obj 26 7 inlet;
 #X obj 26 252 outlet;
 #X obj 188 151 rsk_get_next_stream;
+#X obj 417 119 delay 10000;
 #X connect 0 0 3 0;
 #X connect 0 1 4 0;
 #X connect 1 0 5 0;
@@ -36,10 +37,12 @@
 #X connect 7 0 6 1;
 #X connect 7 1 8 0;
 #X connect 8 0 9 0;
+#X connect 8 0 14 0;
 #X connect 9 0 10 0;
 #X connect 11 0 0 0;
 #X connect 13 0 6 0;
 #X connect 13 1 7 0;
+#X connect 14 0 0 0;
 #X restore 9 69 pd get_next_stream;
 #X obj 386 536 r ERROR;
 #X obj 386 558 print ERROR;
@@ -118,7 +121,7 @@
 #X restore 9 239 pd schedule_upcoming;
 #X obj 552 83 s \$0.instance;
 #X obj 9 445 hradio 33 1 0 2 \$0.instance \$0.instance empty 0 -8 0
-10 -228856 -1 -1 0;
+10 -228856 -1 -1 1;
 #X obj 277 188 list prepend;
 #X obj 506 14 loadbang;
 #X obj 371 187 r \$0.instance;
@@ -226,7 +229,7 @@
 #X obj 80 491 r \$0.announce;
 #X msg 552 60 0;
 #X obj 9 314 t b b b;
-#N canvas 0 43 371 196 play.announcement 0;
+#N canvas 0 50 371 196 play.announcement 0;
 #X msg 5 112 play;
 #X obj 5 135 s \$0.announce;
 #X obj 5 12 inlet;
@@ -306,7 +309,7 @@
 #X obj 146 262 tgl 20 0 empty empty empty 17 7 0 10 -228856 -1 -1 1
 1;
 #X obj 77 262 nbx 5 20 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--228856 -1 -1 2346 256;
+-228856 -1 -1 29 256;
 #X text 169 264 <- should always be on;
 #X obj 9 289 bng 20 250 50 0 empty empty empty 17 7 0 10 -228856 -1
 -1;
